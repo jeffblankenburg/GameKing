@@ -10,7 +10,9 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -155,6 +157,65 @@ namespace GameKing
                 Image image = (Image)FindName("Card" + i);
                 image.Source = PokerGame.Hand.Cards[i].Image;
             }
+        }
+
+        int volume = 1;
+
+        private void Volume_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            volume++;
+
+            if (volume == 4) volume = 0;
+
+            string imagepath = "ms-appx:/Assets/buttons/Volume" + volume + ".png";
+            BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+            VolumeButton.Source = i;
+
+            //TODO: Actually toggle the volume.
+
+            switch (volume)
+            {
+                case 0:
+                    
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+
+            }
+        }
+
+        private void BetMax_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!HoldRound)
+            {
+                if (GamePlayer.IncreaseBet(5)) Deal();
+                //TODO: Build an animation that shows the red box travel to the 5 coin slot.
+                ChangeBetHighlight();
+            }
+        }
+
+        private void BetOne_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!HoldRound)
+            {
+                if (GamePlayer.IncreaseBet(1)) Deal();
+                ChangeBetHighlight();
+            }
+        }
+
+        private void ChangeBetHighlight()
+        {
+            ResetReds();
+            Rectangle r = (Rectangle)FindName("CoinBox" + GamePlayer.CurrentBet);
+            r.Fill = Red;
+            BetText.Text = "BET   " + GamePlayer.CurrentBet;
         }
     }
 }

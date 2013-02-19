@@ -138,6 +138,10 @@
     <Content Include="Assets\buttons\HELP.png" />
     <Content Include="Assets\buttons\MOREGAMES.png" />
     <Content Include="Assets\buttons\SEEPAYS.png" />
+    <Content Include="Assets\buttons\Volume0.png" />
+    <Content Include="Assets\buttons\Volume1.png" />
+    <Content Include="Assets\buttons\Volume2.png" />
+    <Content Include="Assets\buttons\Volume3.png" />
     <Content Include="Assets\cards\110.png" />
     <Content Include="Assets\cards\111.png" />
     <Content Include="Assets\cards\112.png" />

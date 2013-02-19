@@ -76,8 +76,17 @@
             <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
             <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
             <Grid Grid.Row="2" Grid.ColumnSpan="5" Margin="0,30,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <TextBlock x:Name="BetText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="BET   5" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
-                <Image x:Name="DealButton" Height="32" Canvas.Left="384" Source="Assets/buttons/DEAL.png" Stretch="Fill" Canvas.Top="641" Width="88" Tapped="Deal_Click"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <Image x:Name="BetOneButton" Source="Assets/buttons/BETONE.png" Width="86" Tapped="BetOne_Tapped" />
+                    <Image x:Name="BetMaxButton" Source="Assets/buttons/BETMAX.png" Width="86" Tapped="BetMax_Tapped" />
+                    <Image x:Name="VolumeButton" Source="Assets/buttons/Volume1.png" Width="70" Tapped="Volume_Tapped" />
+                    <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Width="176" Tapped="Deal_Click"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>
