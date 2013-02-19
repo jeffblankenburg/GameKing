@@ -9,48 +9,76 @@
 
     <Grid Background="#00019f">
         <Grid.RowDefinitions>
-            <RowDefinition Height="45*" />
-            <RowDefinition Height="55*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Width="1366">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*"/>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="366"/>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#000000" Grid.ColumnSpan="6"  />
             <Rectangle Fill="#FCD800" Grid.ColumnSpan="6" Margin="2" />
-            <Rectangle Fill="#000064" Grid.Column="0" Stroke="#000000" StrokeThickness="2" Margin="4,4,0,4" />
-            <Rectangle Fill="#000064" Grid.Column="1" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
-            <Rectangle Fill="#000064" Grid.Column="2" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
-            <Rectangle Fill="#000064" Grid.Column="3" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
-            <Rectangle Fill="#000064" Grid.Column="4" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
-            <Rectangle Fill="#000064" Grid.Column="5" Stroke="#000000" StrokeThickness="2" Margin="2,4,4,4" />
-            <ItemsControl x:Name="PayTable" Grid.ColumnSpan="6" Margin="15">
+            <Rectangle x:Name="CoinBox0" Fill="#000064" Grid.Column="0" Stroke="#000000" StrokeThickness="2" Margin="4,4,0,4" />
+            <Rectangle x:Name="CoinBox1" Fill="#000064" Grid.Column="1" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox2" Fill="#000064" Grid.Column="2" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox3" Fill="#000064" Grid.Column="3" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox4" Fill="#000064" Grid.Column="4" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox5" Fill="#000064" Grid.Column="5" Stroke="#000000" StrokeThickness="2" Margin="2,4,4,4" />
+            <ItemsControl x:Name="PayTable" Grid.ColumnSpan="6" Margin="15,15,5,15">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2.5*"/>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="366"/>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="40" Grid.Column="0" Margin="6,4,4,4"/>
-                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="40" Grid.Column="1" Margin="4,4,4,4" TextAlignment="Right"/>
-                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="40" Grid.Column="2" Margin="4,4,4,4" TextAlignment="Right"/>
-                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="40" Grid.Column="3" Margin="4,4,4,4" TextAlignment="Right"/>
-                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="40" Grid.Column="4" Margin="4,4,4,4" TextAlignment="Right"/>
-                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="40" Grid.Column="5" Margin="4,4,8,4" TextAlignment="Right"/>
+                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="24" Grid.Column="0" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="24" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0" />
+                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="24" Grid.Column="2" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
+                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="24" Grid.Column="3" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
+                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="24" Grid.Column="4" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
+                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="24" Grid.Column="5" FontWeight="Bold" TextAlignment="Right" Margin="0,0,30,0"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+        </Grid>
+        <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="319" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="240" />
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="0" Visibility="Collapsed" />
+            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="1" Visibility="Collapsed" />
+            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="2" Visibility="Collapsed" />
+            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="3" Visibility="Collapsed" />
+            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="4" Visibility="Collapsed" />
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
+            <Grid Grid.Row="2" Grid.ColumnSpan="5" Margin="0,30,0,0">
+                <TextBlock x:Name="BetText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="BET   5" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
+                <Image x:Name="DealButton" Height="32" Canvas.Left="384" Source="Assets/buttons/DEAL.png" Stretch="Fill" Canvas.Top="641" Width="88" Tapped="Deal_Click"/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
