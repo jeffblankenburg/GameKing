@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="GameKing.Game"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GameKing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#00019f">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*" />
+            <RowDefinition Height="55*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="#000000" Grid.ColumnSpan="6"  />
+            <Rectangle Fill="#FCD800" Grid.ColumnSpan="6" Margin="2" />
+            <Rectangle Fill="#000064" Grid.Column="0" Stroke="#000000" StrokeThickness="2" Margin="4,4,0,4" />
+            <Rectangle Fill="#000064" Grid.Column="1" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle Fill="#000064" Grid.Column="2" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle Fill="#000064" Grid.Column="3" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle Fill="#000064" Grid.Column="4" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle Fill="#000064" Grid.Column="5" Stroke="#000000" StrokeThickness="2" Margin="2,4,4,4" />
+            <ItemsControl x:Name="PayTable" Grid.ColumnSpan="6" Margin="15">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.5*"/>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="40" Grid.Column="0" Margin="6,4,4,4"/>
+                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="40" Grid.Column="1" Margin="4,4,4,4" TextAlignment="Right"/>
+                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="40" Grid.Column="2" Margin="4,4,4,4" TextAlignment="Right"/>
+                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="40" Grid.Column="3" Margin="4,4,4,4" TextAlignment="Right"/>
+                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="40" Grid.Column="4" Margin="4,4,4,4" TextAlignment="Right"/>
+                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="40" Grid.Column="5" Margin="4,4,8,4" TextAlignment="Right"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</Page>

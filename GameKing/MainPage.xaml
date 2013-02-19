@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="GameKing.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GameKing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Canvas Background="#00019f">
+        <Image Source="Assets/gamelogo/DeucesWild.png" Width="200" Canvas.Left="42" Canvas.Top="34" Tapped="DeucesWild_Tapped"  />
+        <Image Source="Assets/gamelogo/JacksOrBetter.png" Width="200" Canvas.Left="270" Canvas.Top="34"  />
+        
+    </Canvas>
+</Page>
