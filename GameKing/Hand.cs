@@ -32,6 +32,7 @@ namespace GameKing
             Sort();
 
             if (IsRoyalFlush()) return "ROYALFLUSH";
+            if (IsRoyalFlushNoDeuces()) return "ROYALFLUSHNODEUCES";
             if (IsStraightFlush()) return "STRAIGHTFLUSH";
             if (IsFourOfAKind()) return "FOUROFAKIND";
             if (IsFullHouse()) return "FULLHOUSE";
@@ -44,6 +45,12 @@ namespace GameKing
         }
 
         private bool IsRoyalFlush()
+        {
+            if (IsStraight() && IsFlush() && (SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 13) && (SortedCards[2].Value.Number == 12) && (SortedCards[3].Value.Number == 11) && (SortedCards[4].Value.Number == 10)) return true;
+            return false;
+        }
+
+        private bool IsRoyalFlushNoDeuces()
         {
             if (IsStraight() && IsFlush() && (SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 13) && (SortedCards[2].Value.Number == 12) && (SortedCards[3].Value.Number == 11) && (SortedCards[4].Value.Number == 10)) return true;
             return false;
