@@ -38,11 +38,6 @@ namespace GameKing
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             GameType = e.Parameter.ToString();
@@ -124,9 +119,9 @@ namespace GameKing
 
         private void ShowHandResult()
         {
-            IEnumerable<PayTableItem> pti = from p in PokerGame.PayTable
-                                            where p.Title.Replace(" ", "") == PokerGame.CheckHand().Replace(" ", "")
-                                            select p;
+            //IEnumerable<PayTableItem> pti = from p in PokerGame.PayTable
+            //                                where p.Title.Replace(" ", "") == PokerGame.CheckHand().Replace(" ", "")
+            //                                select p;
             
             //switch (PokerGame.CheckHand())
             //{
@@ -150,10 +145,24 @@ namespace GameKing
 
         public void ShowCards()
         {
+            string x = String.Empty;
+            
             for (int i = 0; i <= 4; i++)
             {
+                switch (GameType)
+                {
+                    case "DEUCESWILD":
+                        if (PokerGame.Hand.Cards[i].Value.Number == 2) x = "w";
+                        break;
+                    default:
+                        x = String.Empty;
+                        break;
+                }
+                
                 Image image = (Image)FindName("Card" + i);
-                image.Source = PokerGame.Hand.Cards[i].Image;
+                string imagepath = "ms-appx:/Assets/cards/" + PokerGame.Hand.Cards[i].Suit.ID.ToString() + PokerGame.Hand.Cards[i].Value.Number.ToString() + x.ToString() + ".png";
+                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                image.Source = imagesource;
             }
         }
 

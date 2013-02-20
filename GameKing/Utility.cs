@@ -6,7 +6,7 @@ using Windows.UI;
 
 namespace GameKing
 {
-    class Utility
+    public class Utility
     {
         public Color HexToColor(string hex)
         {

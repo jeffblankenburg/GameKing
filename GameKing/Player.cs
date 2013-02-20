@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GameKing
 {
-    class Player
+    public class Player
     {
         public int CurrentBet = 0;
         public int Credits = 10000;

@@ -7,21 +7,18 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace GameKing
 {
-    class Card
+    public class Card
     {
-        private readonly Suit suit;
-        private readonly Value value;
-        private readonly BitmapImage image;
+        public Suit Suit { get; set; }
+        public Value Value { get; set; }
+        //public BitmapImage Image { get; set; }
 
-        public Suit Suit { get { return suit; } }
-        public Value Value { get { return value; } }
-        public BitmapImage Image { get { return image; } }
-
-        public Card(Suit suit, Value value, BitmapImage image)
+        //public Card(Suit suit, Value value, BitmapImage image)
+        public Card(Suit suit, Value value)
         {
-            this.suit = suit;
-            this.value = value;
-            this.image = image;
+            this.Suit = suit;
+            this.Value = value;
+            //this.image = image;
         }
     }
 }

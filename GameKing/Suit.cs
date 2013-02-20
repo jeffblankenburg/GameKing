@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameKing
 {
-    class Suit
+    public class Suit
     {
         public string Name { get; set; }
         public int ID { get; set; }

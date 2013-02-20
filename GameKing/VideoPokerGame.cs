@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameKing
 {
-    class VideoPokerGame
+    public class VideoPokerGame
     {
         public Deck Deck;
         public Hand Hand;
@@ -74,9 +74,9 @@ namespace GameKing
             return payTable;
         }
 
-        public string CheckHand()
+        public string CheckHand(string GameType)
         {
-            return Hand.Check();
+            return Hand.Check(GameType);
         }
     }
 }
