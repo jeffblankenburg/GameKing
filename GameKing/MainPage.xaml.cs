@@ -39,5 +39,10 @@ namespace GameKing
         {
             Frame.Navigate(typeof(Game), "DEUCESWILD");
         }
+
+        private void JacksOrBetter_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "JACKSORBETTER");
+        }
     }
 }

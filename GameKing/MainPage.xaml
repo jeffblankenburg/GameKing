@@ -9,7 +9,7 @@
 
     <Canvas Background="#00019f">
         <Image Source="Assets/gamelogo/DeucesWild.png" Width="200" Canvas.Left="42" Canvas.Top="34" Tapped="DeucesWild_Tapped"  />
-        <Image Source="Assets/gamelogo/JacksOrBetter.png" Width="200" Canvas.Left="270" Canvas.Top="34"  />
+        <Image Source="Assets/gamelogo/JacksOrBetter.png" Width="200" Canvas.Left="270" Canvas.Top="34" Tapped="JacksOrBetter_Tapped"  />
         
     </Canvas>
 </Page>

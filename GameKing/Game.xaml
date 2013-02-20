@@ -54,8 +54,8 @@
         </Grid>
         <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="319" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -65,17 +65,17 @@
                 <ColumnDefinition Width="240" />
                 <ColumnDefinition Width="240" />
             </Grid.ColumnDefinitions>
-            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="0" Visibility="Collapsed" />
-            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="1" Visibility="Collapsed" />
-            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="2" Visibility="Collapsed" />
-            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="3" Visibility="Collapsed" />
-            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="4" Visibility="Collapsed" />
-            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="319" Tapped="Card_MouseLeftButtonDown" />
-            <Grid Grid.Row="2" Grid.ColumnSpan="5" Margin="0,30,0,0">
+            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="0" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
+            <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
