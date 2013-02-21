@@ -101,7 +101,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="Assets\numbers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -207,6 +206,18 @@
     <Content Include="Assets\gamelogo\DoubleBonusPoker.png" />
     <Content Include="Assets\gamelogo\JacksOrBetter.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\numbers\0.png" />
+    <Content Include="Assets\numbers\1.png" />
+    <Content Include="Assets\numbers\2.png" />
+    <Content Include="Assets\numbers\3.png" />
+    <Content Include="Assets\numbers\4.png" />
+    <Content Include="Assets\numbers\5.png" />
+    <Content Include="Assets\numbers\6.png" />
+    <Content Include="Assets\numbers\7.png" />
+    <Content Include="Assets\numbers\8.png" />
+    <Content Include="Assets\numbers\9.png" />
+    <Content Include="Assets\numbers\CREDITS.png" />
+    <Content Include="Assets\numbers\WIN.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />

@@ -6,6 +6,26 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+	<Page.Resources>
+        <Storyboard x:Name="PayTableTitleBlink" RepeatBehavior="Forever">
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+				<EasingColorKeyFrame KeyTime="0" Value="White"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+				<EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+				<EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+			</ColorAnimationUsingKeyFrames>
+		</Storyboard>
+        <Storyboard x:Name="PayTableNumberBlink" RepeatBehavior="Forever">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
     <Grid Background="#00019f">
         <Grid.RowDefinitions>
@@ -80,8 +100,16 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="BetText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="BET   5" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   5" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <StackPanel x:Name="CreditsPanel" Orientation="Horizontal">
+                        <Image Source="Assets/numbers/1.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/CREDITS.png" Height="52" Margin="15,0,0,0" />
+                    </StackPanel>
                     <Image x:Name="BetOneButton" Source="Assets/buttons/BETONE.png" Width="86" Tapped="BetOne_Tapped" />
                     <Image x:Name="BetMaxButton" Source="Assets/buttons/BETMAX.png" Width="86" Tapped="BetMax_Tapped" />
                     <Image x:Name="VolumeButton" Source="Assets/buttons/Volume1.png" Width="70" Tapped="Volume_Tapped" />

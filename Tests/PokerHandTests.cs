@@ -256,7 +256,7 @@ namespace Tests
             vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
             vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 7, Name = "Seven" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 5, Name = "Five" };
             vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
             vpg.Hand.Cards[2].Value = new Value { Number = 2, Name = "Two" };
             vpg.Hand.Cards[3].Suit = new Suit { ID = 2, Name = "Diamonds" };
@@ -298,6 +298,23 @@ namespace Tests
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
             vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
             Assert.AreEqual("FOUROFAKIND", vpg.Hand.Check("DEUCESWILD"));
+        }
+
+        [TestMethod]
+        public void DEUCESWILD_StraightFlush()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
+            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 10, Name = "Ten" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 9, Name = "Nine" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Eight" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 7, Name = "Seven" };
+            Assert.AreEqual("STRAIGHTFLUSH", vpg.Hand.Check("DEUCESWILD"));
         }
     }
 }

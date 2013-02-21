@@ -33,28 +33,28 @@ namespace GameKing
 
             if (GameType == "DEUCESWILD")
             {
-                if (IsRoyalFlush()) return "ROYALFLUSHNODEUCES";
-                if (DEUCES_IsFourDeuces()) return "FOURDEUCES";
-                if (DEUCES_IsRoyalFlushWithDeuces()) return "ROYALFLUSHWITHDEUCES";
-                if (DEUCES_IsFiveOfAKind()) return "FIVEOFAKIND";
-                //if (DEUCES_IsStraightFlush()) return "STRAIGHTFLUSH";
-                if (DEUCES_IsFourOfAKind()) return "FOUROFAKIND";
-                if (DEUCES_IsFullHouse()) return "FULLHOUSE";
+                if (IsRoyalFlush()) return "ROYAL FLUSH NO DEUCES";
+                if (DEUCES_IsFourDeuces()) return "4 DEUCES";
+                if (DEUCES_IsRoyalFlushWithDeuces()) return "ROYAL FLUSH WITH DEUCES";
+                if (DEUCES_IsFiveOfAKind()) return "5 OF A KIND";
+                if (DEUCES_IsStraightFlush()) return "STRAIGHT FLUSH";
+                if (DEUCES_IsFourOfAKind()) return "4 OF A KIND";
+                if (DEUCES_IsFullHouse()) return "FULL HOUSE";
                 if (DEUCES_IsFlush()) return "FLUSH";
                 if (DEUCES_IsStraight()) return "STRAIGHT";
-                if (DEUCES_IsThreeOfAKind()) return "THREEOFAKIND";
+                if (DEUCES_IsThreeOfAKind()) return "3 OF A KIND";
             }
             else
             {
-                if (IsRoyalFlush()) return "ROYALFLUSH";
-                if (IsStraightFlush()) return "STRAIGHTFLUSH";
-                if (IsFourOfAKind()) return "FOUROFAKIND";
-                if (IsFullHouse()) return "FULLHOUSE";
+                if (IsRoyalFlush()) return "ROYAL FLUSH";
+                if (IsStraightFlush()) return "STRAIGHT FLUSH";
+                if (IsFourOfAKind()) return "4 OF A KIND";
+                if (IsFullHouse()) return "FULL HOUSE";
                 if (IsFlush()) return "FLUSH";
                 if (IsStraight()) return "STRAIGHT";
-                if (IsThreeOfAKind()) return "THREEOFAKIND";
-                if (IsTwoPair()) return "TWOPAIR";
-                if (IsJacksOrBetter()) return "JACKSORBETTER";
+                if (IsThreeOfAKind()) return "3 OF A KIND";
+                if (IsTwoPair()) return "TWO PAIR";
+                if (IsJacksOrBetter()) return "JACKS OR BETTER";
                 if (IsPair()) return "PAIR";
             }
             return "NOTHING";
@@ -253,6 +253,12 @@ namespace GameKing
                 if (DEUCES_IsPair()) return true;
             }
             if (CountDeuces() == 3) return true;
+            return false;
+        }
+
+        private bool DEUCES_IsStraightFlush()
+        {
+            if (DEUCES_IsStraight() && DEUCES_IsFlush()) return true;
             return false;
         }
     }

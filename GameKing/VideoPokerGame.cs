@@ -22,6 +22,7 @@ namespace GameKing
 
         public void Deal()
         {
+            
             for (int i = 0; i <= 4; i++)
             {
                 Hand.Cards.Add(Deck.Draw());

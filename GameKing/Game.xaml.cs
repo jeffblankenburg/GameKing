@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
@@ -48,6 +49,7 @@ namespace GameKing
         {
             PokerGame = new VideoPokerGame(GameType);
             LoadPayTable();
+            DrawCredits();
         }
 
         private void LoadPayTable()
@@ -88,6 +90,7 @@ namespace GameKing
 
         private void ResetReds()
         {
+            StopPayTableAnimations();
             CoinBox1.Fill = Blue;
             CoinBox2.Fill = Blue;
             CoinBox3.Fill = Blue;
@@ -102,9 +105,11 @@ namespace GameKing
 
         private void Deal()
         {
+            StopPayTableAnimations();
             if (!HoldRound)
             {
                 ClearHolds();
+                ChargeCredits();
                 PokerGame = new VideoPokerGame(GameType);
                 HoldRound = true;
             }
@@ -112,50 +117,28 @@ namespace GameKing
             {
                 PokerGame.Draw();
                 HoldRound = false;
-                ShowHandResult();
+                HighlightWinningBetValue(PayTable);
             }
             ShowCards();
         }
 
-        private void ShowHandResult()
+        private void ChargeCredits()
         {
-            //IEnumerable<PayTableItem> pti = from p in PokerGame.PayTable
-            //                                where p.Title.Replace(" ", "") == PokerGame.CheckHand().Replace(" ", "")
-            //                                select p;
-            
-            //switch (PokerGame.CheckHand())
-            //{
-            //    case "ROYALFLUSH":
-            //        IEnumerable<PayTableItem> pti = from p in payTable
-            //                                        where p.Title == PokerGame.CheckHand().Replace(" ", "")
-            //                                        select p;
-            //        break;
-            //    case "THREEOFAKIND":
-            //        break;
-            //    case "TWOPAIR":
-            //        break;
-            //    case "JACKSORBETTER":
-
-            //        break;
-            //    case "NOTHING":
-
-            //        break;
-            //}
+            GamePlayer.Credits -= GamePlayer.CurrentBet;
+            DrawCredits();
         }
 
         public void ShowCards()
         {
-            string x = String.Empty;
+            string x;
             
             for (int i = 0; i <= 4; i++)
             {
+                x = String.Empty;
                 switch (GameType)
                 {
                     case "DEUCESWILD":
                         if (PokerGame.Hand.Cards[i].Value.Number == 2) x = "w";
-                        break;
-                    default:
-                        x = String.Empty;
                         break;
                 }
                 
@@ -238,9 +221,14 @@ namespace GameKing
                 {
                     TextBlock targetItem = (TextBlock)child;
 
-                    if (targetItem.Text == "Item2")
+                    if (targetItem.Text.Replace(".", "") == PokerGame.CheckHand(GameType))
                     {
-                        targetItem.Foreground = new SolidColorBrush(Colors.White);
+                        TextBlock coinslot = (TextBlock)VisualTreeHelper.GetChild(targetElement, i + GamePlayer.CurrentBet);
+                        Storyboard.SetTarget(PayTableTitleBlink, targetItem);
+                        Storyboard.SetTarget(PayTableNumberBlink, coinslot);
+                        PayTableTitleBlink.Begin();
+                        PayTableNumberBlink.Begin();
+                        AwardWinnings(Int32.Parse(coinslot.Text));
                         return;
                     }
                 }
@@ -250,6 +238,36 @@ namespace GameKing
                 }
             }
 
+        }
+
+        private void StopPayTableAnimations()
+        {
+            PayTableTitleBlink.Stop();
+            PayTableNumberBlink.Stop();
+        }
+
+        private void AwardWinnings(int credits)
+        {
+            GamePlayer.Credits += credits;
+            DrawCredits();
+        }
+
+        private void DrawCredits()
+        {
+            CreditsPanel.Children.Clear();
+            for (int i = 0; i < GamePlayer.Credits.ToString().Length; i++)
+            {
+                Image j = new Image { Width = 38 };
+                string imagepath = "ms-appx:/Assets/numbers/" + GamePlayer.Credits.ToString()[i] + ".png";
+                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                j.Source = imagesource;
+                CreditsPanel.Children.Add(j);
+            }
+            Image creditImage = new Image { Height = 52 };
+            string creditPath = "ms-appx:/Assets/numbers/CREDITS.png";
+            BitmapImage creditBI = new BitmapImage(new Uri(creditPath, UriKind.Absolute));
+            creditImage.Source = creditBI;
+            CreditsPanel.Children.Add(creditImage);
         }
     }
 }

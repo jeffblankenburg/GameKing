@@ -15,8 +15,9 @@ namespace GameKing
             if (BetAmount == 1)
             {
                 CurrentBet += 1;
-                if (CurrentBet > 5) return true;
-                else return false;
+                if (CurrentBet == 5) return true;
+                else if (CurrentBet > 5) CurrentBet = 1;
+                return false;
             }
             else
             {
