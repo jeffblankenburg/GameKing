@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameKing
 {
+    [DataContract]
     public class Hand
     {
+        [DataMember]
+        public string Id;
+        [DataMember]
         public List<Card> Cards = new List<Card>();
+        [DataMember]
         public List<Card> SortedCards = new List<Card>();
+        [DataMember]
         public List<bool> Held = new List<bool>();
 
         public void Hold(int card, bool state)
@@ -68,7 +75,7 @@ namespace GameKing
 
         private bool IsRoyalFlush()
         {
-            if (IsStraight() && IsFlush() && (SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 13) && (SortedCards[2].Value.Number == 12) && (SortedCards[3].Value.Number == 11) && (SortedCards[4].Value.Number == 10)) return true;
+            if (IsStraight() && IsFlush() && (SortedCards[4].Value.Number == 10)) return true;
             return false;
         }
 
@@ -100,7 +107,7 @@ namespace GameKing
 
         private bool IsStraight()
         {
-            if ((SortedCards[1].Value.Number == SortedCards[0].Value.Number - 1) && (SortedCards[2].Value.Number == SortedCards[1].Value.Number - 1) && (SortedCards[3].Value.Number == SortedCards[2].Value.Number - 1) && (SortedCards[4].Value.Number == SortedCards[3].Value.Number - 1)) return true;
+            if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 1) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1) && (SortedCards[2].Value.Number == SortedCards[3].Value.Number + 1) && (SortedCards[3].Value.Number == SortedCards[4].Value.Number + 1)) return true;
             if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 5) && (SortedCards[2].Value.Number == 4) && (SortedCards[3].Value.Number == 3) && (SortedCards[4].Value.Number == 2)) return true;
             return false;
         }
@@ -261,5 +268,6 @@ namespace GameKing
             if (DEUCES_IsStraight() && DEUCES_IsFlush()) return true;
             return false;
         }
+
     }
 }

@@ -25,7 +25,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "Jack" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 10, Name = "Ten" };
-            Assert.AreEqual("ROYALFLUSH", vpg.Hand.Check("JACKSORBETTER"));
+            Assert.AreEqual("ROYAL FLUSH", vpg.Hand.Check("JACKSORBETTER"));
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Eight" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 6, Name = "Six" };
-            Assert.AreEqual("STRAIGHTFLUSH", vpg.Hand.Check("JACKSORBETTER"));
+            Assert.AreEqual("STRAIGHT FLUSH", vpg.Hand.Check("JACKSORBETTER"));
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 14, Name = "Ace" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 6, Name = "Six" };
-            Assert.AreEqual("FOUROFAKIND", vpg.Hand.Check("JACKSORBETTER"));
+            Assert.AreEqual("4 OF A KIND", vpg.Hand.Check("JACKSORBETTER"));
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "Jack" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
             vpg.Hand.Cards[4].Value = new Value { Number = 11, Name = "Jack" };
-            Assert.AreEqual("FULLHOUSE", vpg.Hand.Check("JACKSORBETTER"));
+            Assert.AreEqual("FULL HOUSE", vpg.Hand.Check("JACKSORBETTER"));
         }
         
         [TestMethod]
@@ -127,7 +127,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Eight" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 9, Name = "Nine" };
-            Assert.AreEqual("THREEOFAKIND", vpg.Hand.Check("JACKSORBETTER"));
+            Assert.AreEqual("3 OF A KIND", vpg.Hand.Check("JACKSORBETTER"));
         }
 
         [TestMethod]
@@ -144,7 +144,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Eight" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 9, Name = "Nine" };
-            Assert.AreEqual("TWOPAIR", vpg.Hand.Check("JACKSORBETTER"));
+            Assert.AreEqual("TWO PAIR", vpg.Hand.Check("JACKSORBETTER"));
         }
 
         [TestMethod]
@@ -161,7 +161,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Eight" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 9, Name = "Nine" };
-            Assert.AreEqual("JACKSORBETTER", vpg.Hand.Check("JACKSORBETTER"));
+            Assert.AreEqual("JACKS OR BETTER", vpg.Hand.Check("JACKSORBETTER"));
         }
 
         [TestMethod]
@@ -195,7 +195,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "Jack" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
             vpg.Hand.Cards[4].Value = new Value { Number = 2, Name = "Two" };
-            Assert.AreEqual("ROYALFLUSHWITHDEUCES", vpg.Hand.Check("DEUCESWILD"));
+            Assert.AreEqual("ROYAL FLUSH WITH DEUCES", vpg.Hand.Check("DEUCESWILD"));
         }
 
         [TestMethod]
@@ -212,7 +212,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 2, Name = "Two" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 3, Name = "Three" };
-            Assert.AreEqual("FOURDEUCES", vpg.Hand.Check("DEUCESWILD"));
+            Assert.AreEqual("4 DEUCES", vpg.Hand.Check("DEUCESWILD"));
         }
 
         [TestMethod]
@@ -229,7 +229,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 6, Name = "Six" };
-            Assert.AreEqual("THREEOFAKIND", vpg.Hand.Check("DEUCESWILD"));
+            Assert.AreEqual("3 OF A KIND", vpg.Hand.Check("DEUCESWILD"));
         }
 
         [TestMethod]
@@ -280,7 +280,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
             vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
-            Assert.AreEqual("FULLHOUSE", vpg.Hand.Check("DEUCESWILD"));
+            Assert.AreEqual("FULL HOUSE", vpg.Hand.Check("DEUCESWILD"));
         }
 
         [TestMethod]
@@ -297,7 +297,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
             vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
-            Assert.AreEqual("FOUROFAKIND", vpg.Hand.Check("DEUCESWILD"));
+            Assert.AreEqual("4 OF A KIND", vpg.Hand.Check("DEUCESWILD"));
         }
 
         [TestMethod]
@@ -314,7 +314,7 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Eight" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
             vpg.Hand.Cards[4].Value = new Value { Number = 7, Name = "Seven" };
-            Assert.AreEqual("STRAIGHTFLUSH", vpg.Hand.Check("DEUCESWILD"));
+            Assert.AreEqual("STRAIGHT FLUSH", vpg.Hand.Check("DEUCESWILD"));
         }
     }
 }

@@ -33,6 +33,18 @@
                 <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Name="CreditPause">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CreditImage">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CardPause">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CreditImage">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot" Background="#00019f">
@@ -105,22 +117,23 @@
             <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="35" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
-                    <StackPanel x:Name="CreditsPanel" Orientation="Horizontal">
-                        <Image Source="Assets/numbers/1.png" Width="38" />
+                    <Image Source="Assets/buttons/MOREGAMES.png" Height="62" Margin="0,0,50,0" />
+                    <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" Width="266" FlowDirection="RightToLeft" >
                         <Image Source="Assets/numbers/0.png" Width="38" />
                         <Image Source="Assets/numbers/0.png" Width="38" />
                         <Image Source="Assets/numbers/0.png" Width="38" />
                         <Image Source="Assets/numbers/0.png" Width="38" />
-                        <Image Source="Assets/numbers/CREDITS.png" Height="52" Margin="15,0,0,0" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
                     </StackPanel>
+                    <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Height="52" Margin="25,0,0,0" />
                     <Image x:Name="BetOneButton" Source="Assets/buttons/BETONE.png" Width="86" Tapped="BetOne_Tapped" />
                     <Image x:Name="BetMaxButton" Source="Assets/buttons/BETMAX.png" Width="86" Tapped="BetMax_Tapped" />
-                    <Image x:Name="VolumeButton" Source="Assets/buttons/Volume1.png" Width="70" Tapped="Volume_Tapped" />
+                    <Image x:Name="VolumeButton" Source="Assets/buttons/Volume2.png" Width="70" Tapped="Volume_Tapped" />
                     <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Width="176" Tapped="Deal_Click"/>
                 </StackPanel>
             </Grid>

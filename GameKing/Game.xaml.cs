@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -37,6 +38,9 @@ namespace GameKing
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
 
         MediaElement OneBet = new MediaElement();
+        MediaElement WinLoop = new MediaElement();
+        MediaElement HoldAlert = new MediaElement();
+        MediaElement CardFlip = new MediaElement();
         
         public Game()
         {
@@ -46,6 +50,8 @@ namespace GameKing
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             GameType = e.Parameter.ToString();
+            CreditPause.Completed += CreditPause_Completed;
+            CardPause.Completed += CardPause_Completed;
             GameSetup();
         }
 
@@ -55,14 +61,31 @@ namespace GameKing
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
-            DrawCredits();
+            DrawCredits(GamePlayer.Credits);
         }
 
         private void LoadAudioFiles()
         {
             OneBet.AutoPlay = false;
+            OneBet.Volume = .66;
             OneBet.Source = new Uri("ms-appx:/Assets/audio/slot_machine_bet_04.wav", UriKind.Absolute);
             LayoutRoot.Children.Add(OneBet);
+
+            HoldAlert.AutoPlay = false;
+            HoldAlert.Volume = .66;
+            HoldAlert.Source = new Uri("ms-appx:/Assets/audio/slot_machine_win_03.wav", UriKind.Absolute);
+            LayoutRoot.Children.Add(HoldAlert);
+
+            CardFlip.AutoPlay = false;
+            CardFlip.Volume = .66;
+            CardFlip.Source = new Uri("ms-appx:/Assets/audio/carddeal.wav", UriKind.Absolute);
+            LayoutRoot.Children.Add(CardFlip);
+
+            WinLoop.AutoPlay = false;
+            WinLoop.IsLooping = true;
+            WinLoop.Volume = .66;
+            WinLoop.Source = new Uri("ms-appx:/Assets/audio/slot_machine_win_jackpot_04.wav", UriKind.Absolute);
+            LayoutRoot.Children.Add(WinLoop);
         }
 
         private void LoadCurrentBet()
@@ -104,6 +127,11 @@ namespace GameKing
             Hold2.Visibility = Visibility.Collapsed;
             Hold3.Visibility = Visibility.Collapsed;
             Hold4.Visibility = Visibility.Collapsed;
+            PokerGame.Hand.Held[0] = false;
+            PokerGame.Hand.Held[1] = false;
+            PokerGame.Hand.Held[2] = false;
+            PokerGame.Hand.Held[3] = false;
+            PokerGame.Hand.Held[4] = false;
         }
 
         private void ResetReds()
@@ -124,9 +152,11 @@ namespace GameKing
         private void Deal()
         {
             StopPayTableAnimations();
+            
             if (!HoldRound)
             {
                 ClearHolds();
+                ResetCardBacks();
                 ChargeCredits();
                 PokerGame = new VideoPokerGame(GameType);
                 HoldRound = true;
@@ -134,40 +164,84 @@ namespace GameKing
             else
             {
                 PokerGame.Draw();
+                ResetCardBacks();
+                //WriteDataToMobileService();
                 HoldRound = false;
-                HighlightWinningBetValue(PayTable);
             }
-            ShowCards();
+            ShowCards(!HoldRound);
+        }
+
+        private void WriteDataToMobileService()
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ResetCardBacks()
+        {
+            for (int i = 0; i <= 4; i++)
+            {
+                if (!PokerGame.Hand.Held[i])
+                {
+                    Image image = (Image)FindName("Card" + i);
+                    string imagepath = "ms-appx:/Assets/cards/BACK.png";
+                    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                    image.Source = imagesource;
+                }
+            }
         }
 
         private void ChargeCredits()
         {
             GamePlayer.Credits -= GamePlayer.CurrentBet;
-            DrawCredits();
+            DrawCredits(GamePlayer.Credits);
         }
 
-        public void ShowCards()
+        int cardCounter = 0;
+        bool ShouldPayUser = false;
+
+        public void ShowCards(bool payUserFlag)
         {
-            string x;
-            
-            for (int i = 0; i <= 4; i++)
+            ShouldPayUser = payUserFlag;
+
+            if (cardCounter <= 4)
             {
-                x = String.Empty;
-                switch (GameType)
+                if (!PokerGame.Hand.Held[cardCounter])
                 {
-                    case "DEUCESWILD":
-                        if (PokerGame.Hand.Cards[i].Value.Number == 2) x = "w";
-                        break;
+                    string x = String.Empty;
+                    switch (GameType)
+                    {
+                        case "DEUCESWILD":
+                            if (PokerGame.Hand.Cards[cardCounter].Value.Number == 2) x = "w";
+                            break;
+                    }
+
+                    Image image = (Image)FindName("Card" + cardCounter);
+                    string imagepath = "ms-appx:/Assets/cards/" + PokerGame.Hand.Cards[cardCounter].Suit.ID.ToString() + PokerGame.Hand.Cards[cardCounter].Value.Number.ToString() + x.ToString() + ".png";
+                    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                    image.Source = imagesource;
+                    cardCounter++;
+                    CardFlip.Play();
+                    CardPause.Begin();
                 }
-                
-                Image image = (Image)FindName("Card" + i);
-                string imagepath = "ms-appx:/Assets/cards/" + PokerGame.Hand.Cards[i].Suit.ID.ToString() + PokerGame.Hand.Cards[i].Value.Number.ToString() + x.ToString() + ".png";
-                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
-                image.Source = imagesource;
+                else
+                {
+                    cardCounter++;
+                    ShowCards(ShouldPayUser);
+                }
+            }
+            else
+            {
+                cardCounter = 0;
+                HighlightWinningBetValue(PayTable, ShouldPayUser);
             }
         }
 
-        int volume = 1;
+        void CardPause_Completed(object sender, object e)
+        {
+            ShowCards(ShouldPayUser);
+        }
+
+        int volume = 2;
 
         private void Volume_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -179,21 +253,23 @@ namespace GameKing
             BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
             VolumeButton.Source = i;
 
-            //TODO: Actually toggle the volume.
-
             switch (volume)
             {
                 case 0:
-                    
+                    WinLoop.Volume = 0;
+                    OneBet.Volume = 0;
                     break;
                 case 1:
-
+                    WinLoop.Volume = .33;
+                    OneBet.Volume = .33;
                     break;
                 case 2:
-
+                    WinLoop.Volume = 66;
+                    OneBet.Volume = .66;
                     break;
                 case 3:
-
+                    WinLoop.Volume = 1;
+                    OneBet.Volume = 1;
                     break;
 
             }
@@ -227,7 +303,7 @@ namespace GameKing
             BetText.Text = "BET   " + GamePlayer.CurrentBet;
         }
 
-        private void HighlightWinningBetValue(DependencyObject targetElement)
+        private void HighlightWinningBetValue(DependencyObject targetElement, bool ShouldAwardWinnings)
         {
             var count = VisualTreeHelper.GetChildrenCount(targetElement);
             if (count == 0)
@@ -247,13 +323,14 @@ namespace GameKing
                         Storyboard.SetTarget(PayTableNumberBlink, coinslot);
                         PayTableTitleBlink.Begin();
                         PayTableNumberBlink.Begin();
-                        AwardWinnings(Int32.Parse(coinslot.Text));
+                        if (ShouldAwardWinnings) AwardWinnings(Int32.Parse(coinslot.Text));
+                        else HoldAlert.Play();
                         return;
                     }
                 }
                 else
                 {
-                    HighlightWinningBetValue(child);
+                    HighlightWinningBetValue(child, ShouldAwardWinnings);
                 }
             }
 
@@ -265,28 +342,43 @@ namespace GameKing
             PayTableNumberBlink.Stop();
         }
 
+        int OldCredits;
+
         private void AwardWinnings(int credits)
         {
+            OldCredits = GamePlayer.Credits;
             GamePlayer.Credits += credits;
-            DrawCredits();
+            WinLoop.Play();
+            UpdateCredits();
         }
 
-        private void DrawCredits()
+        private void UpdateCredits()
+        {
+            if (OldCredits < GamePlayer.Credits)
+            {
+                OldCredits++;
+                DrawCredits(OldCredits);
+                CreditPause.Begin();
+            }
+            else WinLoop.Stop();
+        }
+
+        void CreditPause_Completed(object sender, object e)
+        {
+ 	        UpdateCredits();
+        }
+
+        private void DrawCredits(int credits)
         {
             CreditsPanel.Children.Clear();
-            for (int i = 0; i < GamePlayer.Credits.ToString().Length; i++)
+            for (int i = credits.ToString().Length-1; i >=0 ; i--)
             {
                 Image j = new Image { Width = 38 };
-                string imagepath = "ms-appx:/Assets/numbers/" + GamePlayer.Credits.ToString()[i] + ".png";
+                string imagepath = "ms-appx:/Assets/numbers/" + credits.ToString()[i] + ".png";
                 BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                 j.Source = imagesource;
                 CreditsPanel.Children.Add(j);
             }
-            Image creditImage = new Image { Height = 52 };
-            string creditPath = "ms-appx:/Assets/numbers/CREDITS.png";
-            BitmapImage creditBI = new BitmapImage(new Uri(creditPath, UriKind.Absolute));
-            creditImage.Source = creditBI;
-            CreditsPanel.Children.Add(creditImage);
         }
     }
 }

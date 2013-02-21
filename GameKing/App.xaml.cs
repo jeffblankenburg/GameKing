@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.WindowsAzure.MobileServices;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -23,6 +24,8 @@ namespace GameKing
     /// </summary>
     sealed partial class App : Application
     {
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://gameking.azure-mobile.net/", "yQFDpmPmnOTOmzjuXcdATTxbtQQlMN66");
+        
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -86,5 +89,7 @@ namespace GameKing
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+
     }
 }
