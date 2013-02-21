@@ -50,9 +50,17 @@ namespace GameKing
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             GameType = e.Parameter.ToString();
+            GamePlayer.Credits = (int)App.settings.Values["credits"];
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
             GameSetup();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            App.settings.Values["credits"] = GamePlayer.Credits;
+            CreditPause.Completed -= CreditPause_Completed;
+            CardPause.Completed -= CardPause_Completed;
         }
 
         private void GameSetup()
@@ -379,6 +387,11 @@ namespace GameKing
                 j.Source = imagesource;
                 CreditsPanel.Children.Add(j);
             }
+        }
+
+        private void MoreGames_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.GoBack();
         }
     }
 }

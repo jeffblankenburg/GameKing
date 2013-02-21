@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.WindowsAzure.MobileServices;
+using Windows.Storage;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -25,6 +26,7 @@ namespace GameKing
     sealed partial class App : Application
     {
         public static MobileServiceClient MobileService = new MobileServiceClient("https://gameking.azure-mobile.net/", "yQFDpmPmnOTOmzjuXcdATTxbtQQlMN66");
+        public static ApplicationDataContainer settings;
         
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -44,6 +46,13 @@ namespace GameKing
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
+            settings = ApplicationData.Current.RoamingSettings;
+
+            if (!settings.Values.ContainsKey("credits"))
+            {
+                settings.Values["credits"] = 10000;
+            }
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -85,11 +94,15 @@ namespace GameKing
         /// <param name="e">Details about the suspend request.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
+           
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
 
-
+        public static void SaveHandData(string HandType)
+        {
+            //TODO: Save Every Result 
+        }
     }
 }
