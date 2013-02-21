@@ -7,7 +7,7 @@ namespace GameKing
 {
     public class Player
     {
-        public int CurrentBet = 0;
+        public int CurrentBet = 1;
         public int Credits = 10000;
 
         public bool IncreaseBet(int BetAmount)

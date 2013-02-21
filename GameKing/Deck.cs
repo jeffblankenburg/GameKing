@@ -22,8 +22,6 @@ namespace GameKing
             {
                 foreach (Value v in Values)
                 {
-                    //string imagepath = "ms-appx:/Assets/cards/" + s.ID.ToString() + v.Number.ToString() + x.ToString() + ".png";
-                    //BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                     Cards.Add(new Card(s, v));
                 }
             }

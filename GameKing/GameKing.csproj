@@ -130,6 +130,9 @@
     <None Include="GameKing_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\audio\slot_machine_bet_04.wav" />
+    <Content Include="Assets\audio\slot_machine_win_03.wav" />
+    <Content Include="Assets\audio\slot_machine_win_jackpot_04.wav" />
     <Content Include="Assets\buttons\BETMAX.png" />
     <Content Include="Assets\buttons\BETONE.png" />
     <Content Include="Assets\buttons\BLANK.png" />

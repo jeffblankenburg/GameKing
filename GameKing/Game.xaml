@@ -10,24 +10,32 @@
         <Storyboard x:Name="PayTableTitleBlink" RepeatBehavior="Forever">
 			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
 				<EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
 				<EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
 				<EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
 				<EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
 				<EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
 			</ColorAnimationUsingKeyFrames>
 		</Storyboard>
         <Storyboard x:Name="PayTableNumberBlink" RepeatBehavior="Forever">
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
                 <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
                 <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
                 <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
                 <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
                 <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
 
-    <Grid Background="#00019f">
+    <Grid x:Name="LayoutRoot" Background="#00019f">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
@@ -90,17 +98,17 @@
             <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Center" />
             <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Center" />
             <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   5" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
                     <StackPanel x:Name="CreditsPanel" Orientation="Horizontal">
                         <Image Source="Assets/numbers/1.png" Width="38" />

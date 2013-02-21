@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,6 +35,8 @@ namespace GameKing
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
+
+        MediaElement OneBet = new MediaElement();
         
         public Game()
         {
@@ -48,8 +52,22 @@ namespace GameKing
         private void GameSetup()
         {
             PokerGame = new VideoPokerGame(GameType);
+            LoadAudioFiles();
+            LoadCurrentBet();
             LoadPayTable();
             DrawCredits();
+        }
+
+        private void LoadAudioFiles()
+        {
+            OneBet.AutoPlay = false;
+            OneBet.Source = new Uri("ms-appx:/Assets/audio/slot_machine_bet_04.wav", UriKind.Absolute);
+            LayoutRoot.Children.Add(OneBet);
+        }
+
+        private void LoadCurrentBet()
+        {
+            ChangeBetHighlight();
         }
 
         private void LoadPayTable()
@@ -195,6 +213,7 @@ namespace GameKing
         {
             if (!HoldRound)
             {
+                OneBet.Play();
                 if (GamePlayer.IncreaseBet(1)) Deal();
                 ChangeBetHighlight();
             }
