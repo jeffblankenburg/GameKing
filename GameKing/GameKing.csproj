@@ -203,11 +203,16 @@
     <Content Include="Assets\cards\BACK.png" />
     <Content Include="Assets\cards\HOLD.png" />
     <Content Include="Assets\cards\JOKER.png" />
+    <Content Include="Assets\gamekinglogo.png" />
     <Content Include="Assets\gamelogo\BonusPoker.png" />
     <Content Include="Assets\gamelogo\BonusPokerDeluxe.png" />
     <Content Include="Assets\gamelogo\DeucesWild.png" />
     <Content Include="Assets\gamelogo\DoubleBonusPoker.png" />
     <Content Include="Assets\gamelogo\JacksOrBetter.png" />
+    <Content Include="Assets\gamelogo\RoyalAcesBonusPoker.png" />
+    <Content Include="Assets\gamelogo\SuperAcesBonusPoker.png" />
+    <Content Include="Assets\gamelogo\TripleBonusPokerPlus.png" />
+    <Content Include="Assets\gamelogo\WhiteHotAces.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\numbers\0.png" />
     <Content Include="Assets\numbers\1.png" />
@@ -221,6 +226,7 @@
     <Content Include="Assets\numbers\9.png" />
     <Content Include="Assets\numbers\CREDITS.png" />
     <Content Include="Assets\numbers\WIN.png" />
+    <Content Include="Assets\pattern.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />

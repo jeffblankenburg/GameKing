@@ -26,11 +26,6 @@ namespace GameKing
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
@@ -53,6 +48,26 @@ namespace GameKing
         private void DoubleBonusPoker_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.Navigate(typeof(Game), "DOUBLEBONUSPOKER");
+        }
+
+        private void RoyalAcesBonusPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "ROYALACESBONUSPOKER");
+        }
+
+        private void BonusPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "BONUSPOKER");
+        }
+
+        private void TripleBonusPokerPlus_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "TRIPLEBONUSPOKERPLUS");
+        }
+
+        private void WhiteHotAces_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "WHITEHOTACES");
         }
     }
 }
