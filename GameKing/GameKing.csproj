@@ -104,6 +104,9 @@
     <SDKReference Include="MobileServicesManagedClient, Version=0.2.0.0">
       <Name>Windows Azure Mobile Services Managed Client</Name>
     </SDKReference>
+    <SDKReference Include="MSAdvertisingXaml, Version=6.1">
+      <Name>Microsoft Advertising SDK for Windows 8 %28Xaml%29</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

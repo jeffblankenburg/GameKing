@@ -44,5 +44,15 @@ namespace GameKing
         {
             Frame.Navigate(typeof(Game), "JACKSORBETTER");
         }
+
+        private void BonusPokerDeluxe_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "BONUSPOKERDELUXE");
+        }
+
+        private void DoubleBonusPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "DOUBLEBONUSPOKER");
+        }
     }
 }

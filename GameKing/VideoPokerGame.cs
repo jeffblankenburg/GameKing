@@ -70,6 +70,30 @@ namespace GameKing
                     payTable.Add(new PayTableItem { Title = "TWO PAIR....................................", Coin1 = 2, Coin2 = 4, Coin3 = 6, Coin4 = 8, Coin5 = 10 });
                     payTable.Add(new PayTableItem { Title = "JACKS OR BETTER.......................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
                     break;
+                case "BONUSPOKERDELUXE":
+                    payTable.Add(new PayTableItem { Title = "ROYAL FLUSH..............................", Coin1 = 250, Coin2 = 500, Coin3 = 750, Coin4 = 1000, Coin5 = 4000 });
+                    payTable.Add(new PayTableItem { Title = "STRAIGHT FLUSH.......................", Coin1 = 50, Coin2 = 100, Coin3 = 150, Coin4 = 200, Coin5 = 250 });
+                    payTable.Add(new PayTableItem { Title = "4 OF A KIND................................", Coin1 = 80, Coin2 = 160, Coin3 = 240, Coin4 = 320, Coin5 = 400 });
+                    payTable.Add(new PayTableItem { Title = "FULL HOUSE................................", Coin1 = 8, Coin2 = 16, Coin3 = 24, Coin4 = 32, Coin5 = 40 });
+                    payTable.Add(new PayTableItem { Title = "FLUSH..........................................", Coin1 = 6, Coin2 = 12, Coin3 = 18, Coin4 = 24, Coin5 = 30 });
+                    payTable.Add(new PayTableItem { Title = "STRAIGHT....................................", Coin1 = 4, Coin2 = 8, Coin3 = 12, Coin4 = 16, Coin5 = 20 });
+                    payTable.Add(new PayTableItem { Title = "3 OF A KIND................................", Coin1 = 3, Coin2 = 6, Coin3 = 9, Coin4 = 12, Coin5 = 15 });
+                    payTable.Add(new PayTableItem { Title = "TWO PAIR....................................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
+                    payTable.Add(new PayTableItem { Title = "JACKS OR BETTER.......................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
+                    break;
+                case "DOUBLEBONUSPOKER":
+                    payTable.Add(new PayTableItem { Title = "ROYAL FLUSH..............................", Coin1 = 250, Coin2 = 500, Coin3 = 750, Coin4 = 1000, Coin5 = 4000 });
+                    payTable.Add(new PayTableItem { Title = "STRAIGHT FLUSH.......................", Coin1 = 50, Coin2 = 100, Coin3 = 150, Coin4 = 200, Coin5 = 250 });
+                    payTable.Add(new PayTableItem { Title = "4 ACES..........................................", Coin1 = 160, Coin2 = 320, Coin3 = 480, Coin4 = 640, Coin5 = 800 });
+                    payTable.Add(new PayTableItem { Title = "4 2s, 3s, 4s...................................", Coin1 = 80, Coin2 = 160, Coin3 = 240, Coin4 = 320, Coin5 = 400 });
+                    payTable.Add(new PayTableItem { Title = "4 5s THRU KINGS.......................", Coin1 = 50, Coin2 = 100, Coin3 = 150, Coin4 = 200, Coin5 = 250 });
+                    payTable.Add(new PayTableItem { Title = "FULL HOUSE................................", Coin1 = 9, Coin2 = 18, Coin3 = 27, Coin4 = 36, Coin5 = 45 });
+                    payTable.Add(new PayTableItem { Title = "FLUSH..........................................", Coin1 = 6, Coin2 = 12, Coin3 = 18, Coin4 = 24, Coin5 = 30 });
+                    payTable.Add(new PayTableItem { Title = "STRAIGHT....................................", Coin1 = 5, Coin2 = 10, Coin3 = 15, Coin4 = 20, Coin5 = 25 });
+                    payTable.Add(new PayTableItem { Title = "3 OF A KIND................................", Coin1 = 3, Coin2 = 6, Coin3 = 9, Coin4 = 12, Coin5 = 15 });
+                    payTable.Add(new PayTableItem { Title = "TWO PAIR....................................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
+                    payTable.Add(new PayTableItem { Title = "JACKS OR BETTER.......................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
+                    break;
             }
 
             return payTable;

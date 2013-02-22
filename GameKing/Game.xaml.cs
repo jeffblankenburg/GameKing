@@ -32,7 +32,7 @@ namespace GameKing
         Player GamePlayer = new Player();
         string GameType;
         bool HoldRound = false;
-
+        int handCounter = 0;
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
@@ -50,7 +50,7 @@ namespace GameKing
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             GameType = e.Parameter.ToString();
-            GamePlayer.Credits = (int)App.settings.Values["credits"];
+            //GamePlayer.Credits = (int)App.settings.Values["credits"];
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
             GameSetup();
@@ -58,7 +58,7 @@ namespace GameKing
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            App.settings.Values["credits"] = GamePlayer.Credits;
+            //App.settings.Values["credits"] = GamePlayer.Credits;
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
         }
@@ -69,7 +69,7 @@ namespace GameKing
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
-            DrawCredits(GamePlayer.Credits);
+            DrawCredits((int)App.settings.Values["credits"]);
         }
 
         private void LoadAudioFiles()
@@ -167,6 +167,7 @@ namespace GameKing
                 ResetCardBacks();
                 ChargeCredits();
                 PokerGame = new VideoPokerGame(GameType);
+                handCounter++;
                 HoldRound = true;
             }
             else
@@ -175,6 +176,11 @@ namespace GameKing
                 ResetCardBacks();
                 //WriteDataToMobileService();
                 HoldRound = false;
+                if (handCounter == 10)
+                {
+                    AdBox.Visibility = Visibility.Visible;
+                    handCounter = 0;
+                }
             }
             ShowCards(!HoldRound);
         }
@@ -200,8 +206,13 @@ namespace GameKing
 
         private void ChargeCredits()
         {
-            GamePlayer.Credits -= GamePlayer.CurrentBet;
-            DrawCredits(GamePlayer.Credits);
+            int credits = (int)App.settings.Values["credits"];
+            int total = (int)App.settings.Values["totalcreditsplayed"];
+            credits -= GamePlayer.CurrentBet;
+            total += GamePlayer.CurrentBet;
+            App.settings.Values["credits"] = credits;
+            App.settings.Values["totalcreditsplayed"] = total;
+            DrawCredits(credits);
         }
 
         int cardCounter = 0;
@@ -352,17 +363,19 @@ namespace GameKing
 
         int OldCredits;
 
-        private void AwardWinnings(int credits)
+        private void AwardWinnings(int award)
         {
-            OldCredits = GamePlayer.Credits;
-            GamePlayer.Credits += credits;
+            int credits = (int)App.settings.Values["credits"];
+            OldCredits = credits;
+            credits += award;
+            App.settings.Values["credits"] = credits;
             WinLoop.Play();
             UpdateCredits();
         }
 
         private void UpdateCredits()
         {
-            if (OldCredits < GamePlayer.Credits)
+            if (OldCredits < (int)App.settings.Values["credits"])
             {
                 OldCredits++;
                 DrawCredits(OldCredits);
@@ -392,6 +405,11 @@ namespace GameKing
         private void MoreGames_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.GoBack();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdBox.Visibility = Visibility.Collapsed;
         }
     }
 }

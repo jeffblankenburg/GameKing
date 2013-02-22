@@ -53,6 +53,11 @@ namespace GameKing
                 settings.Values["credits"] = 10000;
             }
 
+            if (!settings.Values.ContainsKey("totalcreditsplayed"))
+            {
+                settings.Values["totalcreditsplayed"] = 0;
+            }
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
