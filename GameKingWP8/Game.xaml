@@ -62,7 +62,7 @@
         </Grid.RowDefinitions>
         <Grid>
             <Image Source="Assets/pattern480_800.png" Stretch="UniformToFill" />
-            <Image x:Name="Logo" Height="111" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="277"/>
+            <Image x:Name="Logo" Height="160" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="399"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

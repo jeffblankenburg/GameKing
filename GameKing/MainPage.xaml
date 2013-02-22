@@ -22,11 +22,13 @@
             <RowDefinition Height="110" />
             <RowDefinition Height="30" />
             <RowDefinition Height="110" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="110" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.ColumnSpan="7">
             <Image Source="Assets/pattern.png" Stretch="UniformToFill" />
-            <Image x:Name="Logo" Height="111" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="277"/>
+            <Image x:Name="Logo" Height="180" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="449"/>
         </Grid>
         <Image Grid.Row="2" Grid.Column="1" Source="Assets/gamelogo/DeucesWild.png" Width="200" Tapped="DeucesWild_Tapped"  />
         <Image Grid.Row="2" Grid.Column="2" Source="Assets/gamelogo/JacksOrBetter.png" Width="200" Tapped="JacksOrBetter_Tapped"  />
@@ -36,7 +38,23 @@
         <Image Grid.Row="4" Grid.Column="2" Source="Assets/gamelogo/TripleBonusPokerPlus.png" Width="200" Tapped="TripleBonusPokerPlus_Tapped"  />
         <Image Grid.Row="4" Grid.Column="3" Source="Assets/gamelogo/BonusPoker.png" Width="200" Tapped="BonusPoker_Tapped"  />
         <Image Grid.Row="4" Grid.Column="4" Source="Assets/gamelogo/RoyalAcesBonusPoker.png" Width="200" Tapped="RoyalAcesBonusPoker_Tapped"  />
-        <Border BorderThickness="3" BorderBrush="White" Grid.Row="5" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="740">
+        <Image Grid.Row="6" Grid.Column="1" Source="Assets/gamelogo/BlackJackBonusPoker.png" Width="200" Opacity=".5"  />
+        <Image Grid.Row="6" Grid.Column="2" Source="Assets/gamelogo/SuperDoubleDoubleBonusPoker.png" Width="200" Opacity=".5"  />
+        <Image Grid.Row="6" Grid.Column="3" Source="Assets/gamelogo/JokerPoker.png" Width="200" Opacity=".5" />
+        <Image Grid.Row="6" Grid.Column="4" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" Width="200" Opacity=".5"  />
+        <TextBlock Grid.Row="6" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
+            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
+        </TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
+            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
+        </TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
+            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
+        </TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
+            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
+        </TextBlock>
+        <Border BorderThickness="3" BorderBrush="White" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="740">
             <UI:AdControl ApplicationId="47fa2188-6db2-4d22-8cd7-2ec6170bdf4b" AdUnitId="10060123" Height="90" Grid.Row="1" Width="728"/>
         </Border>
     </Grid>
