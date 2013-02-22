@@ -133,9 +133,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameKing\GameKing.csproj">
-      <Project>{b5ed8c82-9ed4-4873-9907-7c3a288b31b3}</Project>
-      <Name>GameKing</Name>
+    <ProjectReference Include="..\PokerLogic\PokerLogic.csproj">
+      <Project>{66e0d40c-8d83-4c31-a363-1784f49a9c5b}</Project>
+      <Name>PokerLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">

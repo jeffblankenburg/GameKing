@@ -1,33 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using Windows.ApplicationModel;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using PokerLogic;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace GameKing
+namespace GameKingWP8
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class Game : Page
+    public partial class Game : PhoneApplicationPage
     {
         VideoPokerGame PokerGame;
         Player GamePlayer = new Player();
@@ -45,13 +33,12 @@ namespace GameKing
         
         public Game()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            GameType = e.Parameter.ToString();
-            //GamePlayer.Credits = (int)App.settings.Values["credits"];
+            GameType = NavigationContext.QueryString["game"].ToString();
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
             GameSetup();
@@ -59,9 +46,18 @@ namespace GameKing
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            //App.settings.Values["credits"] = GamePlayer.Credits;
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
+        }
+
+        void CardPause_Completed(object sender, object e)
+        {
+            ShowCards(ShouldPayUser);
+        }
+
+        void CreditPause_Completed(object sender, object e)
+        {
+            UpdateCredits();
         }
 
         private void GameSetup()
@@ -70,31 +66,7 @@ namespace GameKing
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
-            DrawCredits((int)App.settings.Values["credits"]);
-        }
-
-        private void LoadAudioFiles()
-        {
-            OneBet.AutoPlay = false;
-            OneBet.Volume = .66;
-            OneBet.Source = new Uri("ms-appx:/Assets/audio/slot_machine_bet_04.wav", UriKind.Absolute);
-            LayoutRoot.Children.Add(OneBet);
-
-            HoldAlert.AutoPlay = false;
-            HoldAlert.Volume = .66;
-            HoldAlert.Source = new Uri("ms-appx:/Assets/audio/slot_machine_win_03.wav", UriKind.Absolute);
-            LayoutRoot.Children.Add(HoldAlert);
-
-            CardFlip.AutoPlay = false;
-            CardFlip.Volume = .66;
-            CardFlip.Source = new Uri("ms-appx:/Assets/audio/carddeal.wav", UriKind.Absolute);
-            LayoutRoot.Children.Add(CardFlip);
-
-            WinLoop.AutoPlay = false;
-            WinLoop.IsLooping = true;
-            WinLoop.Volume = .66;
-            WinLoop.Source = new Uri("ms-appx:/Assets/audio/slot_machine_win_jackpot_04.wav", UriKind.Absolute);
-            LayoutRoot.Children.Add(WinLoop);
+            DrawCredits((int)App.settings["credits"]);
         }
 
         private void LoadCurrentBet()
@@ -107,7 +79,31 @@ namespace GameKing
             PayTable.ItemsSource = PokerGame.PayTable;
         }
 
-        private void Card_MouseLeftButtonDown(object sender, TappedRoutedEventArgs e)
+        private void LoadAudioFiles()
+        {
+            OneBet.AutoPlay = false;
+            OneBet.Volume = .66;
+            OneBet.Source = new Uri("Assets/audio/slot_machine_bet_04.wav", UriKind.RelativeOrAbsolute);
+            LayoutRoot.Children.Add(OneBet);
+
+            HoldAlert.AutoPlay = false;
+            HoldAlert.Volume = .66;
+            HoldAlert.Source = new Uri("Assets/audio/slot_machine_win_03.wav", UriKind.RelativeOrAbsolute);
+            LayoutRoot.Children.Add(HoldAlert);
+
+            CardFlip.AutoPlay = false;
+            CardFlip.Volume = .66;
+            CardFlip.Source = new Uri("Assets/audio/carddeal.wav", UriKind.RelativeOrAbsolute);
+            LayoutRoot.Children.Add(CardFlip);
+
+            WinLoop.AutoPlay = false;
+            //WinLoop.IsLooping = true;
+            WinLoop.Volume = .66;
+            WinLoop.Source = new Uri("Assets/audio/slot_machine_win_jackpot_04.wav", UriKind.RelativeOrAbsolute);
+            LayoutRoot.Children.Add(WinLoop);
+        }
+
+        private void Card_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (HoldRound)
             {
@@ -129,31 +125,7 @@ namespace GameKing
             }
         }
 
-        private void ClearHolds()
-        {
-            Hold0.Visibility = Visibility.Collapsed;
-            Hold1.Visibility = Visibility.Collapsed;
-            Hold2.Visibility = Visibility.Collapsed;
-            Hold3.Visibility = Visibility.Collapsed;
-            Hold4.Visibility = Visibility.Collapsed;
-            PokerGame.Hand.Held[0] = false;
-            PokerGame.Hand.Held[1] = false;
-            PokerGame.Hand.Held[2] = false;
-            PokerGame.Hand.Held[3] = false;
-            PokerGame.Hand.Held[4] = false;
-        }
-
-        private void ResetReds()
-        {
-            StopPayTableAnimations();
-            CoinBox1.Fill = Blue;
-            CoinBox2.Fill = Blue;
-            CoinBox3.Fill = Blue;
-            CoinBox4.Fill = Blue;
-            CoinBox5.Fill = Blue;
-        }
-
-        private void Deal_Click(object sender, TappedRoutedEventArgs e)
+        private void Deal_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Deal();
         }
@@ -161,7 +133,7 @@ namespace GameKing
         private void Deal()
         {
             StopPayTableAnimations();
-            
+
             if (!HoldRound)
             {
                 ClearHolds();
@@ -179,40 +151,21 @@ namespace GameKing
                 HoldRound = false;
                 if (handCounter == 10)
                 {
-                    AdBox.Visibility = Visibility.Visible;
+                    //AdBox.Visibility = Visibility.Visible;
                     handCounter = 0;
                 }
             }
             ShowCards(!HoldRound);
         }
 
-        private void WriteDataToMobileService()
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void ResetCardBacks()
-        {
-            for (int i = 0; i <= 4; i++)
-            {
-                if (!PokerGame.Hand.Held[i])
-                {
-                    Image image = (Image)FindName("Card" + i);
-                    string imagepath = "ms-appx:/Assets/cards/BACK.png";
-                    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
-                    image.Source = imagesource;
-                }
-            }
-        }
-
         private void ChargeCredits()
         {
-            int credits = (int)App.settings.Values["credits"];
-            int total = (int)App.settings.Values["totalcreditsplayed"];
+            int credits = (int)App.settings["credits"];
+            int total = (int)App.settings["totalcreditsplayed"];
             credits -= GamePlayer.CurrentBet;
             total += GamePlayer.CurrentBet;
-            App.settings.Values["credits"] = credits;
-            App.settings.Values["totalcreditsplayed"] = total;
+            App.settings["credits"] = credits;
+            App.settings["totalcreditsplayed"] = total;
             DrawCredits(credits);
         }
 
@@ -236,8 +189,8 @@ namespace GameKing
                     }
 
                     Image image = (Image)FindName("Card" + cardCounter);
-                    string imagepath = "ms-appx:/Assets/cards/" + PokerGame.Hand.Cards[cardCounter].Suit.ID.ToString() + PokerGame.Hand.Cards[cardCounter].Value.Number.ToString() + x.ToString() + ".png";
-                    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                    string imagepath = "Assets/cards/" + PokerGame.Hand.Cards[cardCounter].Suit.ID.ToString() + PokerGame.Hand.Cards[cardCounter].Value.Number.ToString() + x.ToString() + ".png";
+                    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Relative));
                     image.Source = imagesource;
                     cardCounter++;
                     CardFlip.Play();
@@ -256,21 +209,16 @@ namespace GameKing
             }
         }
 
-        void CardPause_Completed(object sender, object e)
-        {
-            ShowCards(ShouldPayUser);
-        }
-
         int volume = 2;
 
-        private void Volume_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Volume_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             volume++;
 
             if (volume == 4) volume = 0;
 
-            string imagepath = "ms-appx:/Assets/buttons/Volume" + volume + ".png";
-            BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+            string imagepath = "Assets/buttons/Volume" + volume + ".png";
+            BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Relative));
             VolumeButton.Source = i;
 
             switch (volume)
@@ -295,7 +243,7 @@ namespace GameKing
             }
         }
 
-        private void BetMax_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BetMax_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (!HoldRound)
             {
@@ -305,7 +253,7 @@ namespace GameKing
             }
         }
 
-        private void BetOne_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BetOne_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (!HoldRound)
             {
@@ -366,17 +314,17 @@ namespace GameKing
 
         private void AwardWinnings(int award)
         {
-            int credits = (int)App.settings.Values["credits"];
+            int credits = (int)App.settings["credits"];
             OldCredits = credits;
             credits += award;
-            App.settings.Values["credits"] = credits;
+            App.settings["credits"] = credits;
             WinLoop.Play();
             UpdateCredits();
         }
 
         private void UpdateCredits()
         {
-            if (OldCredits < (int)App.settings.Values["credits"])
+            if (OldCredits < (int)App.settings["credits"])
             {
                 OldCredits++;
                 DrawCredits(OldCredits);
@@ -385,32 +333,60 @@ namespace GameKing
             else WinLoop.Stop();
         }
 
-        void CreditPause_Completed(object sender, object e)
-        {
- 	        UpdateCredits();
-        }
-
         private void DrawCredits(int credits)
         {
             CreditsPanel.Children.Clear();
-            for (int i = credits.ToString().Length-1; i >=0 ; i--)
+            for (int i = credits.ToString().Length - 1; i >= 0; i--)
             {
-                Image j = new Image { Width = 38 };
-                string imagepath = "ms-appx:/Assets/numbers/" + credits.ToString()[i] + ".png";
-                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                Image j = new Image { Width = 19 };
+                string imagepath = "Assets/numbers/" + credits.ToString()[i] + ".png";
+                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Relative));
                 j.Source = imagesource;
                 CreditsPanel.Children.Add(j);
             }
         }
 
-        private void MoreGames_Tapped(object sender, TappedRoutedEventArgs e)
+        private void MoreGames_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Frame.GoBack();
+            NavigationService.GoBack();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void ClearHolds()
         {
-            AdBox.Visibility = Visibility.Collapsed;
+            Hold0.Visibility = Visibility.Collapsed;
+            Hold1.Visibility = Visibility.Collapsed;
+            Hold2.Visibility = Visibility.Collapsed;
+            Hold3.Visibility = Visibility.Collapsed;
+            Hold4.Visibility = Visibility.Collapsed;
+            PokerGame.Hand.Held[0] = false;
+            PokerGame.Hand.Held[1] = false;
+            PokerGame.Hand.Held[2] = false;
+            PokerGame.Hand.Held[3] = false;
+            PokerGame.Hand.Held[4] = false;
+        }
+
+        private void ResetReds()
+        {
+            StopPayTableAnimations();
+            CoinBox1.Fill = Blue;
+            CoinBox2.Fill = Blue;
+            CoinBox3.Fill = Blue;
+            CoinBox4.Fill = Blue;
+            CoinBox5.Fill = Blue;
+        }
+
+        private void ResetCardBacks()
+        {
+            for (int i = 0; i <= 4; i++)
+            {
+                if (!PokerGame.Hand.Held[i])
+                {
+                    Image image = (Image)FindName("Card" + i);
+                    string imagepath = "Assets/cards/BACK.png";
+                    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Relative));
+                    image.Source = imagesource;
+                }
+            }
         }
     }
 }

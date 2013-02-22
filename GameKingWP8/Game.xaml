@@ -1,0 +1,165 @@
+﻿<phone:PhoneApplicationPage xmlns:UI="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI" 
+    x:Class="GameKingWP8.Game"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0">
+
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="PayTableTitleBlink" RepeatBehavior="Forever">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="PayTableNumberBlink" RepeatBehavior="Forever">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CreditPause">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CreditImage">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CardPause">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CreditImage">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="#00019f">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Image Source="Assets/pattern480_800.png" Stretch="UniformToFill" />
+            <Image x:Name="Logo" Height="111" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="277"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="#000000" Grid.ColumnSpan="6"  />
+            <Rectangle Fill="#FCD800" Grid.ColumnSpan="6" Margin="2" />
+            <Rectangle x:Name="CoinBox0" Fill="#000064" Grid.Column="0" Stroke="#000000" StrokeThickness="2" Margin="4,4,0,4" />
+            <Rectangle x:Name="CoinBox1" Fill="#000064" Grid.Column="1" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox2" Fill="#000064" Grid.Column="2" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox3" Fill="#000064" Grid.Column="3" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox4" Fill="#000064" Grid.Column="4" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+            <Rectangle x:Name="CoinBox5" Fill="#000064" Grid.Column="5" Stroke="#000000" StrokeThickness="2" Margin="2,4,4,4" />
+            <ItemsControl x:Name="PayTable" Grid.ColumnSpan="6" Margin="15,15,5,15">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="14" Grid.Column="0" FontWeight="Bold" Margin="-5,0,0,0"/>
+                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="14" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" Margin="0,0,10,0" />
+                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="14" Grid.Column="2" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="14" Grid.Column="3" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="14" Grid.Column="4" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="14" Grid.Column="5" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Grid Grid.Row="2" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="80" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="95" />
+                <ColumnDefinition Width="95" />
+                <ColumnDefinition Width="95" />
+                <ColumnDefinition Width="95" />
+                <ColumnDefinition Width="95" />
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="0" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
+            <Grid Grid.Row="2" Grid.ColumnSpan="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="16" TextAlignment="Center" Foreground="White"/>
+                <Grid HorizontalAlignment="Right" Grid.Row="1" >
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" FlowDirection="RightToLeft" >
+                            <Image Source="Assets/numbers/0.png" Width="19" />
+                            <Image Source="Assets/numbers/0.png" Width="19" />
+                            <Image Source="Assets/numbers/0.png" Width="19" />
+                            <Image Source="Assets/numbers/0.png" Width="19" />
+                            <Image Source="Assets/numbers/0.png" Width="19" />
+                        </StackPanel>
+                        <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Height="26" Margin="15,0,0,0" />
+                    </StackPanel>
+                </Grid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+                    <Image Source="Assets/buttons/MOREGAMES.png" Height="31" Margin="0,0,50,0" MouseLeftButtonDown="MoreGames_Tapped" />
+                    
+                    <Image x:Name="BetOneButton" Source="Assets/buttons/BETONE.png" Width="43" MouseLeftButtonDown="BetOne_Tapped" />
+                    <Image x:Name="BetMaxButton" Source="Assets/buttons/BETMAX.png" Width="43" MouseLeftButtonDown="BetMax_Tapped" />
+                    <Image x:Name="VolumeButton" Source="Assets/buttons/Volume2.png" Width="35" MouseLeftButtonDown="Volume_Tapped" />
+                    <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Width="88" MouseLeftButtonDown="Deal_Click"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="3" Grid.ColumnSpan="5">
+                <UI:AdControl Height="80" AdUnitId="10060233" ApplicationId="4b478008-47b9-49f6-b63d-8a16c270f419" />
+            </Grid>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
