@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GameKingWP8
 {
@@ -25,11 +27,6 @@ namespace GameKingWP8
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
-
-        MediaElement OneBet = new MediaElement();
-        MediaElement WinLoop = new MediaElement();
-        MediaElement HoldAlert = new MediaElement();
-        MediaElement CardFlip = new MediaElement();
         
         public Game()
         {
@@ -69,6 +66,35 @@ namespace GameKingWP8
             DrawCredits((int)App.settings["credits"]);
         }
 
+        private void LoadAudioFiles()
+        {
+            //App.settings["credits"] = 10;
+        }
+
+        private void PlayOneBet()
+        {
+            var stream = TitleContainer.OpenStream("Assets/audio/onebet.wav");
+            SoundEffect effect = SoundEffect.FromStream(stream);
+            FrameworkDispatcher.Update();
+            effect.Play();
+        }
+
+        private void PlayCardDeal()
+        {
+            var stream = TitleContainer.OpenStream("Assets/audio/carddeal.wav");
+            SoundEffect effect = SoundEffect.FromStream(stream);
+            FrameworkDispatcher.Update();
+            effect.Play();
+        }
+
+        private void PlayHoldAlert()
+        {
+            var stream = TitleContainer.OpenStream("Assets/audio/holdalert.wav");
+            SoundEffect effect = SoundEffect.FromStream(stream);
+            FrameworkDispatcher.Update();
+            effect.Play();
+        }
+
         private void LoadCurrentBet()
         {
             ChangeBetHighlight();
@@ -77,30 +103,6 @@ namespace GameKingWP8
         private void LoadPayTable()
         {
             PayTable.ItemsSource = PokerGame.PayTable;
-        }
-
-        private void LoadAudioFiles()
-        {
-            OneBet.AutoPlay = false;
-            OneBet.Volume = .66;
-            OneBet.Source = new Uri("Assets/audio/slot_machine_bet_04.wav", UriKind.RelativeOrAbsolute);
-            LayoutRoot.Children.Add(OneBet);
-
-            HoldAlert.AutoPlay = false;
-            HoldAlert.Volume = .66;
-            HoldAlert.Source = new Uri("Assets/audio/slot_machine_win_03.wav", UriKind.RelativeOrAbsolute);
-            LayoutRoot.Children.Add(HoldAlert);
-
-            CardFlip.AutoPlay = false;
-            CardFlip.Volume = .66;
-            CardFlip.Source = new Uri("Assets/audio/carddeal.wav", UriKind.RelativeOrAbsolute);
-            LayoutRoot.Children.Add(CardFlip);
-
-            WinLoop.AutoPlay = false;
-            //WinLoop.IsLooping = true;
-            WinLoop.Volume = .66;
-            WinLoop.Source = new Uri("Assets/audio/slot_machine_win_jackpot_04.wav", UriKind.RelativeOrAbsolute);
-            LayoutRoot.Children.Add(WinLoop);
         }
 
         private void Card_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -133,6 +135,7 @@ namespace GameKingWP8
         private void Deal()
         {
             StopPayTableAnimations();
+            ResetBox.Visibility = Visibility.Collapsed;
 
             if (!HoldRound)
             {
@@ -161,12 +164,21 @@ namespace GameKingWP8
         private void ChargeCredits()
         {
             int credits = (int)App.settings["credits"];
-            int total = (int)App.settings["totalcreditsplayed"];
-            credits -= GamePlayer.CurrentBet;
-            total += GamePlayer.CurrentBet;
-            App.settings["credits"] = credits;
-            App.settings["totalcreditsplayed"] = total;
-            DrawCredits(credits);
+
+            if ((credits - GamePlayer.CurrentBet) >= 0)
+            {
+                int total = (int)App.settings["totalcreditsplayed"];
+                credits -= GamePlayer.CurrentBet;
+                total += GamePlayer.CurrentBet;
+                App.settings["credits"] = credits;
+                App.settings["totalcreditsplayed"] = total;
+                DrawCredits(credits);
+            }
+            else if ((credits - GamePlayer.CurrentBet) < 0)
+            {
+                GamePlayer.CurrentBet = credits;
+                Deal();
+            }
         }
 
         int cardCounter = 0;
@@ -193,7 +205,7 @@ namespace GameKingWP8
                     BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Relative));
                     image.Source = imagesource;
                     cardCounter++;
-                    CardFlip.Play();
+                    PlayCardDeal();
                     CardPause.Begin();
                 }
                 else
@@ -205,43 +217,49 @@ namespace GameKingWP8
             else
             {
                 cardCounter = 0;
+                if ((!HoldRound) && (int)App.settings["credits"] == 0)
+                {
+                    ResetBox.Visibility = Visibility.Visible;
+                    App.settings["credits"] = 10000;
+                    DrawCredits(10000);
+                }
                 HighlightWinningBetValue(PayTable, ShouldPayUser);
             }
         }
 
-        int volume = 2;
+        //int volume = 2;
 
-        private void Volume_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            volume++;
+        //private void Volume_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    volume++;
 
-            if (volume == 4) volume = 0;
+        //    if (volume == 4) volume = 0;
 
-            string imagepath = "Assets/buttons/Volume" + volume + ".png";
-            BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Relative));
-            VolumeButton.Source = i;
+        //    string imagepath = "Assets/buttons/Volume" + volume + ".png";
+        //    BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Relative));
+        //    VolumeButton.Source = i;
 
-            switch (volume)
-            {
-                case 0:
-                    WinLoop.Volume = 0;
-                    OneBet.Volume = 0;
-                    break;
-                case 1:
-                    WinLoop.Volume = .33;
-                    OneBet.Volume = .33;
-                    break;
-                case 2:
-                    WinLoop.Volume = 66;
-                    OneBet.Volume = .66;
-                    break;
-                case 3:
-                    WinLoop.Volume = 1;
-                    OneBet.Volume = 1;
-                    break;
+        //    switch (volume)
+        //    {
+        //        case 0:
+        //            WinLoop.Volume = 0;
+        //            OneBet.Volume = 0;
+        //            break;
+        //        case 1:
+        //            WinLoop.Volume = .33;
+        //            OneBet.Volume = .33;
+        //            break;
+        //        case 2:
+        //            WinLoop.Volume = 66;
+        //            OneBet.Volume = .66;
+        //            break;
+        //        case 3:
+        //            WinLoop.Volume = 1;
+        //            OneBet.Volume = 1;
+        //            break;
 
-            }
-        }
+        //    }
+        //}
 
         private void BetMax_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -257,7 +275,7 @@ namespace GameKingWP8
         {
             if (!HoldRound)
             {
-                OneBet.Play();
+                PlayOneBet();
                 if (GamePlayer.IncreaseBet(1)) Deal();
                 ChangeBetHighlight();
             }
@@ -266,7 +284,7 @@ namespace GameKingWP8
         private void ChangeBetHighlight()
         {
             ResetReds();
-            Rectangle r = (Rectangle)FindName("CoinBox" + GamePlayer.CurrentBet);
+            System.Windows.Shapes.Rectangle r = (System.Windows.Shapes.Rectangle)FindName("CoinBox" + GamePlayer.CurrentBet);
             r.Fill = Red;
             BetText.Text = "BET   " + GamePlayer.CurrentBet;
         }
@@ -292,7 +310,7 @@ namespace GameKingWP8
                         PayTableTitleBlink.Begin();
                         PayTableNumberBlink.Begin();
                         if (ShouldAwardWinnings) AwardWinnings(Int32.Parse(coinslot.Text));
-                        else HoldAlert.Play();
+                        else PlayHoldAlert();
                         return;
                     }
                 }
@@ -318,7 +336,6 @@ namespace GameKingWP8
             OldCredits = credits;
             credits += award;
             App.settings["credits"] = credits;
-            WinLoop.Play();
             UpdateCredits();
         }
 
@@ -328,9 +345,9 @@ namespace GameKingWP8
             {
                 OldCredits++;
                 DrawCredits(OldCredits);
+                PlayOneBet();
                 CreditPause.Begin();
             }
-            else WinLoop.Stop();
         }
 
         private void DrawCredits(int credits)
@@ -387,6 +404,16 @@ namespace GameKingWP8
                     image.Source = imagesource;
                 }
             }
+        }
+
+        private void ResetBox_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ResetBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void Help_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Help.xaml", UriKind.Relative));
         }
     }
 }

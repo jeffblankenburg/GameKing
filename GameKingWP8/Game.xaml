@@ -128,6 +128,13 @@
             <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
             <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
             <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
+            <Border x:Name="ResetBox" Visibility="Collapsed" Grid.Row="1" Grid.ColumnSpan="5" BorderBrush="#FCD800" BorderThickness="6" MouseLeftButtonDown="ResetBox_MouseLeftButtonDown">
+                <Grid>
+                    <Rectangle Fill="#000064" />
+                    <TextBlock Foreground="White" Text="You have lost everything, and you should feel bad.  Even still, we have reset your credits to 10,000.  Enjoy!" TextWrapping="Wrap" TextAlignment="Center" Height="100" VerticalAlignment="Center" />
+                    
+                </Grid>
+            </Border>
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35" />
@@ -147,19 +154,30 @@
                         <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Height="26" Margin="15,0,0,0" />
                     </StackPanel>
                 </Grid>
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-                    <Image Source="Assets/buttons/MOREGAMES.png" Height="31" Margin="0,0,50,0" MouseLeftButtonDown="MoreGames_Tapped" />
-                    
-                    <Image x:Name="BetOneButton" Source="Assets/buttons/BETONE.png" Width="43" MouseLeftButtonDown="BetOne_Tapped" />
-                    <Image x:Name="BetMaxButton" Source="Assets/buttons/BETMAX.png" Width="43" MouseLeftButtonDown="BetMax_Tapped" />
-                    <Image x:Name="VolumeButton" Source="Assets/buttons/Volume2.png" Width="35" MouseLeftButtonDown="Volume_Tapped" />
-                    <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Width="88" MouseLeftButtonDown="Deal_Click"/>
-                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="87" />
+                        <ColumnDefinition Width="87" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="87" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="Assets/buttons/MOREGAMES.png" Height="31" MouseLeftButtonDown="MoreGames_Tapped" />
+                    <Image Source="Assets/buttons/HELP.png" Grid.Column="1" Height="31" MouseLeftButtonDown="Help_Tapped" />
+                    <Image x:Name="BetOneButton" Grid.Column="2" HorizontalAlignment="Right" Source="Assets/buttons/BETONE.png" Width="43" MouseLeftButtonDown="BetOne_Tapped" />
+                    <Image x:Name="BetMaxButton" Grid.Column="3" Source="Assets/buttons/BETMAX.png" Width="43" MouseLeftButtonDown="BetMax_Tapped" />
+                    <!--<Image x:Name="VolumeButton" Source="Assets/buttons/Volume2.png" Width="35" MouseLeftButtonDown="Volume_Tapped" />-->
+                    <Image x:Name="DealButton" Grid.Column="4" Source="Assets/buttons/DEAL.png" Width="88" MouseLeftButtonDown="Deal_Click" />
+                </Grid>
             </Grid>
             <Grid Grid.Row="3" Grid.ColumnSpan="5">
                 <UI:AdControl Height="80" AdUnitId="10060233" ApplicationId="4b478008-47b9-49f6-b63d-8a16c270f419" />
             </Grid>
         </Grid>
+        <MediaElement x:Name="CardFlip" Source="Assets/audio/carddeal.wav" AutoPlay="False" Volume=".66" />
+        <MediaElement x:Name="HoldAlert" Source="Assets/audio/holdalert.wav" AutoPlay="False" Volume=".66" />
+        <MediaElement x:Name="WinLoop" Source="Assets/audio/jackpot.wav" AutoPlay="False" Volume=".66" />
+        <MediaElement x:Name="OneBet" Source="Assets/audio/onebet.wav" AutoPlay="False" Volume=".66" />
     </Grid>
 
 </phone:PhoneApplicationPage>
