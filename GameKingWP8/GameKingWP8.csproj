@@ -231,6 +231,8 @@
     <Content Include="Assets\gamelogo\SuperDoubleDoubleBonusPoker.png" />
     <Content Include="Assets\gamelogo\TripleBonusPokerPlus.png" />
     <Content Include="Assets\gamelogo\WhiteHotAces.png" />
+    <Content Include="Assets\Large.png" />
+    <Content Include="Assets\Medium.png" />
     <Content Include="Assets\numbers\0.png" />
     <Content Include="Assets\numbers\1.png" />
     <Content Include="Assets\numbers\2.png" />
@@ -244,6 +246,7 @@
     <Content Include="Assets\numbers\CREDITS.png" />
     <Content Include="Assets\numbers\WIN.png" />
     <Content Include="Assets\pattern480_800.png" />
+    <Content Include="Assets\Small.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
