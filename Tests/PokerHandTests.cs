@@ -318,6 +318,23 @@ namespace Tests
         }
 
         [TestMethod]
+        public void DEUCESWILD_FiveOfAKind()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
+            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 2, Name = "Two" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 2, Name = "Two" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 3, Name = "Clubs" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "Jack" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 11, Name = "Jack" };
+            Assert.AreEqual("5 OF A KIND", vpg.Hand.Check("DEUCESWILD"));
+        }
+
+        [TestMethod]
         public void NOWILD_FourAces()
         {
             VideoPokerGame vpg = new VideoPokerGame("DOUBLEBONUSPOKER");

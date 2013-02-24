@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using PokerLogic;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,6 +35,8 @@ namespace GameKing
         string GameType;
         bool HoldRound = false;
         int handCounter = 0;
+        //Hand OpeningHand;
+        //Hand ClosingHand;
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
@@ -51,7 +54,6 @@ namespace GameKing
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             GameType = e.Parameter.ToString();
-            //GamePlayer.Credits = (int)App.settings.Values["credits"];
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
             GameSetup();
@@ -59,7 +61,6 @@ namespace GameKing
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            //App.settings.Values["credits"] = GamePlayer.Credits;
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
         }
@@ -67,10 +68,38 @@ namespace GameKing
         private void GameSetup()
         {
             PokerGame = new VideoPokerGame(GameType);
+            ResizeCards();
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
             DrawCredits((int)App.settings.Values["credits"]);
+        }
+
+        private void ResizeCards()
+        {
+            double Height = Windows.UI.Xaml.Window.Current.Bounds.Height;
+            double Width = Windows.UI.Xaml.Window.Current.Bounds.Width;
+            int CardHeight = 0;
+            int CardWidth = 0;
+
+            if (Height <= 1024)
+            {
+                CardHeight = 273;
+                CardWidth = 190;
+            }
+
+            else if (Height <= 1200)
+            {
+                CardHeight = 450;
+                CardWidth = 312;
+            }
+
+            for (int i = 0; i <= 4; i++)
+            {
+                Image card = (Image)FindName("Card" + i);
+                card.Width = CardWidth;
+                card.Height = CardHeight;
+            }
         }
 
         private void LoadAudioFiles()
@@ -109,13 +138,16 @@ namespace GameKing
 
         private void Card_MouseLeftButtonDown(object sender, TappedRoutedEventArgs e)
         {
-            if (HoldRound)
+            if (!IsShowingCards)
             {
-                Image image = sender as Image;
-                int place = Int32.Parse(image.Name.Substring(4, 1));
-                if (PokerGame.Hand.Held[place]) PokerGame.Hand.Hold(place, false);
-                else PokerGame.Hand.Hold(place, true);
-                UpdateHold();
+                if (HoldRound)
+                {
+                    Image image = sender as Image;
+                    int place = Int32.Parse(image.Name.Substring(4, 1));
+                    if (PokerGame.Hand.Held[place]) PokerGame.Hand.Hold(place, false);
+                    else PokerGame.Hand.Hold(place, true);
+                    UpdateHold();
+                }
             }
         }
 
@@ -160,30 +192,50 @@ namespace GameKing
 
         private void Deal()
         {
-            StopPayTableAnimations();
             
-            if (!HoldRound)
+            if (!IsShowingCards)
             {
-                ClearHolds();
-                ResetCardBacks();
-                ChargeCredits();
-                PokerGame = new VideoPokerGame(GameType);
-                handCounter++;
-                HoldRound = true;
-            }
-            else
-            {
-                PokerGame.Draw();
-                ResetCardBacks();
-                //WriteDataToMobileService();
-                HoldRound = false;
-                if (handCounter == 10)
+                if (!IsDrawingCredits)
                 {
-                    AdBox.Visibility = Visibility.Visible;
-                    handCounter = 0;
+                    StopPayTableAnimations();
+                    ResetBox.Visibility = Visibility.Collapsed;
+                    if (!HoldRound)
+                    {
+                        ClearHolds();
+                        ResetCardBacks();
+                        ChargeCredits();
+                        PokerGame = new VideoPokerGame(GameType);
+                        handCounter++;
+                        HoldRound = true;
+                        //OpeningHand = PokerGame.Hand;
+                    }
+                    else
+                    {
+                        PokerGame.Draw();
+                        ResetCardBacks();
+                        //WriteDataToMobileService();
+                        HoldRound = false;
+                        //ClosingHand = PokerGame.Hand;
+                        //SaveHands();
+                    }
+                    ShowCards(!HoldRound);
                 }
             }
-            ShowCards(!HoldRound);
+        }
+
+        private void SaveHands()
+        {
+            //StorageFile file = await App.files.GetFileAsync("handhistory.txt");
+            //string handtext = await FileIO.ReadTextAsync(file);
+
+
+            //List<BothHands> handhistory = JsonConvert.DeserializeObject<List<BothHands>>(handtext);
+            //BothHands bothhands = new BothHands { OpeningHand = OpeningHand, ClosingHand = ClosingHand };
+            //handhistory.Add(bothhands);
+            //handtext = JsonConvert.SerializeObject(handhistory);
+
+            //file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.ReplaceExisting);
+            //await FileIO.WriteTextAsync(file, handtext);
         }
 
         private void WriteDataToMobileService()
@@ -218,9 +270,11 @@ namespace GameKing
 
         int cardCounter = 0;
         bool ShouldPayUser = false;
+        bool IsShowingCards = false;
 
         public void ShowCards(bool payUserFlag)
         {
+            IsShowingCards = true;
             ShouldPayUser = payUserFlag;
 
             if (cardCounter <= 4)
@@ -252,7 +306,14 @@ namespace GameKing
             else
             {
                 cardCounter = 0;
+                if ((!HoldRound) && (int)App.settings.Values["credits"] == 0)
+                {
+                    ResetBox.Visibility = Visibility.Visible;
+                    App.settings.Values["credits"] = 10000;
+                    DrawCredits(10000);
+                }
                 HighlightWinningBetValue(PayTable, ShouldPayUser);
+                IsShowingCards = false;
             }
         }
 
@@ -297,7 +358,7 @@ namespace GameKing
 
         private void BetMax_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (!HoldRound)
+            if (!HoldRound && !IsShowingCards && !IsDrawingCredits)
             {
                 if (GamePlayer.IncreaseBet(5)) Deal();
                 //TODO: Build an animation that shows the red box travel to the 5 coin slot.
@@ -307,7 +368,7 @@ namespace GameKing
 
         private void BetOne_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (!HoldRound)
+            if (!HoldRound && !IsShowingCards && !IsDrawingCredits)
             {
                 OneBet.Play();
                 if (GamePlayer.IncreaseBet(1)) Deal();
@@ -343,7 +404,11 @@ namespace GameKing
                         Storyboard.SetTarget(PayTableNumberBlink, coinslot);
                         PayTableTitleBlink.Begin();
                         PayTableNumberBlink.Begin();
-                        if (ShouldAwardWinnings) AwardWinnings(Int32.Parse(coinslot.Text));
+                        if (ShouldAwardWinnings)
+                        {
+                            AwardWinnings(Int32.Parse(coinslot.Text));
+                            RecordHand(targetItem.Text.Replace(".", ""));
+                        }
                         else HoldAlert.Play();
                         return;
                     }
@@ -356,6 +421,28 @@ namespace GameKing
 
         }
 
+        private void RecordHand(string HandRank)
+        {
+            if (App.settings.Values.ContainsKey("COUNT_" + HandRank))
+                App.settings.Values["COUNT_" + HandRank] = (int)App.settings.Values["COUNT_" + HandRank] + 1;
+            else
+                App.settings.Values["COUNT_" + HandRank] = 1;
+
+
+            if (!App.settings.Values.ContainsKey("COUNT_4OFAKIND"))
+                App.settings.Values["COUNT_4OFAKIND"] = 0;
+
+
+            switch (HandRank)
+            {
+                case "4ACES":
+                case "42s3s4s":
+                case "45sTHRUKINGS":
+                    App.settings.Values["COUNT_4OFAKIND"] = (int)App.settings.Values["COUNT_4OFAKIND"] + 1;
+                    break;
+            }
+        }
+
         private void StopPayTableAnimations()
         {
             PayTableTitleBlink.Stop();
@@ -363,6 +450,7 @@ namespace GameKing
         }
 
         int OldCredits;
+        bool IsDrawingCredits = false;
 
         private void AwardWinnings(int award)
         {
@@ -376,13 +464,18 @@ namespace GameKing
 
         private void UpdateCredits()
         {
+            IsDrawingCredits = true;
             if (OldCredits < (int)App.settings.Values["credits"])
             {
                 OldCredits++;
                 DrawCredits(OldCredits);
                 CreditPause.Begin();
             }
-            else WinLoop.Stop();
+            else
+            {
+                WinLoop.Stop();
+                IsDrawingCredits = false;
+            }
         }
 
         void CreditPause_Completed(object sender, object e)
@@ -408,9 +501,9 @@ namespace GameKing
             Frame.GoBack();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void ResetBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            AdBox.Visibility = Visibility.Collapsed;
+            ResetBox.Visibility = Visibility.Collapsed;
         }
     }
 }

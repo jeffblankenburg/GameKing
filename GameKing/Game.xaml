@@ -53,14 +53,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Width="1366">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="366"/>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="305"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#000000" Grid.ColumnSpan="6"  />
             <Rectangle Fill="#FCD800" Grid.ColumnSpan="6" Margin="2" />
@@ -75,19 +75,19 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="366"/>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="305"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="24" Grid.Column="0" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="24" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0" />
-                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="24" Grid.Column="2" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
-                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="24" Grid.Column="3" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
-                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="24" Grid.Column="4" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
-                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="24" Grid.Column="5" FontWeight="Bold" TextAlignment="Right" Margin="0,0,30,0"/>
+                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="20" Grid.Column="0" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="20" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0" />
+                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="20" Grid.Column="2" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
+                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="20" Grid.Column="3" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
+                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="20" Grid.Column="4" FontWeight="Bold" TextAlignment="Right" Margin="0,0,25,0"/>
+                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="20" Grid.Column="5" FontWeight="Bold" TextAlignment="Right" Margin="0,0,30,0"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -96,34 +96,51 @@
         <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240" />
-                <ColumnDefinition Width="240" />
-                <ColumnDefinition Width="240" />
-                <ColumnDefinition Width="240" />
-                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="0" Visibility="Collapsed" VerticalAlignment="Center" />
             <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Center" />
             <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Center" />
             <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Center" />
             <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="200" Height="290" Tapped="Card_MouseLeftButtonDown" />
-            <Grid Grid.Row="2" Grid.ColumnSpan="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock x:Name="BetText" HorizontalAlignment="Center" Padding="0,15,0,0" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-                    <Image Source="Assets/buttons/MOREGAMES.png" Height="62" Margin="0,0,50,0" Tapped="MoreGames_Tapped" />
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Border x:Name="ResetBox" Visibility="Collapsed" Grid.Row="1" Grid.ColumnSpan="5" BorderBrush="#FCD800" BorderThickness="6" Tapped="ResetBox_Tapped">
+                <Grid>
+                    <Rectangle Fill="#000064" />
+                    <TextBlock Foreground="White" Text="You have lost everything, and you should feel bad.  Even still, we have reset your credits to 10,000.  Enjoy!" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="56" />
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="170" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.ColumnSpan="7">
+                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+
                     <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" Width="266" FlowDirection="RightToLeft" >
                         <Image Source="Assets/numbers/0.png" Width="38" />
                         <Image Source="Assets/numbers/0.png" Width="38" />
@@ -132,18 +149,17 @@
                         <Image Source="Assets/numbers/0.png" Width="38" />
                     </StackPanel>
                     <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Height="52" Margin="25,0,0,0" />
-                    <Image x:Name="BetOneButton" Source="Assets/buttons/BETONE.png" Width="86" Tapped="BetOne_Tapped" />
-                    <Image x:Name="BetMaxButton" Source="Assets/buttons/BETMAX.png" Width="86" Tapped="BetMax_Tapped" />
-                    <Image x:Name="VolumeButton" Source="Assets/buttons/Volume2.png" Width="70" Tapped="Volume_Tapped" />
-                    <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Width="176" Tapped="Deal_Click"/>
+
                 </StackPanel>
             </Grid>
-        </Grid>
-        <Canvas x:Name="AdBox" Width="728" Height="90" Grid.RowSpan="2" Grid.ColumnSpan="6" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10">
-            <Button Content="CLOSE" Canvas.Top="-39" Canvas.Left="-3" Click="CloseButton_Click" />
-            <Border BorderThickness="3" BorderBrush="White">
-                <UI:AdControl ApplicationId="47fa2188-6db2-4d22-8cd7-2ec6170bdf4b" AdUnitId="10060123" Height="90" Grid.Row="1" Width="728"/>
+            <Image Grid.Column="1" Grid.Row="1" Source="Assets/buttons/MOREGAMES.png" Width="150" Tapped="MoreGames_Tapped" />
+            <Border Grid.Column="2" Grid.Row="1" BorderThickness="3" BorderBrush="White" Height="90" Width="728">
+                <UI:AdControl ApplicationId="47fa2188-6db2-4d22-8cd7-2ec6170bdf4b" AdUnitId="10060123" Height="90" Width="728"/>
             </Border>
-        </Canvas>
+            <Image x:Name="BetOneButton" Grid.Column="3" Grid.Row="1" Source="Assets/buttons/BETONE.png" Width="75" Tapped="BetOne_Tapped" />
+            <Image x:Name="BetMaxButton" Grid.Column="4" Grid.Row="1" Source="Assets/buttons/BETMAX.png" Width="75" Tapped="BetMax_Tapped" />
+            <Image x:Name="VolumeButton" Grid.Column="5" Grid.Row="1" Source="Assets/buttons/Volume2.png" Width="60" Tapped="Volume_Tapped" />
+            <Image x:Name="DealButton" Grid.Column="6" Grid.Row="1" Source="Assets/buttons/DEAL.png" Width="150" Tapped="Deal_Click"/>
+        </Grid>
     </Grid>
 </Page>

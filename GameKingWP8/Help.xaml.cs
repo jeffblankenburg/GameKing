@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using Windows.System;
 
 namespace GameKingWP8
 {
@@ -26,10 +27,9 @@ namespace GameKingWP8
             ect.Show();
         }
 
-        private void Phone_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void Phone_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            MarketplaceReviewTask mrt = new MarketplaceReviewTask();
-            mrt.Show();
+            await Launcher.LaunchUriAsync(new Uri("http://www.windowsphone.com/en-us/store/app/king-poker/0eccfa62-3566-420f-9955-d4e108ba247a", UriKind.Absolute));
         }
 
         private void Image_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

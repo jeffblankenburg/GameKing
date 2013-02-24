@@ -15,6 +15,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.WindowsAzure.MobileServices;
 using Windows.Storage;
+using PokerLogic;
+using Newtonsoft.Json;
+using Windows.UI.ApplicationSettings;
+using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -27,6 +31,7 @@ namespace GameKing
     {
         public static MobileServiceClient MobileService = new MobileServiceClient("https://gameking.azure-mobile.net/", "yQFDpmPmnOTOmzjuXcdATTxbtQQlMN66");
         public static ApplicationDataContainer settings;
+        public static StorageFolder files;
         
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -46,7 +51,10 @@ namespace GameKing
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
+            SettingsPane.GetForCurrentView().CommandsRequested += App_CommandsRequested;
+            
             settings = ApplicationData.Current.RoamingSettings;
+            files = ApplicationData.Current.RoamingFolder;
 
             if (!settings.Values.ContainsKey("credits"))
             {
@@ -88,6 +96,41 @@ namespace GameKing
             }
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        void App_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            SettingsCommand command = new SettingsCommand("about", "About This App", (handler) =>
+            {
+                Popup popup = BuildSettingsItem(new AboutPage(), 346);
+                popup.IsOpen = true;
+            });
+
+            args.Request.ApplicationCommands.Add(command);
+
+        }
+
+        private Popup BuildSettingsItem(UserControl page, int width)
+        {
+            Popup p = new Popup();
+            p.IsLightDismissEnabled = true;
+            p.ChildTransitions = new TransitionCollection();
+            p.ChildTransitions.Add(new PaneThemeTransition()
+            {
+                Edge = (SettingsPane.Edge == SettingsEdgeLocation.Right) ?
+                        EdgeTransitionLocation.Right :
+                        EdgeTransitionLocation.Left
+            });
+
+            page.Width = width;
+            page.Height = Window.Current.Bounds.Height;
+            p.Child = page;
+
+            p.SetValue(Canvas.LeftProperty, SettingsPane.Edge == SettingsEdgeLocation.Right ? (Window.Current.Bounds.Width - width) : 0);
+            p.SetValue(Canvas.TopProperty, 0);
+
+            return p;
+
         }
 
         /// <summary>

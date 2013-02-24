@@ -24,6 +24,8 @@ namespace GameKingWP8
         string GameType;
         bool HoldRound = false;
         int handCounter = 0;
+        Hand OpeningHand;
+        Hand ClosingHand;
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
@@ -107,13 +109,16 @@ namespace GameKingWP8
 
         private void Card_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (HoldRound)
+            if (!IsShowingCards)
             {
-                Image image = sender as Image;
-                int place = Int32.Parse(image.Name.Substring(4, 1));
-                if (PokerGame.Hand.Held[place]) PokerGame.Hand.Hold(place, false);
-                else PokerGame.Hand.Hold(place, true);
-                UpdateHold();
+                if (HoldRound)
+                {
+                    Image image = sender as Image;
+                    int place = Int32.Parse(image.Name.Substring(4, 1));
+                    if (PokerGame.Hand.Held[place]) PokerGame.Hand.Hold(place, false);
+                    else PokerGame.Hand.Hold(place, true);
+                    UpdateHold();
+                }
             }
         }
 
@@ -134,31 +139,43 @@ namespace GameKingWP8
 
         private void Deal()
         {
-            StopPayTableAnimations();
-            ResetBox.Visibility = Visibility.Collapsed;
-
-            if (!HoldRound)
+            if (!IsShowingCards)
             {
-                ClearHolds();
-                ResetCardBacks();
-                ChargeCredits();
-                PokerGame = new VideoPokerGame(GameType);
-                handCounter++;
-                HoldRound = true;
-            }
-            else
-            {
-                PokerGame.Draw();
-                ResetCardBacks();
-                //WriteDataToMobileService();
-                HoldRound = false;
-                if (handCounter == 10)
+                if (!IsDrawingCredits)
                 {
-                    //AdBox.Visibility = Visibility.Visible;
-                    handCounter = 0;
+                    StopPayTableAnimations();
+                    ResetBox.Visibility = Visibility.Collapsed;
+
+                    if (!HoldRound)
+                    {
+                        ClearHolds();
+                        ResetCardBacks();
+                        ChargeCredits();
+                        PokerGame = new VideoPokerGame(GameType);
+                        handCounter++;
+                        HoldRound = true;
+                        OpeningHand = PokerGame.Hand;
+                    }
+                    else
+                    {
+                        PokerGame.Draw();
+                        ResetCardBacks();
+                        //WriteDataToMobileService();
+                        HoldRound = false;
+                        ClosingHand = PokerGame.Hand;
+                        SaveHands();
+                    }
+                    ShowCards(!HoldRound);
                 }
             }
-            ShowCards(!HoldRound);
+        }
+
+        private void SaveHands()
+        {
+            List<BothHands> handhistory = (List<BothHands>)App.settings["handhistory"];
+            BothHands bothhands = new BothHands{ OpeningHand=OpeningHand, ClosingHand=ClosingHand};
+            handhistory.Add(bothhands);
+            App.settings["handhistory"] = handhistory;
         }
 
         private void ChargeCredits()
@@ -183,9 +200,11 @@ namespace GameKingWP8
 
         int cardCounter = 0;
         bool ShouldPayUser = false;
+        bool IsShowingCards = false;
 
         public void ShowCards(bool payUserFlag)
         {
+            IsShowingCards = true;
             ShouldPayUser = payUserFlag;
 
             if (cardCounter <= 4)
@@ -224,6 +243,7 @@ namespace GameKingWP8
                     DrawCredits(10000);
                 }
                 HighlightWinningBetValue(PayTable, ShouldPayUser);
+                IsShowingCards = false;
             }
         }
 
@@ -263,7 +283,7 @@ namespace GameKingWP8
 
         private void BetMax_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!HoldRound)
+            if (!HoldRound && !IsShowingCards && !IsDrawingCredits)
             {
                 if (GamePlayer.IncreaseBet(5)) Deal();
                 //TODO: Build an animation that shows the red box travel to the 5 coin slot.
@@ -273,7 +293,7 @@ namespace GameKingWP8
 
         private void BetOne_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!HoldRound)
+            if (!HoldRound && !IsShowingCards && !IsDrawingCredits)
             {
                 PlayOneBet();
                 if (GamePlayer.IncreaseBet(1)) Deal();
@@ -309,7 +329,11 @@ namespace GameKingWP8
                         Storyboard.SetTarget(PayTableNumberBlink, coinslot);
                         PayTableTitleBlink.Begin();
                         PayTableNumberBlink.Begin();
-                        if (ShouldAwardWinnings) AwardWinnings(Int32.Parse(coinslot.Text));
+                        if (ShouldAwardWinnings)
+                        {
+                            AwardWinnings(Int32.Parse(coinslot.Text));
+                            RecordHand(targetItem.Text.Replace(".", "").Replace(" ", "").Replace(",", ""));
+                        }
                         else PlayHoldAlert();
                         return;
                     }
@@ -320,6 +344,28 @@ namespace GameKingWP8
                 }
             }
 
+        }
+
+        private void RecordHand(string HandRank)
+        {
+            if (App.settings.Contains("COUNT_" + HandRank))
+                App.settings["COUNT_" + HandRank] = (int)App.settings["COUNT_" + HandRank] + 1;
+            else
+                App.settings["COUNT_" + HandRank] = 1;
+
+
+            if (!App.settings.Contains("COUNT_4OFAKIND"))
+                App.settings["COUNT_4OFAKIND"] = 0;
+            
+
+            switch (HandRank)
+            {
+                case "4ACES":
+                case "42s3s4s":
+                case "45sTHRUKINGS":
+                    App.settings["COUNT_4OFAKIND"] = (int)App.settings["COUNT_4OFAKIND"] + 1;
+                    break;
+            }
         }
 
         private void StopPayTableAnimations()
@@ -339,14 +385,21 @@ namespace GameKingWP8
             UpdateCredits();
         }
 
+        bool IsDrawingCredits = false;
+
         private void UpdateCredits()
         {
+            IsDrawingCredits = true;
             if (OldCredits < (int)App.settings["credits"])
             {
                 OldCredits++;
                 DrawCredits(OldCredits);
                 PlayOneBet();
                 CreditPause.Begin();
+            }
+            else
+            {
+                IsDrawingCredits = false;
             }
         }
 

@@ -227,6 +227,8 @@ namespace PokerLogic
         private bool DEUCES_IsFiveOfAKind()
         {
             if ((IsFourOfAKind()) && (SortedCards[4].Value.Number == 2)) return true;
+            if ((CountDeuces() == 2) && (IsThreeOfAKind())) return true;
+            if ((CountDeuces() == 3) && (SortedCards[0].Value.Number == SortedCards[1].Value.Number)) return true;
             return false;
         }
 

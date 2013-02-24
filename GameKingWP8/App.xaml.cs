@@ -8,6 +8,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using GameKingWP8.Resources;
 using System.IO.IsolatedStorage;
+using System.Collections.Generic;
+using PokerLogic;
 
 namespace GameKingWP8
 {
@@ -35,7 +37,11 @@ namespace GameKingWP8
             {
                 settings["totalcreditsplayed"] = 0;
             }
-            
+
+            if (!settings.Contains("handhistory"))
+            {
+                settings["handhistory"] = new List<BothHands>();
+            }
             
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;

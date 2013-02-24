@@ -7,7 +7,7 @@ using System.Text;
 namespace PokerLogic
 {
     [DataContract]
-    public class Suit
+    public class Suit 
     {
         [DataMember]
         public string Name { get; set; }
