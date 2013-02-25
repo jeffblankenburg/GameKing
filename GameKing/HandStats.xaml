@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="GameKing.HandStats"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GameKing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="768"
+    d:DesignWidth="320">
+
+    <Grid x:Name="SnappedGrid">
+        <StackPanel>
+            <Grid>
+                <Image Source="Assets/pattern.png" Stretch="UniformToFill" />
+                <Image x:Name="Logo" Source="Assets/gamekinglogo.png" Width="300"/>
+            </Grid>
+            <TextBlock x:Name="HandCountText" FontSize="20" FontWeight="Bold" Margin="20,20,20,0" />
+            <ItemsControl x:Name="StatsList" Margin="20">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding Name}" />
+                            <TextBlock FontSize="20" FontWeight="Bold" Grid.Column="1" Text="{Binding ID}" />
+                        </Grid>
+                    </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock x:Name="CreditCountText" FontSize="20" FontWeight="Bold" Margin="20,0,20,0" />
+        </StackPanel>
+    </Grid>
+</UserControl>

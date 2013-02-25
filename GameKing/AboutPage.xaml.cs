@@ -26,7 +26,7 @@ namespace GameKing
 
         private async void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var mailto = new Uri("mailto:recipient@example.com&subject=Comment from King Poker on Windows 8");
+            var mailto = new Uri("mailto:kingpoker@jexed.com");
             await Windows.System.Launcher.LaunchUriAsync(mailto);
 
         }

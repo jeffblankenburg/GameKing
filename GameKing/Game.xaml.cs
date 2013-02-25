@@ -35,8 +35,6 @@ namespace GameKing
         string GameType;
         bool HoldRound = false;
         int handCounter = 0;
-        //Hand OpeningHand;
-        //Hand ClosingHand;
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
@@ -54,9 +52,35 @@ namespace GameKing
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             GameType = e.Parameter.ToString();
+            SizeChanged += Game_SizeChanged;
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
             GameSetup();
+        }
+
+        void Game_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ResizeCards();
+            CheckSnappedView();
+        }
+
+        private void CheckSnappedView()
+        {
+            if (Windows.UI.Xaml.Window.Current.Bounds.Width <= 320)
+            {
+                PayTableGrid.Visibility = Visibility.Collapsed;
+                CardGrid.Visibility = Visibility.Collapsed;
+                ButtonsGrid.Visibility = Visibility.Collapsed;
+                SnappedStats.GrabStats();
+                SnappedStats.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PayTableGrid.Visibility = Visibility.Visible;
+                CardGrid.Visibility = Visibility.Visible;
+                ButtonsGrid.Visibility = Visibility.Visible;
+                SnappedStats.Visibility = Visibility.Collapsed;
+            }
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -77,18 +101,22 @@ namespace GameKing
 
         private void ResizeCards()
         {
-            double Height = Windows.UI.Xaml.Window.Current.Bounds.Height;
-            double Width = Windows.UI.Xaml.Window.Current.Bounds.Width;
             int CardHeight = 0;
             int CardWidth = 0;
 
-            if (Height <= 1024)
+            if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 768)
             {
                 CardHeight = 273;
                 CardWidth = 190;
+
+                if (Windows.UI.Xaml.Window.Current.Bounds.Width <= 1024)
+                {
+                    CardHeight = 230;
+                    CardWidth = 160;
+                }
             }
 
-            else if (Height <= 1200)
+            else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 1200)
             {
                 CardHeight = 450;
                 CardWidth = 312;
@@ -205,6 +233,7 @@ namespace GameKing
                         ResetCardBacks();
                         ChargeCredits();
                         PokerGame = new VideoPokerGame(GameType);
+                        IncrementHandCount();
                         handCounter++;
                         HoldRound = true;
                         //OpeningHand = PokerGame.Hand;
@@ -221,6 +250,12 @@ namespace GameKing
                     ShowCards(!HoldRound);
                 }
             }
+        }
+
+        private void IncrementHandCount()
+        {
+            int handcount = (int)App.settings.Values["totalhandsplayed"];
+            App.settings.Values["totalhandsplayed"] = handcount + 1;
         }
 
         private void SaveHands()
@@ -326,34 +361,34 @@ namespace GameKing
 
         private void Volume_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            volume++;
+            //volume++;
 
-            if (volume == 4) volume = 0;
+            //if (volume == 4) volume = 0;
 
-            string imagepath = "ms-appx:/Assets/buttons/Volume" + volume + ".png";
-            BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
-            VolumeButton.Source = i;
+            //string imagepath = "ms-appx:/Assets/buttons/Volume" + volume + ".png";
+            //BitmapImage i = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+            //VolumeButton.Source = i;
 
-            switch (volume)
-            {
-                case 0:
-                    WinLoop.Volume = 0;
-                    OneBet.Volume = 0;
-                    break;
-                case 1:
-                    WinLoop.Volume = .33;
-                    OneBet.Volume = .33;
-                    break;
-                case 2:
-                    WinLoop.Volume = 66;
-                    OneBet.Volume = .66;
-                    break;
-                case 3:
-                    WinLoop.Volume = 1;
-                    OneBet.Volume = 1;
-                    break;
+            //switch (volume)
+            //{
+            //    case 0:
+            //        WinLoop.Volume = 0;
+            //        OneBet.Volume = 0;
+            //        break;
+            //    case 1:
+            //        WinLoop.Volume = .33;
+            //        OneBet.Volume = .33;
+            //        break;
+            //    case 2:
+            //        WinLoop.Volume = 66;
+            //        OneBet.Volume = .66;
+            //        break;
+            //    case 3:
+            //        WinLoop.Volume = 1;
+            //        OneBet.Volume = 1;
+            //        break;
 
-            }
+            //}
         }
 
         private void BetMax_Tapped(object sender, TappedRoutedEventArgs e)
@@ -423,24 +458,12 @@ namespace GameKing
 
         private void RecordHand(string HandRank)
         {
+            HandRank = HandRank.Replace(",", "");
+
             if (App.settings.Values.ContainsKey("COUNT_" + HandRank))
                 App.settings.Values["COUNT_" + HandRank] = (int)App.settings.Values["COUNT_" + HandRank] + 1;
             else
                 App.settings.Values["COUNT_" + HandRank] = 1;
-
-
-            if (!App.settings.Values.ContainsKey("COUNT_4OFAKIND"))
-                App.settings.Values["COUNT_4OFAKIND"] = 0;
-
-
-            switch (HandRank)
-            {
-                case "4ACES":
-                case "42s3s4s":
-                case "45sTHRUKINGS":
-                    App.settings.Values["COUNT_4OFAKIND"] = (int)App.settings.Values["COUNT_4OFAKIND"] + 1;
-                    break;
-            }
         }
 
         private void StopPayTableAnimations()

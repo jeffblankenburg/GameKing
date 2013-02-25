@@ -28,6 +28,22 @@ namespace GameKing
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            SizeChanged += Game_SizeChanged;
+        }
+
+        private void Game_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (Windows.UI.Xaml.Window.Current.Bounds.Width <= 320)
+            {
+                FullScreen.Visibility = Visibility.Collapsed;
+                SnappedState.GrabStats();
+                SnappedState.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FullScreen.Visibility = Visibility.Visible;
+                SnappedState.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void DeucesWild_Tapped(object sender, TappedRoutedEventArgs e)

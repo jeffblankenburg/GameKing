@@ -53,7 +53,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" x:Name="PayTableGrid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="305"/>
                 <ColumnDefinition Width="*" />
@@ -93,7 +93,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-        <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <Grid x:Name="CardGrid" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
                 <RowDefinition Height="*" />
@@ -122,7 +122,7 @@
                 </Grid>
             </Border>
         </Grid>
-        <Grid Grid.RowSpan="2" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Margin="0,0,0,0">
+        <Grid x:Name="ButtonsGrid" Grid.RowSpan="2" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
@@ -131,9 +131,9 @@
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="90" />
-                <ColumnDefinition Width="90" />
-                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="170" />
                 <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
@@ -158,8 +158,9 @@
             </Border>
             <Image x:Name="BetOneButton" Grid.Column="3" Grid.Row="1" Source="Assets/buttons/BETONE.png" Width="75" Tapped="BetOne_Tapped" />
             <Image x:Name="BetMaxButton" Grid.Column="4" Grid.Row="1" Source="Assets/buttons/BETMAX.png" Width="75" Tapped="BetMax_Tapped" />
-            <Image x:Name="VolumeButton" Grid.Column="5" Grid.Row="1" Source="Assets/buttons/Volume2.png" Width="60" Tapped="Volume_Tapped" />
+            <!--<Image x:Name="VolumeButton" Grid.Column="5" Grid.Row="1" Source="Assets/buttons/Volume2.png" Width="60" Tapped="Volume_Tapped" />-->
             <Image x:Name="DealButton" Grid.Column="6" Grid.Row="1" Source="Assets/buttons/DEAL.png" Width="150" Tapped="Deal_Click"/>
         </Grid>
+        <local:HandStats x:Name="SnappedStats" Visibility="Collapsed" />
     </Grid>
 </Page>
