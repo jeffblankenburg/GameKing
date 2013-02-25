@@ -147,6 +147,7 @@
   <ItemGroup>
     <Content Include="Assets\audio\carddeal.wav" />
     <Content Include="Assets\audio\click.wav" />
+    <Content Include="Assets\audio\jackpot.wav" />
     <Content Include="Assets\audio\slot_machine_bet_04.wav" />
     <Content Include="Assets\audio\slot_machine_win_03.wav" />
     <Content Include="Assets\audio\slot_machine_win_jackpot_04.wav" />

@@ -150,7 +150,7 @@ namespace GameKing
             WinLoop.AutoPlay = false;
             WinLoop.IsLooping = true;
             WinLoop.Volume = .66;
-            WinLoop.Source = new Uri("ms-appx:/Assets/audio/slot_machine_win_jackpot_04.wav", UriKind.Absolute);
+            WinLoop.Source = new Uri("ms-appx:/Assets/audio/jackpot.wav", UriKind.Absolute);
             LayoutRoot.Children.Add(WinLoop);
         }
 
