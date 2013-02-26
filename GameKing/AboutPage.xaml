@@ -38,8 +38,6 @@
                     <StackPanel Grid.Row="1" >
                         <TextBlock Text="King Poker strives to be the most authentic video poker experience you can have outside a casino.  If you have ideas, comments, suggestions, requests, or find a bug in our software, please email us:" TextWrapping="Wrap" Foreground="White" />
                         <TextBlock Text="kingpoker@jexed.com" FontWeight="Bold" TextWrapping="Wrap" Foreground="White" Margin="0,20,0,30" FontSize="24" Tapped="TextBlock_Tapped" />
-                        <TextBlock Text="We will be adding many more variations of video poker, blackjack, pai gow, and other great electronic casino games in the future.  Please review our app to let us know what your favorite game is!" TextWrapping="Wrap" Foreground="White" />
-                        <Image Source="Assets/WindowsStoreIcon.png" Height="50" Margin="0,20,0,0" HorizontalAlignment="Left" Tapped="Phone_Tapped" />
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
