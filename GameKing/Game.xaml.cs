@@ -133,11 +133,14 @@ namespace GameKing
                 CardWidth = 312;
             }
 
-            for (int i = 0; i <= 4; i++)
+            if ((CardWidth == 0) && (CardHeight == 0))
             {
-                Image card = (Image)FindName("Card" + i);
-                card.Width = CardWidth;
-                card.Height = CardHeight;
+                for (int i = 0; i <= 4; i++)
+                {
+                    Image card = (Image)FindName("Card" + i);
+                    card.Width = CardWidth;
+                    card.Height = CardHeight;
+                }
             }
         }
 
