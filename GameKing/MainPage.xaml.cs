@@ -24,11 +24,23 @@ namespace GameKing
         public MainPage()
         {
             this.InitializeComponent();
+            
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            AdRotatorControl.Invalidate();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SizeChanged += Game_SizeChanged;
+            Loaded += MainPage_Loaded;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            Loaded -= MainPage_Loaded;
         }
 
         private void Game_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -5,6 +5,7 @@
     xmlns:local="using:GameKing"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:AdRotatorWin8="using:AdRotatorWin8"
     mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" Background="#00019f">
@@ -54,10 +55,14 @@
             </TextBlock>
             <TextBlock Grid.Row="6" Grid.Column="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
                 <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-            </TextBlock>-->
+            </TextBlock>
             <Border BorderThickness="3" BorderBrush="White" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="740">
                 <UI:AdControl ApplicationId="47fa2188-6db2-4d22-8cd7-2ec6170bdf4b" AdUnitId="10060123" Height="90" Grid.Row="1" Width="728"/>
-            </Border>
+            </Border>-->
+            <AdRotatorWin8:AdRotatorControl x:Name="AdRotatorControl" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="728" Height="90" SettingsUrl="http://jeffblankenburg.com/KingPoker/AdSettings.xml" DefaultAdType="AdDuplex" DefaultSettingsFileUri="AdSettings.xml" 
+                                        PubCenterAdUnitId="35283 " 
+                                        PubCenterAppId="0cd20fbe-8688-49de-b14d-305e604ad2bd"
+                                        AdDuplexAppId="10063036" />
         </Grid>
         <local:HandStats x:Name="SnappedState" Visibility="Collapsed" />
     </Grid>

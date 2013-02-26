@@ -258,6 +258,9 @@
     <Content Include="Assets\WindowsStoreIcon.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Common\ReadMe.txt" />
+    <Content Include="AdSettings.xml" />
+    <Content Include="defaultAdSettings.xml" />
+    <Content Include="ReadMe-AdRotator-XAML.txt" />
     <Content Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -295,6 +298,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AdDuplex.Windows, Version=8.0.3.0, Culture=neutral, PublicKeyToken=447cab5ae9276daf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AdDuplexWindows.8.0.3.0\lib\winrt45\AdDuplex.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="AdRotatorWin8, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AdRotatorWin8.1.0.10\lib\netcore45\AdRotatorWin8.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll</HintPath>
     </Reference>

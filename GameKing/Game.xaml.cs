@@ -55,7 +55,13 @@ namespace GameKing
             SizeChanged += Game_SizeChanged;
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
+            Loaded += Game_Loaded;
             GameSetup();
+        }
+
+        void Game_Loaded(object sender, RoutedEventArgs e)
+        {
+            AdRotatorControl.Invalidate();
         }
 
         void Game_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -87,6 +93,7 @@ namespace GameKing
         {
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
+            Loaded -= Game_Loaded;
         }
 
         private void GameSetup()
@@ -115,7 +122,11 @@ namespace GameKing
                     CardWidth = 160;
                 }
             }
-
+            else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 900)
+            {
+                CardHeight = 400;
+                CardWidth = 277;
+            }
             else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 1200)
             {
                 CardHeight = 450;
@@ -357,7 +368,7 @@ namespace GameKing
             ShowCards(ShouldPayUser);
         }
 
-        int volume = 2;
+        //int volume = 2;
 
         private void Volume_Tapped(object sender, TappedRoutedEventArgs e)
         {

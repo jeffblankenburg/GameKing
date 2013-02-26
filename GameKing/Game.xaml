@@ -4,7 +4,7 @@
     xmlns:local="using:GameKing"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:AdRotatorWin8="using:AdRotatorWin8"
     x:Class="GameKing.Game"
     mc:Ignorable="d">
     <Page.Resources>
@@ -153,9 +153,13 @@
                 </StackPanel>
             </Grid>
             <Image Grid.Column="1" Grid.Row="1" Source="Assets/buttons/MOREGAMES.png" Width="150" Tapped="MoreGames_Tapped" />
-            <Border Grid.Column="2" Grid.Row="1" BorderThickness="3" BorderBrush="White" Height="90" Width="728">
+            <AdRotatorWin8:AdRotatorControl x:Name="AdRotatorControl" Grid.Column="2" Grid.Row="1" Width="728" Height="90" SettingsUrl="http://jeffblankenburg.com/KingPoker/AdSettings.xml" DefaultAdType="AdDuplex" DefaultSettingsFileUri="AdSettings.xml" 
+                                        PubCenterAdUnitId="35283 " 
+                                        PubCenterAppId="0cd20fbe-8688-49de-b14d-305e604ad2bd"
+                                        AdDuplexAppId="10063036" />
+            <!--<Border Grid.Column="2" Grid.Row="1" BorderThickness="3" BorderBrush="White" Height="90" Width="728">
                 <UI:AdControl ApplicationId="47fa2188-6db2-4d22-8cd7-2ec6170bdf4b" AdUnitId="10060123" Height="90" Width="728"/>
-            </Border>
+            </Border>-->
             <Image x:Name="BetOneButton" Grid.Column="3" Grid.Row="1" Source="Assets/buttons/BETONE.png" Width="75" Tapped="BetOne_Tapped" />
             <Image x:Name="BetMaxButton" Grid.Column="4" Grid.Row="1" Source="Assets/buttons/BETMAX.png" Width="75" Tapped="BetMax_Tapped" />
             <!--<Image x:Name="VolumeButton" Grid.Column="5" Grid.Row="1" Source="Assets/buttons/Volume2.png" Width="60" Tapped="Volume_Tapped" />-->
