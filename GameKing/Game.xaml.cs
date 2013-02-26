@@ -122,7 +122,7 @@ namespace GameKing
                     CardWidth = 160;
                 }
             }
-            else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 900)
+            else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 1050)
             {
                 CardHeight = 400;
                 CardWidth = 277;
