@@ -29,7 +29,7 @@ namespace GameKing
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            AdRotatorControl.Invalidate();
+            //AdRotatorControl.Invalidate();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -96,6 +96,26 @@ namespace GameKing
         private void WhiteHotAces_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.Navigate(typeof(Game), "WHITEHOTACES");
+        }
+
+        private void SuperAcesBonusPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "SUPERACESBONUSPOKER");
+        }
+
+        private void AcesAndFacesPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "ACESANDFACESPOKER");
+        }
+
+        private void DoubleBonusDeucesWild_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "DOUBLEBONUSDEUCESWILD");
+        }
+
+        private void DeucesWildBonusPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "DEUCESWILDBONUSPOKER");
         }
     }
 }

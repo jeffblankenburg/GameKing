@@ -61,7 +61,7 @@ namespace GameKing
 
         void Game_Loaded(object sender, RoutedEventArgs e)
         {
-            AdRotatorControl.Invalidate();
+            //AdRotatorControl.Invalidate();
         }
 
         void Game_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -124,16 +124,27 @@ namespace GameKing
             }
             else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 1050)
             {
-                CardHeight = 400;
-                CardWidth = 277;
+                CardHeight = 300;
+                CardWidth = 208;
             }
             else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 1200)
             {
-                CardHeight = 450;
-                CardWidth = 312;
+                CardHeight = 350;
+                CardWidth = 243;
+            }
+            else
+            {
+                CardHeight = 273;
+                CardWidth = 190;
             }
 
-            if ((CardWidth == 0) && (CardHeight == 0))
+            if ((GameType == "DOUBLEBONUSDEUCESWILD") || (GameType == "DEUCESWILDBONUSPOKER"))
+            {
+                CardHeight = (int)(CardHeight * .8);
+                CardWidth = (int)(CardWidth * .8);
+            }
+
+            if ((CardWidth != 0) && (CardHeight != 0))
             {
                 for (int i = 0; i <= 4; i++)
                 {

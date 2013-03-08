@@ -64,6 +64,36 @@ namespace PokerLogic
                 if (IsTwoPair()) return "TWO PAIR";
                 if (IsJacksOrBetter()) return "JACKS OR BETTER";
             }
+            else if (GameType == "ACESANDFACESPOKER")
+            {
+                if (IsRoyalFlush()) return "ROYAL FLUSH";
+                if (IsStraightFlush()) return "STRAIGHT FLUSH";
+                if (IsFourAces()) return "4 ACES";
+                if (IsFourJacksQueensOrKings()) return "4 Js, Qs, Ks";
+                if (IsFourTwosThruTens()) return "4 2s THRU 10s";
+                if (IsFullHouse()) return "FULL HOUSE";
+                if (IsFlush()) return "FLUSH";
+                if (IsStraight()) return "STRAIGHT";
+                if (IsThreeOfAKind()) return "3 OF A KIND";
+                if (IsTwoPair()) return "TWO PAIR";
+                if (IsJacksOrBetter()) return "JACKS OR BETTER";
+            }
+            else if (GameType == "DOUBLEBONUSDEUCESWILD")
+            {
+                if (IsRoyalFlush()) return "ROYAL FLUSH";
+                if (DEUCES_IsFourDeucesPlusAce()) return "4 DEUCES PLUS ACE";
+                if (DEUCES_IsFourDeuces()) return "4 DEUCES";
+                if (DEUCES_IsRoyalFlushWithDeuces()) return "ROYAL FLUSH WITH DEUCES";
+                if (DEUCES_IsFiveAces()) return "5 ACES";
+                if (DEUCES_IsFiveThreesThruFives()) return "5 3s THRU 5s";
+                if (DEUCES_IsFiveSixesThruKings()) return "5 6s THRU KINGS";
+                if (DEUCES_IsStraightFlush()) return "STRAIGHT FLUSH";
+                if (DEUCES_IsFourOfAKind()) return "4 OF A KIND";
+                if (DEUCES_IsFullHouse()) return "FULL HOUSE";
+                if (DEUCES_IsFlush()) return "FLUSH";
+                if (DEUCES_IsStraight()) return "STRAIGHT";
+                if (DEUCES_IsThreeOfAKind()) return "3 OF A KIND";
+            }
             else
             {
                 if (IsRoyalFlush()) return "ROYAL FLUSH";
@@ -118,6 +148,39 @@ namespace PokerLogic
             if ((SortedCards[1].Value.Number == 3) && (SortedCards[4].Value.Number == 3)) return true;
             if ((SortedCards[0].Value.Number == 4) && (SortedCards[3].Value.Number == 4)) return true;
             if ((SortedCards[1].Value.Number == 4) && (SortedCards[4].Value.Number == 4)) return true;
+            return false;
+        }
+
+        private bool IsFourJacksQueensOrKings()
+        {
+            if ((SortedCards[0].Value.Number == 11) && (SortedCards[3].Value.Number == 11)) return true;
+            if ((SortedCards[1].Value.Number == 11) && (SortedCards[4].Value.Number == 11)) return true;
+            if ((SortedCards[0].Value.Number == 12) && (SortedCards[3].Value.Number == 12)) return true;
+            if ((SortedCards[1].Value.Number == 12) && (SortedCards[4].Value.Number == 12)) return true;
+            if ((SortedCards[0].Value.Number == 13) && (SortedCards[3].Value.Number == 13)) return true;
+            if ((SortedCards[1].Value.Number == 13) && (SortedCards[4].Value.Number == 13)) return true;
+            return false;
+        }
+
+        private bool IsFourTwosThruTens()
+        {
+            if ((SortedCards[1].Value.Number == 2)) return true;
+            if ((SortedCards[0].Value.Number == 3) && (SortedCards[3].Value.Number == 3)) return true;
+            if ((SortedCards[1].Value.Number == 3) && (SortedCards[4].Value.Number == 3)) return true;
+            if ((SortedCards[0].Value.Number == 4) && (SortedCards[3].Value.Number == 4)) return true;
+            if ((SortedCards[1].Value.Number == 4) && (SortedCards[4].Value.Number == 4)) return true;
+            if ((SortedCards[0].Value.Number == 5) && (SortedCards[3].Value.Number == 5)) return true;
+            if ((SortedCards[1].Value.Number == 5) && (SortedCards[4].Value.Number == 5)) return true;
+            if ((SortedCards[0].Value.Number == 6) && (SortedCards[3].Value.Number == 6)) return true;
+            if ((SortedCards[1].Value.Number == 6) && (SortedCards[4].Value.Number == 6)) return true;
+            if ((SortedCards[0].Value.Number == 7) && (SortedCards[3].Value.Number == 7)) return true;
+            if ((SortedCards[1].Value.Number == 7) && (SortedCards[4].Value.Number == 7)) return true;
+            if ((SortedCards[0].Value.Number == 8) && (SortedCards[3].Value.Number == 8)) return true;
+            if ((SortedCards[1].Value.Number == 8) && (SortedCards[4].Value.Number == 8)) return true;
+            if ((SortedCards[0].Value.Number == 9) && (SortedCards[3].Value.Number == 9)) return true;
+            if ((SortedCards[1].Value.Number == 9) && (SortedCards[4].Value.Number == 9)) return true;
+            if ((SortedCards[0].Value.Number == 10) && (SortedCards[3].Value.Number == 10)) return true;
+            if ((SortedCards[1].Value.Number == 10) && (SortedCards[4].Value.Number == 10)) return true;
             return false;
         }
 
@@ -224,11 +287,44 @@ namespace PokerLogic
             return false;
         }
 
+        private bool DEUCES_IsFourDeucesPlusAce()
+        {
+            if ((DEUCES_IsFourDeuces()) && (SortedCards[0].Value.Number == 14)) return true;
+            return false;
+        }
+
         private bool DEUCES_IsFiveOfAKind()
         {
             if ((IsFourOfAKind()) && (SortedCards[4].Value.Number == 2)) return true;
             if ((CountDeuces() == 2) && (IsThreeOfAKind())) return true;
             if ((CountDeuces() == 3) && (SortedCards[0].Value.Number == SortedCards[1].Value.Number)) return true;
+            return false;
+        }
+
+        private bool DEUCES_IsFiveAces()
+        {
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 14)) return true;
+            return false;
+        }
+
+        private bool DEUCES_IsFiveThreesThruFives()
+        {
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 3)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 4)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 5)) return true;
+            return false;
+        }
+
+        private bool DEUCES_IsFiveSixesThruKings()
+        {
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 6)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 7)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 8)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 9)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 10)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 11)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 12)) return true;
+            if ((DEUCES_IsFiveOfAKind()) && (SortedCards[0].Value.Number == 13)) return true;
             return false;
         }
 

@@ -111,7 +111,14 @@ namespace GameKing
                 popup.IsOpen = true;
             });
 
+            SettingsCommand command2 = new SettingsCommand("privacy", "Privacy Policy", (handler) =>
+            {
+                Popup popup = BuildSettingsItem(new PrivacyPolicyPage(), 346);
+                popup.IsOpen = true;
+            });
+
             args.Request.ApplicationCommands.Add(command);
+            args.Request.ApplicationCommands.Add(command2);
 
         }
 

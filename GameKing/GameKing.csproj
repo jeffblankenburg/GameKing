@@ -132,6 +132,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrivacyPolicyPage.xaml.cs">
+      <DependentUpon>PrivacyPolicyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
@@ -222,6 +225,7 @@
     <Content Include="Assets\cards\HOLD.png" />
     <Content Include="Assets\cards\JOKER.png" />
     <Content Include="Assets\gamekinglogo.png" />
+    <Content Include="Assets\gamelogo\AcesAndFacesPoker.png" />
     <Content Include="Assets\gamelogo\BlackJackBonusPoker.png" />
     <Content Include="Assets\gamelogo\BonusPoker.png" />
     <Content Include="Assets\gamelogo\BonusPokerDeluxe.png" />
@@ -229,6 +233,7 @@
     <Content Include="Assets\gamelogo\DeucesWildBonusPoker.png" />
     <Content Include="Assets\gamelogo\DoubleBonusDeucesWild.png" />
     <Content Include="Assets\gamelogo\DoubleBonusPoker.png" />
+    <Content Include="Assets\gamelogo\DoubleDoubleBonusPoker.png" />
     <Content Include="Assets\gamelogo\JacksOrBetter.png" />
     <Content Include="Assets\gamelogo\JokerPoker.png" />
     <Content Include="Assets\gamelogo\RoyalAcesBonusPoker.png" />
@@ -258,7 +263,6 @@
     <Content Include="Assets\WindowsStoreIcon.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Common\ReadMe.txt" />
-    <Content Include="AdSettings.xml" />
     <Content Include="defaultAdSettings.xml" />
     <Content Include="ReadMe-AdRotator-XAML.txt" />
     <Content Include="Scripts\jquery-1.9.1.intellisense.js" />
@@ -289,6 +293,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PrivacyPolicyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
