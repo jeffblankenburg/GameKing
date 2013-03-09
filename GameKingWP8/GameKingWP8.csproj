@@ -224,6 +224,7 @@
     <Content Include="Assets\gamelogo\DeucesWildBonusPoker.png" />
     <Content Include="Assets\gamelogo\DoubleBonusDeucesWild.png" />
     <Content Include="Assets\gamelogo\DoubleBonusPoker.png" />
+    <Content Include="Assets\gamelogo\DoubleDoubleBonusPoker.png" />
     <Content Include="Assets\gamelogo\JacksOrBetter.png" />
     <Content Include="Assets\gamelogo\JokerPoker.png" />
     <Content Include="Assets\gamelogo\RoyalAcesBonusPoker.png" />

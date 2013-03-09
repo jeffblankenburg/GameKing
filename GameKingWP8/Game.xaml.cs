@@ -214,7 +214,7 @@ namespace GameKingWP8
                     string x = String.Empty;
                     switch (GameType)
                     {
-                        case "DEUCESWILD":
+                        case "DEUCESWILD": case "DOUBLEBONUSDEUCESWILD": case "DEUCESWILDBONUSPOKER":
                             if (PokerGame.Hand.Cards[cardCounter].Value.Number == 2) x = "w";
                             break;
                     }

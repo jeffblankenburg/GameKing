@@ -78,7 +78,7 @@ namespace PokerLogic
                 if (IsTwoPair()) return "TWO PAIR";
                 if (IsJacksOrBetter()) return "JACKS OR BETTER";
             }
-            else if (GameType == "DOUBLEBONUSDEUCESWILD")
+            else if ((GameType == "DOUBLEBONUSDEUCESWILD") || (GameType == "DEUCESWILDBONUSPOKER"))
             {
                 if (IsRoyalFlush()) return "ROYAL FLUSH";
                 if (DEUCES_IsFourDeucesPlusAce()) return "4 DEUCES PLUS ACE";

@@ -191,7 +191,7 @@ namespace PokerLogic
                     payTable.Add(new PayTableItem { Title = "4 DEUCES PLUS ACE...................", Coin1 = 400, Coin2 = 800, Coin3 = 1200, Coin4 = 1600, Coin5 = 2000 });
                     payTable.Add(new PayTableItem { Title = "4 DEUCES.....................................", Coin1 = 200, Coin2 = 400, Coin3 = 600, Coin4 = 800, Coin5 = 1000 });
                     payTable.Add(new PayTableItem { Title = "ROYAL FLUSH WITH DEUCES....", Coin1 = 25, Coin2 = 50, Coin3 = 75, Coin4 = 100, Coin5 = 125 });
-                    payTable.Add(new PayTableItem { Title = "5 ACES.....................................", Coin1 = 80, Coin2 = 160, Coin3 = 240, Coin4 = 320, Coin5 = 400 });
+                    payTable.Add(new PayTableItem { Title = "5 ACES.........................................", Coin1 = 80, Coin2 = 160, Coin3 = 240, Coin4 = 320, Coin5 = 400 });
                     payTable.Add(new PayTableItem { Title = "5 3s THRU 5s...............................", Coin1 = 40, Coin2 = 80, Coin3 = 120, Coin4 = 160, Coin5 = 200 });
                     payTable.Add(new PayTableItem { Title = "5 6s THRU KINGS.......................", Coin1 = 20, Coin2 = 40, Coin3 = 60, Coin4 = 80, Coin5 = 100 });
                     payTable.Add(new PayTableItem { Title = "STRAIGHT FLUSH.......................", Coin1 = 13, Coin2 = 26, Coin3 = 39, Coin4 = 52, Coin5 = 65 });

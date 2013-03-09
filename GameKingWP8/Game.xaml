@@ -137,7 +137,7 @@
             </Border>
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="35" />
+                    <RowDefinition Height="20" />
                     <RowDefinition Height="35" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>

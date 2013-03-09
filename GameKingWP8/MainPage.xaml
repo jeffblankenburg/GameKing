@@ -51,30 +51,9 @@
         <Image Grid.Column="1" Grid.Row="6" Source="Assets/gamelogo/WhiteHotAces.png" MouseLeftButtonDown="WhiteHotAces_Tapped"  />
         <Image Grid.Column="3" Grid.Row="6" Source="Assets/gamelogo/SuperAcesBonusPoker.png" MouseLeftButtonDown="SuperAcesBonusPoker_Tapped"  />
         <Image Grid.Column="5" Grid.Row="6" Source="Assets/gamelogo/BonusPoker.png" MouseLeftButtonDown="BonusPoker_Tapped"  />
-        <Image Grid.Column="1" Grid.Row="8" Source="Assets/gamelogo/BlackJackBonusPoker.png" Opacity=".5"/>
-        <Image Grid.Column="3" Grid.Row="8" Source="Assets/gamelogo/SuperDoubleDoubleBonusPoker.png" Opacity=".5"/>
-        <Image Grid.Column="5" Grid.Row="8" Source="Assets/gamelogo/JokerPoker.png" Opacity=".5"/>
-        <Image Grid.Column="1" Grid.Row="10" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" Opacity=".5"/>
-        <Image Grid.Column="3" Grid.Row="10" Source="Assets/gamelogo/DeucesWildBonusPoker.png" Opacity=".5"/>
-        <Image Grid.Column="5" Grid.Row="10" Source="Assets/gamelogo/AcesAndFacesPoker.png" Opacity=".5"/>
-        <TextBlock Grid.Row="8" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">
-            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-        </TextBlock>
-        <TextBlock Grid.Row="8" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">
-            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-        </TextBlock>
-        <TextBlock Grid.Row="8" Grid.Column="5" TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">
-            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-        </TextBlock>
-        <TextBlock Grid.Row="10" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">
-            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-        </TextBlock>
-        <TextBlock Grid.Row="10" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">
-            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-        </TextBlock>
-        <TextBlock Grid.Row="10" Grid.Column="5" TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">
-            <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-        </TextBlock>
+        <Image Grid.Column="1" Grid.Row="8" Source="Assets/gamelogo/AcesAndFacesPoker.png" MouseLeftButtonDown="AcesAndFacesPoker_Tapped" />
+        <Image Grid.Column="3" Grid.Row="8" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" MouseLeftButtonDown="DoubleBonusDeucesWild_Tapped" />
+        <Image Grid.Column="5" Grid.Row="8" Source="Assets/gamelogo/DeucesWildBonusPoker.png" MouseLeftButtonDown="DeucesWildBonusPoker_Tapped"/>
         <Grid Grid.Row="11" Grid.ColumnSpan="7" VerticalAlignment="Bottom">
             <UI:AdControl Height="80" AdUnitId="10060233" ApplicationId="4b478008-47b9-49f6-b63d-8a16c270f419" />
         </Grid>
