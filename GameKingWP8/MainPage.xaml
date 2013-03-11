@@ -55,7 +55,7 @@
         <Image Grid.Column="3" Grid.Row="8" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" MouseLeftButtonDown="DoubleBonusDeucesWild_Tapped" />
         <Image Grid.Column="5" Grid.Row="8" Source="Assets/gamelogo/DeucesWildBonusPoker.png" MouseLeftButtonDown="DeucesWildBonusPoker_Tapped"/>
         <Grid Grid.Row="11" Grid.ColumnSpan="7" VerticalAlignment="Bottom">
-            <UI:AdControl Height="80" AdUnitId="10060233" ApplicationId="4b478008-47b9-49f6-b63d-8a16c270f419" />
+            <UI:AdControl Height="80" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
         </Grid>
     </Grid>
 

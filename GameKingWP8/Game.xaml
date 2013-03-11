@@ -171,7 +171,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="3" Grid.ColumnSpan="5">
-                <UI:AdControl Height="80" AdUnitId="10060233" ApplicationId="4b478008-47b9-49f6-b63d-8a16c270f419" />
+                <UI:AdControl Height="80" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
             </Grid>
         </Grid>
         <MediaElement x:Name="CardFlip" Source="Assets/audio/carddeal.wav" AutoPlay="False" Volume=".66" />

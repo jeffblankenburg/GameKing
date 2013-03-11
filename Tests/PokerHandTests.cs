@@ -469,5 +469,22 @@ namespace Tests
             vpg.Hand.Cards[4].Value = new Value { Number = 2, Name = "Seven" };
             Assert.AreEqual("5 6s THRU KINGS", vpg.Hand.Check("DOUBLEBONUSDEUCESWILD"));
         }
+
+        [TestMethod]
+        public void Lowdermilk_Hand()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("BONUSPOKERDELUXE");
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 9, Name = "Nine" };
+            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 12, Name = "Queen" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 4, Name = "Four" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 3, Name = "Three" };
+            Assert.AreEqual("FLUSH", vpg.Hand.Check("BONUSPOKERDELUXE"));
+        }
     }
 }
