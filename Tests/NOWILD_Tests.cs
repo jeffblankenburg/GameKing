@@ -9,8 +9,15 @@ using PokerLogic;
 namespace Tests
 {
     [TestClass]
-    public class PokerHandTests
+    public class NOWILD_Tests
     {
+        [TestMethod]
+        public void NOWILD_DeckCounter()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("JACKSORBETTER");
+            Assert.AreEqual(47, vpg.Deck.Cards.Count);
+        }
+        
         [TestMethod]
         public void NOWILD_RoyalFlush()
         {
@@ -182,159 +189,6 @@ namespace Tests
         }
 
         [TestMethod]
-        public void DEUCESWILD_RoyalFlushWithDeuces()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 14, Name = "Ace" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "Jack" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 2, Name = "Two" };
-            Assert.AreEqual("ROYAL FLUSH WITH DEUCES", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_FourDeuces()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 3, Name = "Three" };
-            Assert.AreEqual("4 DEUCES", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_ThreeOfAKind()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 14, Name = "Ace" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 6, Name = "Six" };
-            Assert.AreEqual("3 OF A KIND", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_Straight()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 7, Name = "Seven" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 9, Name = "Nine" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
-            Assert.AreEqual("STRAIGHT", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_Flush()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 5, Name = "Five" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
-            Assert.AreEqual("FLUSH", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_FullHouse()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 8, Name = "Eight" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
-            Assert.AreEqual("FULL HOUSE", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_FourOfAKind()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
-            Assert.AreEqual("4 OF A KIND", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_StraightFlush()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 9, Name = "Nine" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Eight" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 7, Name = "Seven" };
-            Assert.AreEqual("STRAIGHT FLUSH", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_FiveOfAKind()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 2, Name = "Two" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "Jack" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 11, Name = "Jack" };
-            Assert.AreEqual("5 OF A KIND", vpg.Hand.Check("DEUCESWILD"));
-        }
-
-        [TestMethod]
         public void NOWILD_FourAces()
         {
             VideoPokerGame vpg = new VideoPokerGame("DOUBLEBONUSPOKER");
@@ -417,74 +271,6 @@ namespace Tests
             vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
             vpg.Hand.Cards[4].Value = new Value { Number = 7, Name = "Seven" };
             Assert.AreEqual("4 2s THRU 10s", vpg.Hand.Check("ACESANDFACESPOKER"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_FourDeucesPlusAce()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DOUBLEBONUSDEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 2, Name = "Three" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 2, Name = "Three" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 14, Name = "Three" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 2, Name = "Three" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 2, Name = "Seven" };
-            Assert.AreEqual("4 DEUCES PLUS ACE", vpg.Hand.Check("DOUBLEBONUSDEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_FiveAces()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DOUBLEBONUSDEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 14, Name = "Three" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 14, Name = "Three" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 14, Name = "Three" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 2, Name = "Three" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 2, Name = "Seven" };
-            Assert.AreEqual("5 ACES", vpg.Hand.Check("DOUBLEBONUSDEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void DEUCESWILD_FiveSixesThroughKings()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("DOUBLEBONUSDEUCESWILD");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 11, Name = "Three" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 11, Name = "Three" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 11, Name = "Three" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "Three" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 2, Name = "Seven" };
-            Assert.AreEqual("5 6s THRU KINGS", vpg.Hand.Check("DOUBLEBONUSDEUCESWILD"));
-        }
-
-        [TestMethod]
-        public void Lowdermilk_Hand()
-        {
-            VideoPokerGame vpg = new VideoPokerGame("BONUSPOKERDELUXE");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 9, Name = "Nine" };
-            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 12, Name = "Queen" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 4, Name = "Four" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 3, Name = "Three" };
-            Assert.AreEqual("FLUSH", vpg.Hand.Check("BONUSPOKERDELUXE"));
         }
     }
 }

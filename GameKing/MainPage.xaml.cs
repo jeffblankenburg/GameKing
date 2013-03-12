@@ -117,5 +117,10 @@ namespace GameKing
         {
             Frame.Navigate(typeof(Game), "DEUCESWILDBONUSPOKER");
         }
+
+        private void JokerPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), "JOKERPOKER");
+        }
     }
 }

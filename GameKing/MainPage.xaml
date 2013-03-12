@@ -43,29 +43,8 @@
             <Image Grid.Row="6" Grid.Column="2" Source="Assets/gamelogo/AcesAndFacesPoker.png" Width="200" Tapped="AcesAndFacesPoker_Tapped"  />
             <Image Grid.Row="6" Grid.Column="3" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" Width="200" Tapped="DoubleBonusDeucesWild_Tapped"  />
             <Image Grid.Row="6" Grid.Column="4" Source="Assets/gamelogo/DeucesWildBonusPoker.png" Width="200" Tapped="DeucesWildBonusPoker_Tapped"  />
-            <!--<Image Grid.Row="6" Grid.Column="1" Source="Assets/gamelogo/BlackJackBonusPoker.png" Width="200" Opacity=".5"  />
-            <Image Grid.Row="6" Grid.Column="2" Source="Assets/gamelogo/SuperDoubleDoubleBonusPoker.png" Width="200" Opacity=".5"  />
-            <Image Grid.Row="6" Grid.Column="3" Source="Assets/gamelogo/JokerPoker.png" Width="200" Opacity=".5" />
-            <Image Grid.Row="6" Grid.Column="4" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" Width="200" Opacity=".5"  />
-            <TextBlock Grid.Row="6" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
-                <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-            </TextBlock>
-            <TextBlock Grid.Row="6" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
-                <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-            </TextBlock>
-            <TextBlock Grid.Row="6" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
-                <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-            </TextBlock>
-            <TextBlock Grid.Row="6" Grid.Column="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold">
-                <Run Text="COMING"/><LineBreak/><Run Text="SOON"/>
-            </TextBlock>
-            <Border BorderThickness="3" BorderBrush="White" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="740">
-                
-            </Border>-->
-            <!--<AdRotatorWin8:AdRotatorControl x:Name="AdRotatorControl" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="728" Height="90" SettingsUrl="http://jeffblankenburg.com/KingPoker/AdSettings.xml" DefaultAdType="AdDuplex" DefaultSettingsFileUri="AdSettings.xml" 
-                                        PubCenterAdUnitId="35283 " 
-                                        PubCenterAppId="0cd20fbe-8688-49de-b14d-305e604ad2bd"
-                                        AdDuplexAppId="10063036" />-->
+            <Image Grid.Row="7" Grid.Column="4" Source="Assets/gamelogo/JokerPoker.png" Width="200" Tapped="JokerPoker_Tapped"  />
+
             <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
         </Grid>
         <local:HandStats x:Name="SnappedState" Visibility="Collapsed" />

@@ -7,7 +7,7 @@ namespace PokerLogic
 {
     public class Deck
     {
-        protected List<Card> Cards;
+        public List<Card> Cards;
 
         public List<Suit> Suits = new List<Suit> { new Suit { Name = "Hearts", ID = 1 }, new Suit { Name = "Diamonds", ID = 2 }, new Suit { Name = "Clubs", ID = 3 }, new Suit { Name = "Spades", ID = 4 } };
         public List<Value> Values = new List<Value> { new Value { Name = "Two", Number = 2 }, new Value { Name = "Three", Number = 3 }, new Value { Name = "Four", Number = 4 }, new Value { Name = "Five", Number = 5 }, new Value { Name = "Six", Number = 6 }, new Value { Name = "Seven", Number = 7 }, new Value { Name = "Eight", Number = 8 }, new Value { Name = "Nine", Number = 9 }, new Value { Name = "Ten", Number = 10 }, new Value { Name = "Jack", Number = 11 }, new Value { Name = "Queen", Number = 12 }, new Value { Name = "King", Number = 13 }, new Value { Name = "Ace", Number = 14 } };
@@ -22,6 +22,14 @@ namespace PokerLogic
                 {
                     Cards.Add(new Card(s, v));
                 }
+            }
+
+            switch (gameType)
+            {
+                case "JOKERPOKER":
+                    Cards.Add(new Card(new Suit{ ID=5, Name="Joker"}, new Value{ Number=1, Name="JOKER"}));
+                    Cards.Add(new Card(new Suit { ID = 5, Name = "Joker" }, new Value { Number = 1, Name = "JOKER" }));
+                    break;
             }
 
             Shuffle();

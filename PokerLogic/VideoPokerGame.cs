@@ -201,6 +201,19 @@ namespace PokerLogic
                     payTable.Add(new PayTableItem { Title = "STRAIGHT....................................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
                     payTable.Add(new PayTableItem { Title = "3 OF A KIND................................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
                     break;
+                case "JOKERPOKER":
+                    payTable.Add(new PayTableItem { Title = "ROYAL FLUSH NO WILD........", Coin1 = 400, Coin2 = 800, Coin3 = 1200, Coin4 = 1600, Coin5 = 4000 });
+                    payTable.Add(new PayTableItem { Title = "5 OF A KIND...................", Coin1 = 200, Coin2 = 400, Coin3 = 600, Coin4 = 800, Coin5 = 1000 });
+                    payTable.Add(new PayTableItem { Title = "ROYAL FLUSH WITH WILD.....................................", Coin1 = 100, Coin2 = 200, Coin3 = 300, Coin4 = 400, Coin5 = 500 });
+                    payTable.Add(new PayTableItem { Title = "STRAIGHT FLUSH.......................", Coin1 = 50, Coin2 = 100, Coin3 = 150, Coin4 = 200, Coin5 = 250 });
+                    payTable.Add(new PayTableItem { Title = "4 OF A KIND................................", Coin1 = 20, Coin2 = 40, Coin3 = 60, Coin4 = 80, Coin5 = 100 });
+                    payTable.Add(new PayTableItem { Title = "FULL HOUSE................................", Coin1 = 10, Coin2 = 20, Coin3 = 30, Coin4 = 40, Coin5 = 50 });
+                    payTable.Add(new PayTableItem { Title = "FLUSH..........................................", Coin1 = 6, Coin2 = 12, Coin3 = 18, Coin4 = 24, Coin5 = 30 });
+                    payTable.Add(new PayTableItem { Title = "STRAIGHT....................................", Coin1 = 5, Coin2 = 10, Coin3 = 15, Coin4 = 20, Coin5 = 25 });
+                    payTable.Add(new PayTableItem { Title = "3 OF A KIND................................", Coin1 = 2, Coin2 = 4, Coin3 = 6, Coin4 = 8, Coin5 = 10 });
+                    payTable.Add(new PayTableItem { Title = "TWO PAIR................................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
+                    payTable.Add(new PayTableItem { Title = "KINGS OR BETTER................................", Coin1 = 1, Coin2 = 2, Coin3 = 3, Coin4 = 4, Coin5 = 5 });
+                    break;
             }
 
             return payTable;

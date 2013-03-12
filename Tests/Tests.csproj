@@ -109,7 +109,9 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PokerHandTests.cs" />
+    <Compile Include="DEUCESWILD_Tests.cs" />
+    <Compile Include="JOKERPOKER_Tests.cs" />
+    <Compile Include="NOWILD_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
