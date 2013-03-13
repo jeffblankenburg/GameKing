@@ -23,6 +23,20 @@ namespace PokerLogic
             Held[card] = state;
         }
 
+        public Hand()
+        {
+
+        }
+
+        public Hand(List<Card> NewCards, List<bool> NewHeld)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Cards.Add(NewCards[i]);
+                Held.Add(NewHeld[i]);
+            }
+        }
+
         public void Sort()
         {
             SortedCards.Clear();

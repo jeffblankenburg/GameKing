@@ -24,8 +24,8 @@ namespace GameKingWP8
         string GameType;
         bool HoldRound = false;
         int handCounter = 0;
-        Hand OpeningHand;
-        Hand ClosingHand;
+        Hand HandStart;
+        Hand HandEnd;
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
@@ -139,6 +139,7 @@ namespace GameKingWP8
 
         private void Deal()
         {
+        
             if (!IsShowingCards)
             {
                 if (!IsDrawingCredits)
@@ -154,7 +155,7 @@ namespace GameKingWP8
                         PokerGame = new VideoPokerGame(GameType);
                         handCounter++;
                         HoldRound = true;
-                        OpeningHand = PokerGame.Hand;
+                        HandStart = new Hand(PokerGame.Hand.Cards, PokerGame.Hand.Held);
                     }
                     else
                     {
@@ -162,8 +163,7 @@ namespace GameKingWP8
                         ResetCardBacks();
                         //WriteDataToMobileService();
                         HoldRound = false;
-                        ClosingHand = PokerGame.Hand;
-                        SaveHands();
+                        HandEnd = new Hand(PokerGame.Hand.Cards, PokerGame.Hand.Held);
                     }
                     ShowCards(!HoldRound);
                 }
@@ -173,9 +173,10 @@ namespace GameKingWP8
         private void SaveHands()
         {
             List<BothHands> handhistory = (List<BothHands>)App.settings["handhistory"];
-            BothHands bothhands = new BothHands{ OpeningHand=OpeningHand, ClosingHand=ClosingHand};
+            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"]};
             handhistory.Add(bothhands);
             App.settings["handhistory"] = handhistory;
+            App.settings.Save();
         }
 
         private void ChargeCredits()
@@ -243,6 +244,7 @@ namespace GameKingWP8
                     DrawCredits(10000);
                 }
                 HighlightWinningBetValue(PayTable, ShouldPayUser);
+                if (ShouldPayUser) SaveHands();
                 IsShowingCards = false;
             }
         }

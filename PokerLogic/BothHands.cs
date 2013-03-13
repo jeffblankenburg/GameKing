@@ -10,10 +10,13 @@ namespace PokerLogic
         public Hand OpeningHand { get; set; }
         public Hand ClosingHand { get; set; }
         public DateTime TimeStamp { get; set; }
+        public string GameType { get; set; }
+        public int CreditCount { get; set; }
 
         public BothHands()
         {
             TimeStamp = DateTime.Now;
         }
+
     }
 }

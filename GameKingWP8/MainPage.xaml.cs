@@ -99,5 +99,10 @@ namespace GameKingWP8
             PlayClick();
             NavigationService.Navigate(new Uri("/Game.xaml?game=DEUCESWILDBONUSPOKER", UriKind.Relative));
         }
+
+        private void Stats_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
+        }
     }
 }
