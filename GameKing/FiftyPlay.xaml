@@ -1,0 +1,548 @@
+﻿<Page xmlns:UI="using:Microsoft.Advertising.WinRT.UI" 
+    x:Class="GameKing.FiftyPlay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GameKing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="PayTableTitleBlink" RepeatBehavior="Forever">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="PayTableNumberBlink" RepeatBehavior="Forever">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CreditPause">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CreditImage">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CardPause">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CreditImage">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    <Grid Background="#00019f">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="141" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="141" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="141" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="141" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="141" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="141" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="141" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card430" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card431" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card432" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card433" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card434" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card440" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card441" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card442" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card443" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card444" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card450" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card451" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card452" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card453" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card454" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="6" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card460" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card461" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card462" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card463" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card464" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="8" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card4710" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card471" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card472" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card473" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card474" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="10" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card480" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card481" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card482" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card483" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card484" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="12" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card490" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card491" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card492" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card493" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card494" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            
+            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card360" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card361" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card362" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card363" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card364" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card370" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card371" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card372" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card373" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card374" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card380" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card381" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card382" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card383" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card384" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="6" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card390" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card391" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card392" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card393" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card394" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="8" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card400" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card401" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card402" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card403" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card404" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="10" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card410" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card411" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card412" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card413" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card414" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="12" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card420" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card421" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card422" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card423" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card424" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            
+            <StackPanel Grid.Column="0" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card290" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card291" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card292" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card293" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card294" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card300" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card301" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card302" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card303" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card304" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card310" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card311" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card312" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card313" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card314" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="6" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card320" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card321" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card322" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card323" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card324" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="8" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card330" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card331" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card332" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card333" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card334" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="10" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card340" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card341" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card342" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card343" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card344" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="12" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card350" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card351" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card352" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card353" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card354" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card220" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card221" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card222" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card223" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card224" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card230" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card231" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card232" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card233" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card234" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card240" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card241" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card242" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card243" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card244" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="6" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card250" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card251" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card252" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card253" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card254" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="8" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card260" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card261" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card262" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card263" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card264" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="10" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card270" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card271" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card272" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card273" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card274" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="12" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card280" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card281" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card282" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card283" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card284" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            
+            <StackPanel Grid.Column="0" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card150" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card151" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card152" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card153" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card154" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card160" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card161" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card162" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card163" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card164" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card170" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card171" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card172" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card173" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card174" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="6" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card180" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card181" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card182" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card183" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card184" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="8" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card190" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card191" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card192" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card193" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card194" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="10" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card200" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card201" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card202" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card203" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card204" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="12" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card210" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card211" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card212" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card213" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card214" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            
+            <StackPanel Grid.Column="0" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card80" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card81" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card82" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card83" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card84" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card90" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card91" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card92" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card93" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card94" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card100" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card101" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card102" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card103" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card104" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="6" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card110" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card111" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card112" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card113" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card114" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="8" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card120" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card121" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card122" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card123" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card124" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="10" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card130" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card131" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card132" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card133" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card134" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="12" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card140" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card141" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card142" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card143" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card144" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card10" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card11" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card12" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card13" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card14" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card20" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card21" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card22" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card23" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card24" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card30" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card31" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card32" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card33" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card34" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="6" Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card40" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card41" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card42" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card43" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card44" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="8" Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card50" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card51" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card52" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card53" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card54" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="10" Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card60" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card61" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card62" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card63" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card64" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <StackPanel Grid.Column="12" Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+                <Image x:Name="Card70" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card71" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card72" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card73" Source="Assets/cards/BACK.png" />
+                <Image x:Name="Card74" Source="Assets/cards/BACK.png" />
+            </StackPanel>
+            <Rectangle x:Name="Cover43" Grid.Column="0"  Grid.Row="0" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover44" Grid.Column="2"  Grid.Row="0" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover45" Grid.Column="4"  Grid.Row="0" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover46" Grid.Column="6"  Grid.Row="0" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover47" Grid.Column="8"  Grid.Row="0" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover48" Grid.Column="10" Grid.Row="0" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover49" Grid.Column="12" Grid.Row="0" Fill="Black" Opacity=".3" />
+
+            <Rectangle x:Name="Cover36" Grid.Column="0"  Grid.Row="2" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover37" Grid.Column="2"  Grid.Row="2" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover38" Grid.Column="4"  Grid.Row="2" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover39" Grid.Column="6"  Grid.Row="2" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover40" Grid.Column="8"  Grid.Row="2" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover41" Grid.Column="10" Grid.Row="2" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover42" Grid.Column="12" Grid.Row="2" Fill="Black" Opacity=".3" />
+
+            <Rectangle x:Name="Cover29" Grid.Column="0"  Grid.Row="4" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover30" Grid.Column="2"  Grid.Row="4" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover31" Grid.Column="4"  Grid.Row="4" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover32" Grid.Column="6"  Grid.Row="4" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover33" Grid.Column="8"  Grid.Row="4" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover34" Grid.Column="10" Grid.Row="4" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover35" Grid.Column="12" Grid.Row="4" Fill="Black" Opacity=".3" />
+
+            <Rectangle x:Name="Cover22" Grid.Column="0"  Grid.Row="6" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover23" Grid.Column="2"  Grid.Row="6" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover24" Grid.Column="4"  Grid.Row="6" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover25" Grid.Column="6"  Grid.Row="6" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover26" Grid.Column="8"  Grid.Row="6" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover27" Grid.Column="10" Grid.Row="6" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover28" Grid.Column="12" Grid.Row="6" Fill="Black" Opacity=".3" />
+
+            <Rectangle x:Name="Cover15" Grid.Column="0"  Grid.Row="8" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover16" Grid.Column="2"  Grid.Row="8" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover17" Grid.Column="4"  Grid.Row="8" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover18" Grid.Column="6"  Grid.Row="8" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover19" Grid.Column="8"  Grid.Row="8" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover20" Grid.Column="10" Grid.Row="8" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover21" Grid.Column="12" Grid.Row="8" Fill="Black" Opacity=".3" />
+
+            <Rectangle x:Name="Cover8" Grid.Column="0"   Grid.Row="10" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover9" Grid.Column="2"   Grid.Row="10" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover10" Grid.Column="4"  Grid.Row="10" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover11" Grid.Column="6"  Grid.Row="10" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover12" Grid.Column="8"  Grid.Row="10" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover13" Grid.Column="10" Grid.Row="10" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover14" Grid.Column="12" Grid.Row="10" Fill="Black" Opacity=".3" />
+
+            <Rectangle x:Name="Cover1" Grid.Column="0"  Grid.Row="12" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover2" Grid.Column="2"  Grid.Row="12" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover3" Grid.Column="4"  Grid.Row="12" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover4" Grid.Column="6"  Grid.Row="12" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover5" Grid.Column="8"  Grid.Row="12" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover6" Grid.Column="10" Grid.Row="12" Fill="Black" Opacity=".3" />
+            <Rectangle x:Name="Cover7" Grid.Column="12" Grid.Row="12" Fill="Black" Opacity=".3" />
+        </Grid>
+        <Grid Grid.Row="2" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="0" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,20" VerticalAlignment="Top" />
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="0" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,20" VerticalAlignment="Top" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="0" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,20" VerticalAlignment="Top" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="0" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,20" VerticalAlignment="Top" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="0" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,20" VerticalAlignment="Top" />
+            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="25" Margin="0,0,0,30" Grid.Column="0" Visibility="Collapsed" VerticalAlignment="Bottom" />
+            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="25" Margin="0,0,0,30" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Bottom" />
+            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="25" Margin="0,0,0,30" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Bottom" />
+            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="25" Margin="0,0,0,30" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Bottom" />
+            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="25" Margin="0,0,0,30" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Bottom" />
+        </Grid>
+        <Grid x:Name="ButtonsGrid" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="170" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.ColumnSpan="7">
+                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+
+                    <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" Width="266" FlowDirection="RightToLeft" >
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                        <Image Source="Assets/numbers/0.png" Width="38" />
+                    </StackPanel>
+                    <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Height="52" Margin="25,0,0,0" />
+
+                </StackPanel>
+            </Grid>
+            <Image Grid.Column="1" Grid.Row="1" Source="Assets/buttons/MOREGAMES.png" Width="150" Tapped="MoreGames_Tapped" />
+            <Image x:Name="BetOneButton" Grid.Column="3" Grid.Row="1" Source="Assets/buttons/BETONE.png" Width="75" Tapped="BetOne_Tapped" />
+            <Image x:Name="BetMaxButton" Grid.Column="4" Grid.Row="1" Source="Assets/buttons/BETMAX.png" Width="75" Tapped="BetMax_Tapped" />
+            <Image x:Name="DealButton" Grid.Column="6" Grid.Row="1" Source="Assets/buttons/DEAL.png" Width="150" Tapped="Deal_Click"/>
+        </Grid>
+        <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" HorizontalAlignment="Center"/>
+    </Grid>
+</Page>

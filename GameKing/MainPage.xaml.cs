@@ -122,5 +122,10 @@ namespace GameKing
         {
             Frame.Navigate(typeof(Game), "JOKERPOKER");
         }
+
+        private void BlackJackBonusPoker_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FiftyPlay), "DEUCESWILD");
+        }
     }
 }

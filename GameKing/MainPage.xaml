@@ -43,6 +43,7 @@
             <Image Grid.Row="6" Grid.Column="2" Source="Assets/gamelogo/AcesAndFacesPoker.png" Width="200" Tapped="AcesAndFacesPoker_Tapped"  />
             <Image Grid.Row="6" Grid.Column="3" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" Width="200" Tapped="DoubleBonusDeucesWild_Tapped"  />
             <Image Grid.Row="6" Grid.Column="4" Source="Assets/gamelogo/DeucesWildBonusPoker.png" Width="200" Tapped="DeucesWildBonusPoker_Tapped"  />
+            <Image Grid.Row="7" Grid.Column="1" Source="Assets/gamelogo/BlackJackBonusPoker.png" Width="200" Tapped="BlackJackBonusPoker_Tapped"  />
             <Image Grid.Row="7" Grid.Column="4" Source="Assets/gamelogo/JokerPoker.png" Width="200" Tapped="JokerPoker_Tapped"  />
 
             <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Margin="0,0,0,5"/>

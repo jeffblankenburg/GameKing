@@ -48,7 +48,7 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="#00019f">
+    <Grid x:Name="LayoutRoot" Background="#00019F">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
