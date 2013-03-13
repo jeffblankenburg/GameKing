@@ -25,11 +25,12 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="#00019f">
         <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center">
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
@@ -45,7 +46,7 @@
             <Rectangle Fill="Red" Margin="5" Grid.Column="6" />
             <TextBlock Text="Finishing Hand" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2" FontWeight="Bold" />
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <ScrollViewer>
                 <ItemsControl x:Name="StatsList" HorizontalAlignment="Center">
                     <ItemsControl.ItemTemplate>
@@ -102,7 +103,7 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
-        <UI:AdControl Grid.Row="2" Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
+        <UI:AdControl Grid.Row="3" Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
     </Grid>
 
 </phone:PhoneApplicationPage>
