@@ -26,17 +26,18 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="180" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="67" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="67" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="67" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="67" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="67" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
         <Grid Grid.ColumnSpan="7">
             <Image Source="Assets/pattern480_800.png" Stretch="UniformToFill" />
@@ -54,7 +55,8 @@
         <Image Grid.Column="1" Grid.Row="8" Source="Assets/gamelogo/AcesAndFacesPoker.png" MouseLeftButtonDown="AcesAndFacesPoker_Tapped" />
         <Image Grid.Column="3" Grid.Row="8" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" MouseLeftButtonDown="DoubleBonusDeucesWild_Tapped" />
         <Image Grid.Column="5" Grid.Row="8" Source="Assets/gamelogo/DeucesWildBonusPoker.png" MouseLeftButtonDown="DeucesWildBonusPoker_Tapped"/>
-        <Grid Grid.Row="11" Grid.ColumnSpan="7" VerticalAlignment="Bottom">
+        <Image Grid.Column="1" Grid.Row="10" Source="Assets/gamelogo/JokerPoker.png" MouseLeftButtonDown="JokerPoker_Tapped"/>
+        <Grid Grid.Row="12" Grid.ColumnSpan="7" VerticalAlignment="Bottom">
             <UI:AdControl Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
         </Grid>
     </Grid>

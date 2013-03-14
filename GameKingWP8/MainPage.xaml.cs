@@ -104,5 +104,11 @@ namespace GameKingWP8
         {
             NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
         }
+
+        private void JokerPoker_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PlayClick();
+            NavigationService.Navigate(new Uri("/Game.xaml?game=JOKERPOKER", UriKind.Relative));
+        }
     }
 }
