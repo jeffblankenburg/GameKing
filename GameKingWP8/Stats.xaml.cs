@@ -16,6 +16,12 @@ namespace GameKingWP8
         public Stats()
         {
             InitializeComponent();
+            Loaded += Stats_Loaded;
+        }
+
+        void Stats_Loaded(object sender, RoutedEventArgs e)
+        {
+            ShowContent.Begin();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -23,7 +29,7 @@ namespace GameKingWP8
             List<BothHands> history = App.settings["handhistory"] as List<BothHands>;
             StatsList.ItemsSource = (from p in history
                                     orderby p.TimeStamp descending
-                                    select p).Take(100);
+                                    select p).Take(25);
         }
     }
 }

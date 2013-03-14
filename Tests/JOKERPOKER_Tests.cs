@@ -308,6 +308,23 @@ namespace Tests
         }
 
         [TestMethod]
+        public void JOKERPOKER_Straight_NoJokers_WithAce()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("JOKERPOKER");
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 14, Name = "Ace" };
+            vpg.Hand.Cards[1].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 2, Name = "Two" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 3, Name = "Three" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 5, Name = "Five" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 4, Name = "Four" };
+            Assert.AreEqual("STRAIGHT", vpg.Hand.Check("JOKERPOKER"));
+        }
+
+        [TestMethod]
         public void JOKERPOKER_Straight_OneJoker()
         {
             VideoPokerGame vpg = new VideoPokerGame("JOKERPOKER");
@@ -325,6 +342,23 @@ namespace Tests
         }
 
         [TestMethod]
+        public void JOKERPOKER_Straight_OneJoker_WithAce()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("JOKERPOKER");
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 14, Name = "Ace" };
+            vpg.Hand.Cards[1].Suit = new Suit { ID = 5, Name = "Joker" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 1, Name = "Joker" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 3, Name = "Three" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 5, Name = "Five" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 4, Name = "Four" };
+            Assert.AreEqual("STRAIGHT", vpg.Hand.Check("JOKERPOKER"));
+        }
+
+        [TestMethod]
         public void JOKERPOKER_Straight_TwoJokers()
         {
             VideoPokerGame vpg = new VideoPokerGame("JOKERPOKER");
@@ -338,6 +372,23 @@ namespace Tests
             vpg.Hand.Cards[3].Value = new Value { Number = 1, Name = "Joker" };
             vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
             vpg.Hand.Cards[4].Value = new Value { Number = 8, Name = "Eight" };
+            Assert.AreEqual("STRAIGHT", vpg.Hand.Check("JOKERPOKER"));
+        }
+
+        [TestMethod]
+        public void JOKERPOKER_Straight_TwoJokers_WithAce()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("JOKERPOKER");
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 14, Name = "Ace" };
+            vpg.Hand.Cards[1].Suit = new Suit { ID = 5, Name = "Joker" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 1, Name = "Joker" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 3, Name = "Three" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 5, Name = "Joker" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 1, Name = "Joker" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 4, Name = "Four" };
             Assert.AreEqual("STRAIGHT", vpg.Hand.Check("JOKERPOKER"));
         }
 

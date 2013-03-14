@@ -379,6 +379,7 @@ namespace PokerLogic
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 2) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1) && (SortedCards[2].Value.Number == SortedCards[3].Value.Number + 1)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 1) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 2) && (SortedCards[2].Value.Number == SortedCards[3].Value.Number + 1)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 1) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1) && (SortedCards[2].Value.Number == SortedCards[3].Value.Number + 2)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 5) && (SortedCards[2].Value.Number == 4) && (SortedCards[3].Value.Number == 3)) return true;
             }
             if (CountDeuces() == 2)
             {
@@ -388,6 +389,8 @@ namespace PokerLogic
                if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 3) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1)) return true;
                if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 2) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 2)) return true;
                if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 1) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 3)) return true;
+               if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 5) && (SortedCards[2].Value.Number == 4)) return true;
+               if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 4) && (SortedCards[2].Value.Number == 3)) return true;
             }
             if (CountDeuces() == 3)
             {
@@ -395,6 +398,9 @@ namespace PokerLogic
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 2)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 3)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 4)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 5)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 4)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 3)) return true;
             }
             return false;
         }
@@ -524,6 +530,9 @@ namespace PokerLogic
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 2) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1) && (SortedCards[2].Value.Number == SortedCards[3].Value.Number + 1)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 1) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 2) && (SortedCards[2].Value.Number == SortedCards[3].Value.Number + 1)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 1) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1) && (SortedCards[2].Value.Number == SortedCards[3].Value.Number + 2)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 5) && (SortedCards[2].Value.Number == 4) && (SortedCards[3].Value.Number == 3)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 4) && (SortedCards[2].Value.Number == 3) && (SortedCards[3].Value.Number == 2)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 5) && (SortedCards[2].Value.Number == 3) && (SortedCards[3].Value.Number == 2)) return true;
             }
             if (CountJokers() == 2)
             {
@@ -533,6 +542,9 @@ namespace PokerLogic
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 3) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 2) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 2)) return true;
                 if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number + 1) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 3)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 1) && (SortedCards[1].Value.Number <=5)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 2) && (SortedCards[1].Value.Number <= 5)) return true;
+                if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == SortedCards[2].Value.Number + 3) && (SortedCards[1].Value.Number <= 5)) return true;
             }
             return false;
         }

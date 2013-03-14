@@ -18,92 +18,148 @@
         <local:ClosingHandCardToImageConverter x:Key="ClosingHandCardToImageConverter" />
         <local:OpeningHandCardToImageConverter x:Key="OpeningHandCardToImageConverter" />
         <local:HandToOutcomeConverter x:Key="HandToOutcomeConverter" />
-        <local:BothHandsToCreditsAndDateConverter x:Key="BothHandsToCreditsAndDateConverter" />
+        <local:BothHandsToCredits x:Key="BothHandsToCredits" />
         <local:HoldToVisibilityConverter x:Key="HoldToVisibilityConverter" />
+        <local:GameTypeToImagePathConverter x:Key="GameTypeToImagePathConverter" />
+        <Storyboard x:Name="ShowContent">
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MainContent">
+        		<DiscreteObjectKeyFrame KeyTime="0">
+        			<DiscreteObjectKeyFrame.Value>
+        				<Visibility>Collapsed</Visibility>
+        			</DiscreteObjectKeyFrame.Value>
+        		</DiscreteObjectKeyFrame>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.1">
+        			<DiscreteObjectKeyFrame.Value>
+        				<Visibility>Visible</Visibility>
+        			</DiscreteObjectKeyFrame.Value>
+        		</DiscreteObjectKeyFrame>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:3">
+        			<DiscreteObjectKeyFrame.Value>
+        				<Visibility>Visible</Visibility>
+        			</DiscreteObjectKeyFrame.Value>
+        		</DiscreteObjectKeyFrame>
+        	</ObjectAnimationUsingKeyFrames>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="StatusBar">
+        		<DiscreteObjectKeyFrame KeyTime="0">
+        			<DiscreteObjectKeyFrame.Value>
+        				<Visibility>Visible</Visibility>
+        			</DiscreteObjectKeyFrame.Value>
+        		</DiscreteObjectKeyFrame>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:3">
+        			<DiscreteObjectKeyFrame.Value>
+        				<Visibility>Collapsed</Visibility>
+        			</DiscreteObjectKeyFrame.Value>
+        		</DiscreteObjectKeyFrame>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MainContent">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1E-05"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2.9" Value="1E-06"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:3" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="#00019f">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1" HorizontalAlignment="Center">
+        <Grid x:Name="MainContent" Visibility="Collapsed">
             <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
                 <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="200" />
-            </Grid.ColumnDefinitions>
-            <Rectangle Fill="#FCD800" />
-            <Rectangle Fill="Red" Margin="5" />
-            <TextBlock Text="Starting Hand" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
-            <Rectangle Fill="#FCD800" Grid.Column="6" />
-            <Rectangle Fill="Red" Margin="5" Grid.Column="6" />
-            <TextBlock Text="Finishing Hand" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2" FontWeight="Bold" />
-        </Grid>
-        <Grid Grid.Row="2">
-            <ScrollViewer>
-                <ItemsControl x:Name="StatsList" HorizontalAlignment="Center">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="15" />
-                                    <RowDefinition Height="10" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="200" />
-                                </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="#FCD800" />
+                <Rectangle Fill="Red" Margin="5" />
+                <TextBlock Text="Starting Hand" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" />
+                <Rectangle Fill="#FCD800" Grid.Column="6" />
+                <Rectangle Fill="Red" Margin="5" Grid.Column="6" />
+                <TextBlock Text="Finishing Hand" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2" FontWeight="Bold" />
+            </Grid>
+            <Grid Grid.Row="2">
+                <ScrollViewer>
+                    <ItemsControl x:Name="StatsList" HorizontalAlignment="Center">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
                                 <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="70" />
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="1" />
+                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="200" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=0}" />
-                                    <Image Grid.Column="0" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=0}" />
-                                    <Image Grid.Column="1" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=1}" />
-                                    <Image Grid.Column="1" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=1}" />
-                                    <Image Grid.Column="2" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=2}" />
-                                    <Image Grid.Column="2" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=2}" />
-                                    <Image Grid.Column="3" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=3}" />
-                                    <Image Grid.Column="3" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=3}" />
-                                    <Image Grid.Column="4" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=4}" />
-                                    <Image Grid.Column="4" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=4}" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=0}" />
+                                        <Image Grid.Column="0" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=0}" />
+                                        <Image Grid.Column="1" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=1}" />
+                                        <Image Grid.Column="1" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=1}" />
+                                        <Image Grid.Column="2" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=2}" />
+                                        <Image Grid.Column="2" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=2}" />
+                                        <Image Grid.Column="3" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=3}" />
+                                        <Image Grid.Column="3" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=3}" />
+                                        <Image Grid.Column="4" Height="70" Width="40" Source="{Binding Converter={StaticResource OpeningHandCardToImageConverter}, ConverterParameter=4}" />
+                                        <Image Grid.Column="4" Source="Assets/cards/HOLD.png" VerticalAlignment="Bottom" Visibility="{Binding ClosingHand, Converter={StaticResource HoldToVisibilityConverter}, ConverterParameter=4}" />
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=0}" />
+                                        <Image Grid.Column="1" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=1}" />
+                                        <Image Grid.Column="2" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=2}" />
+                                        <Image Grid.Column="3" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=3}" />
+                                        <Image Grid.Column="4" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=4}" />
+                                    </Grid>
+                                    <Rectangle Fill="#FCD800" Grid.Row="3" Grid.ColumnSpan="3" />
+                                    <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200" />
+                                            <ColumnDefinition Width="20" />
+                                            <ColumnDefinition Width="200" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.RowSpan="2" Source="{Binding GameType, Converter={StaticResource GameTypeToImagePathConverter}}" HorizontalAlignment="Left" />
+                                        <TextBlock Grid.RowSpan="2" Text="{Binding Converter={StaticResource BothHandsToCredits}}" TextAlignment="Right" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Right" />
+                                        <TextBlock Text="{Binding TimeStamp}" Grid.Row="0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+                                        <TextBlock Text="{Binding Converter={StaticResource HandToOutcomeConverter}}" Grid.Row="1" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+                                    </Grid>
                                 </Grid>
-                                <Grid Grid.Column="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition Width="40" />
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=0}" />
-                                    <Image Grid.Column="1" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=1}" />
-                                    <Image Grid.Column="2" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=2}" />
-                                    <Image Grid.Column="3" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=3}" />
-                                    <Image Grid.Column="4" Height="70" Width="40" Source="{Binding Converter={StaticResource ClosingHandCardToImageConverter}, ConverterParameter=4}" />
-                                </Grid>
-                                <TextBlock Text="{Binding Converter={StaticResource BothHandsToCreditsAndDateConverter}}" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="12" />
-                                <TextBlock Text="{Binding Converter={StaticResource HandToOutcomeConverter}}" Grid.Row="1" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <UI:AdControl Grid.Row="3" Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
         </Grid>
-        <UI:AdControl Grid.Row="3" Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
+        <ProgressBar x:Name="StatusBar" IsEnabled="True" IsIndeterminate="True" Foreground="Red" VerticalAlignment="Center" Height="10" />
     </Grid>
 
 </phone:PhoneApplicationPage>

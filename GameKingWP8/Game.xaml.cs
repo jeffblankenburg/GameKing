@@ -47,6 +47,7 @@ namespace GameKingWP8
         {
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
+            App.settings.Save();
         }
 
         void CardPause_Completed(object sender, object e)
@@ -176,7 +177,7 @@ namespace GameKingWP8
             BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"]};
             handhistory.Add(bothhands);
             App.settings["handhistory"] = handhistory;
-            App.settings.Save();
+            //App.settings.Save();
         }
 
         private void ChargeCredits()
