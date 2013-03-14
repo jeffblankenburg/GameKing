@@ -53,8 +53,8 @@ namespace GameKing
         {
             SettingsPane.GetForCurrentView().CommandsRequested += App_CommandsRequested;
             
-            settings = ApplicationData.Current.RoamingSettings;
-            files = ApplicationData.Current.RoamingFolder;
+            settings = ApplicationData.Current.LocalSettings;
+            files = ApplicationData.Current.LocalFolder;
 
             if (!settings.Values.ContainsKey("credits"))
             {

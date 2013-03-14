@@ -35,6 +35,8 @@ namespace GameKing
         string GameType;
         bool HoldRound = false;
         int handCounter = 0;
+        Hand HandStart;
+        Hand HandEnd;
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
@@ -261,7 +263,7 @@ namespace GameKing
                         IncrementHandCount();
                         handCounter++;
                         HoldRound = true;
-                        //OpeningHand = PokerGame.Hand;
+                        HandStart = new Hand(PokerGame.Hand.Cards, PokerGame.Hand.Held);
                     }
                     else
                     {
@@ -269,8 +271,7 @@ namespace GameKing
                         ResetCardBacks();
                         //WriteDataToMobileService();
                         HoldRound = false;
-                        //ClosingHand = PokerGame.Hand;
-                        //SaveHands();
+                        HandEnd = new Hand(PokerGame.Hand.Cards, PokerGame.Hand.Held);
                     }
                     ShowCards(!HoldRound);
                 }
@@ -283,19 +284,20 @@ namespace GameKing
             App.settings.Values["totalhandsplayed"] = handcount + 1;
         }
 
-        private void SaveHands()
+        private async void SaveHands()
         {
-            //StorageFile file = await App.files.GetFileAsync("handhistory.txt");
-            //string handtext = await FileIO.ReadTextAsync(file);
+            StorageFile file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.OpenIfExists);
+            string handtext = await FileIO.ReadTextAsync(file);
 
 
-            //List<BothHands> handhistory = JsonConvert.DeserializeObject<List<BothHands>>(handtext);
-            //BothHands bothhands = new BothHands { OpeningHand = OpeningHand, ClosingHand = ClosingHand };
-            //handhistory.Add(bothhands);
-            //handtext = JsonConvert.SerializeObject(handhistory);
+            List<BothHands> handhistory = JsonConvert.DeserializeObject<List<BothHands>>(handtext);
+            if (handhistory == null) handhistory = new List<BothHands>();
+            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings.Values["credits"] };
+            handhistory.Add(bothhands);
+            handtext = JsonConvert.SerializeObject(handhistory);
 
-            //file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(file, handtext);
+            file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(file, handtext);
         }
 
         private void WriteDataToMobileService()
@@ -373,6 +375,7 @@ namespace GameKing
                     DrawCredits(10000);
                 }
                 HighlightWinningBetValue(PayTable, ShouldPayUser);
+                if (ShouldPayUser) SaveHands();
                 IsShowingCards = false;
             }
         }
