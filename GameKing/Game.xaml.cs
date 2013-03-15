@@ -292,17 +292,18 @@ namespace GameKing
 
             List<BothHands> handhistory = JsonConvert.DeserializeObject<List<BothHands>>(handtext);
             if (handhistory == null) handhistory = new List<BothHands>();
-            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings.Values["credits"] };
+            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings.Values["credits"], ANID = App.settings.Values["userid"].ToString() };
             handhistory.Add(bothhands);
             handtext = JsonConvert.SerializeObject(handhistory);
+            //WriteDataToMobileService(handtext);
 
             file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, handtext);
         }
 
-        private void WriteDataToMobileService()
+        private async void WriteDataToMobileService(string bh)
         {
-            //throw new NotImplementedException();
+            await App.MobileService.GetTable<string>().InsertAsync(bh);
         }
 
         private void ResetCardBacks()

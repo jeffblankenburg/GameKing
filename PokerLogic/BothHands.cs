@@ -7,6 +7,8 @@ namespace PokerLogic
 {
     public class BothHands
     {
+        public int Id { get; set; }
+        public string ANID { get; set; }
         public Hand OpeningHand { get; set; }
         public Hand ClosingHand { get; set; }
         public DateTime TimeStamp { get; set; }

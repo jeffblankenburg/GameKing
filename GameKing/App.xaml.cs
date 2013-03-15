@@ -29,7 +29,7 @@ namespace GameKing
     /// </summary>
     sealed partial class App : Application
     {
-        public static MobileServiceClient MobileService = new MobileServiceClient("https://gameking.azure-mobile.net/", "yQFDpmPmnOTOmzjuXcdATTxbtQQlMN66");
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://kingpoker.azure-mobile.net/","TKrwESHysONzEMdZtNMlQrPbNzdjPB94");
         public static ApplicationDataContainer settings;
         public static StorageFolder files;
         
@@ -69,6 +69,11 @@ namespace GameKing
             if (!settings.Values.ContainsKey("totalhandsplayed"))
             {
                 settings.Values["totalhandsplayed"] = 0;
+            }
+
+            if (!settings.Values.ContainsKey("userid"))
+            {
+                settings.Values["userid"] = Guid.NewGuid().ToString();
             }
 
             Frame rootFrame = Window.Current.Content as Frame;

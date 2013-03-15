@@ -10,6 +10,7 @@ using GameKingWP8.Resources;
 using System.IO.IsolatedStorage;
 using System.Collections.Generic;
 using PokerLogic;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace GameKingWP8
 {
@@ -20,7 +21,7 @@ namespace GameKingWP8
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
-
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://kingpoker.azure-mobile.net/", "TKrwESHysONzEMdZtNMlQrPbNzdjPB94");
         public static IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
 
         /// <summary>

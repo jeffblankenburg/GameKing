@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Phone.Info;
 
 namespace GameKingWP8
 {
@@ -162,7 +163,6 @@ namespace GameKingWP8
                     {
                         PokerGame.Draw();
                         ResetCardBacks();
-                        //WriteDataToMobileService();
                         HoldRound = false;
                         HandEnd = new Hand(PokerGame.Hand.Cards, PokerGame.Hand.Held);
                     }
@@ -174,10 +174,17 @@ namespace GameKingWP8
         private void SaveHands()
         {
             List<BothHands> handhistory = (List<BothHands>)App.settings["handhistory"];
-            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"]};
+            string ANID = UserExtendedProperties.GetValue("ANID2").ToString().Substring(2, 32);
+            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"], ANID = ANID };
             handhistory.Add(bothhands);
             App.settings["handhistory"] = handhistory;
+            //WriteDataToMobileService(bothhands);
             //App.settings.Save();
+        }
+
+        private async void WriteDataToMobileService(BothHands bh)
+        {
+            await App.MobileService.GetTable<BothHands>().InsertAsync(bh);
         }
 
         private void ChargeCredits()
