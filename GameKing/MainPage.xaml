@@ -10,43 +10,50 @@
     <Grid x:Name="LayoutRoot" Background="#00019f">
         <Grid x:Name="FullScreen">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="17*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="17*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="17*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="17*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="17*" />
+                <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="180" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="110" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="110" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="110" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="23*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="14*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="14*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="14*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="12*" />
             </Grid.RowDefinitions>
-            <Grid Grid.ColumnSpan="7">
+            <Grid Grid.ColumnSpan="11">
                 <Image Source="Assets/pattern.png" Stretch="UniformToFill" />
-                <Image x:Name="Logo" Height="180" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="449"/>
+                <Image x:Name="Logo" Source="Assets/gamekinglogo.png" Stretch="Uniform" Margin="10" />
             </Grid>
-            <Image Grid.Row="2" Grid.Column="1" Source="Assets/gamelogo/DeucesWild.png" Width="200" Tapped="DeucesWild_Tapped"  />
-            <Image Grid.Row="2" Grid.Column="2" Source="Assets/gamelogo/JacksOrBetter.png" Width="200" Tapped="JacksOrBetter_Tapped"  />
-            <Image Grid.Row="2" Grid.Column="3" Source="Assets/gamelogo/BonusPokerDeluxe.png" Width="200" Tapped="BonusPokerDeluxe_Tapped"  />
-            <Image Grid.Row="2" Grid.Column="4" Source="Assets/gamelogo/DoubleBonusPoker.png" Width="200" Tapped="DoubleBonusPoker_Tapped"  />
-            <Image Grid.Row="4" Grid.Column="1" Source="Assets/gamelogo/WhiteHotAces.png" Width="200" Tapped="WhiteHotAces_Tapped"  />
-            <Image Grid.Row="4" Grid.Column="2" Source="Assets/gamelogo/TripleBonusPokerPlus.png" Width="200" Tapped="TripleBonusPokerPlus_Tapped"  />
-            <Image Grid.Row="4" Grid.Column="3" Source="Assets/gamelogo/BonusPoker.png" Width="200" Tapped="BonusPoker_Tapped"  />
-            <Image Grid.Row="4" Grid.Column="4" Source="Assets/gamelogo/RoyalAcesBonusPoker.png" Width="200" Tapped="RoyalAcesBonusPoker_Tapped"  />
-            <Image Grid.Row="6" Grid.Column="1" Source="Assets/gamelogo/SuperAcesBonusPoker.png" Width="200" Tapped="SuperAcesBonusPoker_Tapped"  />
-            <Image Grid.Row="6" Grid.Column="2" Source="Assets/gamelogo/AcesAndFacesPoker.png" Width="200" Tapped="AcesAndFacesPoker_Tapped"  />
-            <Image Grid.Row="6" Grid.Column="3" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" Width="200" Tapped="DoubleBonusDeucesWild_Tapped"  />
-            <Image Grid.Row="6" Grid.Column="4" Source="Assets/gamelogo/DeucesWildBonusPoker.png" Width="200" Tapped="DeucesWildBonusPoker_Tapped"  />
-            <Image Grid.Row="7" Grid.Column="1" Source="Assets/gamelogo/BlackJackBonusPoker.png" Width="200" Tapped="BlackJackBonusPoker_Tapped"  />
-            <Image Grid.Row="7" Grid.Column="4" Source="Assets/gamelogo/JokerPoker.png" Width="200" Tapped="JokerPoker_Tapped"  />
+            <Image Grid.Row="2" Grid.Column="1" Source="Assets/gamelogo/DeucesWild.png" Tapped="DeucesWild_Tapped"  />
+            <Image Grid.Row="2" Grid.Column="3" Source="Assets/gamelogo/JacksOrBetter.png" Tapped="JacksOrBetter_Tapped"  />
+            <Image Grid.Row="2" Grid.Column="5" Source="Assets/gamelogo/BonusPokerDeluxe.png" Tapped="BonusPokerDeluxe_Tapped"  />
+            <Image Grid.Row="2" Grid.Column="7" Source="Assets/gamelogo/DoubleBonusPoker.png" Tapped="DoubleBonusPoker_Tapped"  />
+            <Image Grid.Row="4" Grid.Column="1" Source="Assets/gamelogo/WhiteHotAces.png" Tapped="WhiteHotAces_Tapped"  />
+            <Image Grid.Row="4" Grid.Column="3" Source="Assets/gamelogo/TripleBonusPokerPlus.png" Tapped="TripleBonusPokerPlus_Tapped"  />
+            <Image Grid.Row="4" Grid.Column="5" Source="Assets/gamelogo/BonusPoker.png" Tapped="BonusPoker_Tapped"  />
+            <Image Grid.Row="4" Grid.Column="7" Source="Assets/gamelogo/RoyalAcesBonusPoker.png" Tapped="RoyalAcesBonusPoker_Tapped"  />
+            <Image Grid.Row="6" Grid.Column="1" Source="Assets/gamelogo/SuperAcesBonusPoker.png" Tapped="SuperAcesBonusPoker_Tapped"  />
+            <Image Grid.Row="6" Grid.Column="3" Source="Assets/gamelogo/AcesAndFacesPoker.png" Tapped="AcesAndFacesPoker_Tapped"  />
+            <Image Grid.Row="6" Grid.Column="5" Source="Assets/gamelogo/DoubleBonusDeucesWild.png" Tapped="DoubleBonusDeucesWild_Tapped"  />
+            <Image Grid.Row="6" Grid.Column="7" Source="Assets/gamelogo/DeucesWildBonusPoker.png" Tapped="DeucesWildBonusPoker_Tapped"  />
+            <Image Grid.Row="2" Grid.Column="9" Source="Assets/gamelogo/BlackJackBonusPoker.png" Tapped="BlackJackBonusPoker_Tapped"  />
+            <Image Grid.Row="4" Grid.Column="9" Source="Assets/gamelogo/JokerPoker.png" Tapped="JokerPoker_Tapped"  />
+            <Image Grid.Row="6" Grid.Column="9" Source="Assets/gamelogo/DoubleDoubleBonusPoker.png" Tapped="DoubleDoubleBonusPoker_Tapped"  />
 
-            <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" Grid.Row="7" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" Grid.Row="8" Grid.ColumnSpan="11" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
         </Grid>
         <local:HandStats x:Name="SnappedState" Visibility="Collapsed" />
     </Grid>

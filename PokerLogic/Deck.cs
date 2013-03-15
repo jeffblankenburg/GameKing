@@ -28,7 +28,7 @@ namespace PokerLogic
             {
                 case "JOKERPOKER":
                     Cards.Add(new Card(new Suit{ ID=5, Name="Joker"}, new Value{ Number=1, Name="JOKER"}));
-                    Cards.Add(new Card(new Suit { ID = 5, Name = "Joker" }, new Value { Number = 1, Name = "JOKER" }));
+                    //Cards.Add(new Card(new Suit { ID = 5, Name = "Joker" }, new Value { Number = 1, Name = "JOKER" }));
                     break;
             }
 

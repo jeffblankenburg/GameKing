@@ -68,7 +68,7 @@ namespace GameKing
 
         void Game_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ResizeCards();
+            //ResizeCards();
             CheckSnappedView();
         }
 
@@ -101,7 +101,7 @@ namespace GameKing
         private void GameSetup()
         {
             PokerGame = new VideoPokerGame(GameType);
-            ResizeCards();
+            //ResizeCards();
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
@@ -140,7 +140,7 @@ namespace GameKing
                 CardWidth = 190;
             }
 
-            if ((GameType == "DOUBLEBONUSDEUCESWILD") || (GameType == "DEUCESWILDBONUSPOKER"))
+            if ((GameType == "DOUBLEBONUSDEUCESWILD") || (GameType == "DEUCESWILDBONUSPOKER") || (GameType == "DOUBLEDOUBLEBONUSPOKER") || (GameType == "BLACKJACKBONUSPOKER"))
             {
                 CardHeight = (int)(CardHeight * .8);
                 CardWidth = (int)(CardWidth * .8);
@@ -210,19 +210,19 @@ namespace GameKing
         {
             for (int i = 0; i <= 4; i++)
             {
-                Image hold = (Image)FindName("Hold" + i);
-                if (PokerGame.Hand.Held[i]) hold.Visibility = Visibility.Visible;
-                else hold.Visibility = Visibility.Collapsed;
+                TextBlock hold = (TextBlock)FindName("Hold" + i);
+                if (PokerGame.Hand.Held[i]) hold.Opacity = 1;
+                else hold.Opacity = 0.024;
             }
         }
 
         private void ClearHolds()
         {
-            Hold0.Visibility = Visibility.Collapsed;
-            Hold1.Visibility = Visibility.Collapsed;
-            Hold2.Visibility = Visibility.Collapsed;
-            Hold3.Visibility = Visibility.Collapsed;
-            Hold4.Visibility = Visibility.Collapsed;
+            Hold0.Opacity = 0.024;
+            Hold1.Opacity = 0.024;
+            Hold2.Opacity = 0.024;
+            Hold3.Opacity = 0.024;
+            Hold4.Opacity = 0.024;
             PokerGame.Hand.Held[0] = false;
             PokerGame.Hand.Held[1] = false;
             PokerGame.Hand.Held[2] = false;
@@ -540,7 +540,7 @@ namespace GameKing
             CreditsPanel.Children.Clear();
             for (int i = credits.ToString().Length-1; i >=0 ; i--)
             {
-                Image j = new Image { Width = 38 };
+                Image j = new Image();
                 string imagepath = "ms-appx:/Assets/numbers/" + credits.ToString()[i] + ".png";
                 BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                 j.Source = imagesource;

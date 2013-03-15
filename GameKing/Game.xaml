@@ -50,9 +50,13 @@
 
     <Grid x:Name="LayoutRoot" Background="#00019F">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="38*" />
+            <RowDefinition Height="36*" />
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="12*" />
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="0" x:Name="PayTableGrid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="305"/>
@@ -93,9 +97,85 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-        <Grid x:Name="CardGrid" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+        <Grid x:Name="CardGrid" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,1,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="33*" />
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Column="0"><TextBlock x:Name="Hold0" Text="HELD" Opacity="0.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" /></Viewbox>
+            <Viewbox Grid.Column="1"><TextBlock x:Name="Hold1" Text="HELD" Opacity="0.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" /></Viewbox>
+            <Viewbox Grid.Column="2"><TextBlock x:Name="Hold2" Text="HELD" Opacity="0.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" /></Viewbox>
+            <Viewbox Grid.Column="3"><TextBlock x:Name="Hold3" Text="HELD" Opacity="0.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" /></Viewbox>
+            <Viewbox Grid.Column="4"><TextBlock x:Name="Hold4" Text="HELD" Opacity="0.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" /></Viewbox>
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
+            <Border x:Name="ResetBox" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="5" BorderBrush="#FCD800" BorderThickness="6" Tapped="ResetBox_Tapped">
+                <Grid>
+                    <Rectangle Fill="#000064" />
+                    <TextBlock Foreground="White" Text="You have lost everything, and you should feel bad.  Even still, we have reset your credits to 10,000.  Enjoy!" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="56" />
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1" Margin="10"><TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/></Viewbox>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5">
+                <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                </StackPanel>
+                <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Margin="10,0,0,0" />
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="ButtonsGrid" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Image Source="Assets/buttons/HELP.png" Tapped="MoreGames_Tapped" Margin="0,0,10,0" />
+                <Image Source="Assets/buttons/MOREGAMES.png" Tapped="MoreGames_Tapped" Margin="0,0,10,0" />
+                <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" />
+            </StackPanel>
+            
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0"/>
+                <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" Tapped="BetOne_Tapped"/>
+                <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" Tapped="BetMax_Tapped"/>
+                <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Tapped="Deal_Click"/>
+            </StackPanel>
+            
+            <!--<Image x:Name="BetOneButton" Grid.Column="3" Source="Assets/buttons/BETONE.png" Tapped="BetOne_Tapped" />
+            <Image x:Name="BetMaxButton" Grid.Column="4" Source="Assets/buttons/BETMAX.png" Tapped="BetMax_Tapped" />-->
+            
+        </Grid>
+        <!--
+        
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -105,22 +185,17 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="0" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="35" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Center" />
             <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
             <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
             <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
             <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
             <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" Margin="20,0" VerticalAlignment="Top" />
-            <Border x:Name="ResetBox" Visibility="Collapsed" Grid.Row="1" Grid.ColumnSpan="5" BorderBrush="#FCD800" BorderThickness="6" Tapped="ResetBox_Tapped">
-                <Grid>
-                    <Rectangle Fill="#000064" />
-                    <TextBlock Foreground="White" Text="You have lost everything, and you should feel bad.  Even still, we have reset your credits to 10,000.  Enjoy!" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="56" />
-                </Grid>
-            </Border>
+            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="0" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,0,-25" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,0,-25" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,0,-25" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,0,-25" Tapped="Card_MouseLeftButtonDown" />
+            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,0,-25" Tapped="Card_MouseLeftButtonDown" />
+            
         </Grid>
         <Grid x:Name="ButtonsGrid" Grid.RowSpan="2" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <Grid.RowDefinitions>
@@ -137,35 +212,11 @@
                 <ColumnDefinition Width="170" />
                 <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.ColumnSpan="7">
-                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-
-                    <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" Width="266" FlowDirection="RightToLeft" >
-                        <Image Source="Assets/numbers/0.png" Width="38" />
-                        <Image Source="Assets/numbers/0.png" Width="38" />
-                        <Image Source="Assets/numbers/0.png" Width="38" />
-                        <Image Source="Assets/numbers/0.png" Width="38" />
-                        <Image Source="Assets/numbers/0.png" Width="38" />
-                    </StackPanel>
-                    <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Height="52" Margin="25,0,0,0" />
-
-                </StackPanel>
-            </Grid>
-            <Image Grid.Column="1" Grid.Row="1" Source="Assets/buttons/MOREGAMES.png" Width="150" Tapped="MoreGames_Tapped" />
-            <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" Grid.Column="2" Grid.Row="1" VerticalAlignment="Bottom"/>
-            <!--<AdRotatorWin8:AdRotatorControl x:Name="AdRotatorControl" Grid.Column="2" Grid.Row="1" Width="728" Height="90" SettingsUrl="http://jeffblankenburg.com/KingPoker/AdSettings.xml" DefaultAdType="AdDuplex" DefaultSettingsFileUri="AdSettings.xml" 
-                                        PubCenterAdUnitId="35283 " 
-                                        PubCenterAppId="0cd20fbe-8688-49de-b14d-305e604ad2bd"
-                                        AdDuplexAppId="10063036" />-->
-            <!--<Border Grid.Column="2" Grid.Row="1" BorderThickness="3" BorderBrush="White" Height="90" Width="728">
-                <UI:AdControl ApplicationId="47fa2188-6db2-4d22-8cd7-2ec6170bdf4b" AdUnitId="10060123" Height="90" Width="728"/>
-            </Border>-->
-            <Image x:Name="BetOneButton" Grid.Column="3" Grid.Row="1" Source="Assets/buttons/BETONE.png" Width="75" Tapped="BetOne_Tapped" />
-            <Image x:Name="BetMaxButton" Grid.Column="4" Grid.Row="1" Source="Assets/buttons/BETMAX.png" Width="75" Tapped="BetMax_Tapped" />
-            <!--<Image x:Name="VolumeButton" Grid.Column="5" Grid.Row="1" Source="Assets/buttons/Volume2.png" Width="60" Tapped="Volume_Tapped" />-->
-            <Image x:Name="DealButton" Grid.Column="6" Grid.Row="1" Source="Assets/buttons/DEAL.png" Width="150" Tapped="Deal_Click"/>
+            
+            
         </Grid>
+        -->
+        <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" Grid.Row="4" VerticalAlignment="Bottom"/>
         <local:HandStats x:Name="SnappedStats" Visibility="Collapsed" />
     </Grid>
 </Page>
