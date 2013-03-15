@@ -35,7 +35,7 @@ namespace GameKingWP8
         private void Image_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://jeffblankenburg.com");
+            wbt.Uri = new Uri("http://apps.microsoft.com/windows/app/king-poker/bc8d046c-e35d-49fa-824e-eccf675c7a12");
             wbt.Show();
         }
     }

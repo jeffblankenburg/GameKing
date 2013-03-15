@@ -272,5 +272,7 @@ namespace Tests
             vpg.Hand.Cards[4].Value = new Value { Number = 7, Name = "Seven" };
             Assert.AreEqual("4 2s THRU 10s", vpg.Hand.Check("ACESANDFACESPOKER"));
         }
+
+        
     }
 }

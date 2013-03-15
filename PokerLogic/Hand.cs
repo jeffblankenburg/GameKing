@@ -122,6 +122,38 @@ namespace PokerLogic
                 if (IsTwoPair()) return "TWO PAIR";
                 if (JOKER_IsKingsOrBetter()) return "KINGS OR BETTER";
             }
+            else if ((GameType == "BLACKJACKBONUSPOKER"))
+            {
+                if (IsRoyalFlush()) return "ROYAL FLUSH";
+                if (BLACKJACKBONUSPOKER_IsFourAcesWithBlackJack()) return "4 ACES WITH BLACK JACK";
+                if (BLACKJACKBONUSPOKER_IsFourTwosThreesOrFoursWithBlackJack()) return "4 2s,3s,4s W/ BLACK JACK";
+                if (BLACKJACKBONUSPOKER_IsFourOfAKindWithBlackJack()) return "4 of a KIND W/ BLACK JACK";
+                if (BLACKJACKBONUSPOKER_IsFourAcesOrJacks()) return "4 ACES or JACKS";
+                if (IsStraightFlush()) return "STRAIGHT FLUSH";
+                if (IsFourOfAKind()) return "4 OF A KIND";
+                if (IsFullHouse()) return "FULL HOUSE";
+                if (IsFlush()) return "FLUSH";
+                if (IsStraight()) return "STRAIGHT";
+                if (IsThreeOfAKind()) return "3 OF A KIND";
+                if (IsTwoPair()) return "TWO PAIR";
+                if (IsJacksOrBetter()) return "JACKS OR BETTER";
+            }
+            else if ((GameType == "DOUBLEDOUBLEBONUSPOKER"))
+            {
+                if (IsRoyalFlush()) return "ROYAL FLUSH";
+                if (IsStraightFlush()) return "STRAIGHT FLUSH";
+                if (IsFourAcesWithAnyTwoThreeOrFour()) return "4 ACES WITH ANY 2,3,4";
+                if (IsFourTwosThreesOrFoursWithAceTwoThreeOrFour()) return "4 2s,3s,4s W/ACE,2,3,4";
+                if (IsFourAces()) return "4 ACES";
+                if (IsFourTwosThreesOrFours()) return "4 2s,3s,4s";
+                if (IsFourFivesThruKings()) return "4 5s THRU KINGS";
+                if (IsFullHouse()) return "FULL HOUSE";
+                if (IsFlush()) return "FLUSH";
+                if (IsStraight()) return "STRAIGHT";
+                if (IsThreeOfAKind()) return "3 OF A KIND";
+                if (IsTwoPair()) return "TWO PAIR";
+                if (IsJacksOrBetter()) return "JACKS OR BETTER";
+            }
             else
             {
                 if (IsRoyalFlush()) return "ROYAL FLUSH";
@@ -164,8 +196,7 @@ namespace PokerLogic
 
         private bool IsFourOfAKind()
         {
-            if ((SortedCards[0].Value.Number == SortedCards[3].Value.Number)) return true;
-            if ((SortedCards[1].Value.Number == SortedCards[4].Value.Number)) return true;
+            if (WhichFourOfAKind() != 0) return true;
             return false;
         }
 
@@ -175,69 +206,51 @@ namespace PokerLogic
             return false;
         }
 
+        private bool IsFourJacks()
+        {
+            if ((WhichFourOfAKind() == 11)) return true;
+            return false;
+        }
+
         private bool IsFourTwosThreesOrFours()
         {
-            if ((SortedCards[1].Value.Number == 2)) return true;
-            if ((SortedCards[0].Value.Number == 3) && (SortedCards[3].Value.Number == 3)) return true;
-            if ((SortedCards[1].Value.Number == 3) && (SortedCards[4].Value.Number == 3)) return true;
-            if ((SortedCards[0].Value.Number == 4) && (SortedCards[3].Value.Number == 4)) return true;
-            if ((SortedCards[1].Value.Number == 4) && (SortedCards[4].Value.Number == 4)) return true;
+            if ((WhichFourOfAKind() == 2)) return true;
+            if ((WhichFourOfAKind() == 3)) return true;
+            if ((WhichFourOfAKind() == 4)) return true;
             return false;
         }
 
         private bool IsFourJacksQueensOrKings()
         {
-            if ((SortedCards[0].Value.Number == 11) && (SortedCards[3].Value.Number == 11)) return true;
-            if ((SortedCards[1].Value.Number == 11) && (SortedCards[4].Value.Number == 11)) return true;
-            if ((SortedCards[0].Value.Number == 12) && (SortedCards[3].Value.Number == 12)) return true;
-            if ((SortedCards[1].Value.Number == 12) && (SortedCards[4].Value.Number == 12)) return true;
-            if ((SortedCards[0].Value.Number == 13) && (SortedCards[3].Value.Number == 13)) return true;
-            if ((SortedCards[1].Value.Number == 13) && (SortedCards[4].Value.Number == 13)) return true;
+            if (WhichFourOfAKind() == 11) return true;
+            if (WhichFourOfAKind() == 12) return true;
+            if (WhichFourOfAKind() == 13) return true;
             return false;
         }
 
         private bool IsFourTwosThruTens()
         {
-            if ((SortedCards[1].Value.Number == 2)) return true;
-            if ((SortedCards[0].Value.Number == 3) && (SortedCards[3].Value.Number == 3)) return true;
-            if ((SortedCards[1].Value.Number == 3) && (SortedCards[4].Value.Number == 3)) return true;
-            if ((SortedCards[0].Value.Number == 4) && (SortedCards[3].Value.Number == 4)) return true;
-            if ((SortedCards[1].Value.Number == 4) && (SortedCards[4].Value.Number == 4)) return true;
-            if ((SortedCards[0].Value.Number == 5) && (SortedCards[3].Value.Number == 5)) return true;
-            if ((SortedCards[1].Value.Number == 5) && (SortedCards[4].Value.Number == 5)) return true;
-            if ((SortedCards[0].Value.Number == 6) && (SortedCards[3].Value.Number == 6)) return true;
-            if ((SortedCards[1].Value.Number == 6) && (SortedCards[4].Value.Number == 6)) return true;
-            if ((SortedCards[0].Value.Number == 7) && (SortedCards[3].Value.Number == 7)) return true;
-            if ((SortedCards[1].Value.Number == 7) && (SortedCards[4].Value.Number == 7)) return true;
-            if ((SortedCards[0].Value.Number == 8) && (SortedCards[3].Value.Number == 8)) return true;
-            if ((SortedCards[1].Value.Number == 8) && (SortedCards[4].Value.Number == 8)) return true;
-            if ((SortedCards[0].Value.Number == 9) && (SortedCards[3].Value.Number == 9)) return true;
-            if ((SortedCards[1].Value.Number == 9) && (SortedCards[4].Value.Number == 9)) return true;
-            if ((SortedCards[0].Value.Number == 10) && (SortedCards[3].Value.Number == 10)) return true;
-            if ((SortedCards[1].Value.Number == 10) && (SortedCards[4].Value.Number == 10)) return true;
+            if (WhichFourOfAKind() == 2) return true;
+            if (WhichFourOfAKind() == 3) return true;
+            if (WhichFourOfAKind() == 4) return true;
+            if (WhichFourOfAKind() == 5) return true;
+            if (WhichFourOfAKind() == 6) return true;
+            if (WhichFourOfAKind() == 7) return true;
+            if (WhichFourOfAKind() == 8) return true;
+            if (WhichFourOfAKind() == 9) return true;
+            if (WhichFourOfAKind() == 10) return true;
             return false;
         }
 
         private bool IsFourFivesThruKings()
         {
-            if ((SortedCards[0].Value.Number == 5) && (SortedCards[3].Value.Number == 5)) return true;
-            if ((SortedCards[1].Value.Number == 5) && (SortedCards[4].Value.Number == 5)) return true;
-            if ((SortedCards[0].Value.Number == 6) && (SortedCards[3].Value.Number == 6)) return true;
-            if ((SortedCards[1].Value.Number == 6) && (SortedCards[4].Value.Number == 6)) return true;
-            if ((SortedCards[0].Value.Number == 7) && (SortedCards[3].Value.Number == 7)) return true;
-            if ((SortedCards[1].Value.Number == 7) && (SortedCards[4].Value.Number == 7)) return true;
-            if ((SortedCards[0].Value.Number == 8) && (SortedCards[3].Value.Number == 8)) return true;
-            if ((SortedCards[1].Value.Number == 8) && (SortedCards[4].Value.Number == 8)) return true;
-            if ((SortedCards[0].Value.Number == 9) && (SortedCards[3].Value.Number == 9)) return true;
-            if ((SortedCards[1].Value.Number == 9) && (SortedCards[4].Value.Number == 9)) return true;
-            if ((SortedCards[0].Value.Number == 10) && (SortedCards[3].Value.Number == 10)) return true;
-            if ((SortedCards[1].Value.Number == 10) && (SortedCards[4].Value.Number == 10)) return true;
-            if ((SortedCards[0].Value.Number == 11) && (SortedCards[3].Value.Number == 11)) return true;
-            if ((SortedCards[1].Value.Number == 11) && (SortedCards[4].Value.Number == 11)) return true;
-            if ((SortedCards[0].Value.Number == 12) && (SortedCards[3].Value.Number == 12)) return true;
-            if ((SortedCards[1].Value.Number == 12) && (SortedCards[4].Value.Number == 12)) return true;
-            if ((SortedCards[0].Value.Number == 13) && (SortedCards[3].Value.Number == 13)) return true;
-            if ((SortedCards[1].Value.Number == 13) && (SortedCards[4].Value.Number == 13)) return true;
+            if (WhichFourOfAKind() == 5) return true;
+            if (WhichFourOfAKind() == 6) return true;
+            if (WhichFourOfAKind() == 7) return true;
+            if (WhichFourOfAKind() == 8) return true;
+            if (WhichFourOfAKind() == 9) return true;
+            if (WhichFourOfAKind() == 10) return true;
+            if (IsFourJacksQueensOrKings()) return true;
             return false;
         }
 
@@ -317,7 +330,7 @@ namespace PokerLogic
 
         private bool DEUCES_IsFourDeuces()
         {
-            if ((IsFourOfAKind()) && (SortedCards[1].Value.Number == 2)) return true;
+            if (WhichFourOfAKind() == 2) return true;
             return false;
         }
 
@@ -565,6 +578,63 @@ namespace PokerLogic
             if ((SortedCards[0].Value.Number == 13) && (SortedCards[1].Value.Number == 13)) return true;
             if ((SortedCards[0].Value.Number == 13) && (SortedCards[1].Value.Number == 13)) return true;
             return false;
+        }
+
+        private bool BLACKJACKBONUSPOKER_IsFourAcesWithBlackJack()
+        {
+            if ((WhichFourOfAKind() == 14) && (SortedCards[4].Value.Number == 11) && (SortedCards[4].Suit.ID > 2)) return true;
+            return false;
+        }
+
+        private bool BLACKJACKBONUSPOKER_IsFourAcesOrJacks()
+        {
+            if ((WhichFourOfAKind() == 14)) return true;
+            if ((WhichFourOfAKind() == 11)) return true;
+            return false;
+        }
+
+        private bool BLACKJACKBONUSPOKER_IsFourOfAKindWithBlackJack()
+        {
+            if ((IsFourOfAKind()) && (WhichFourOfAKind() != 11) && (SortedCards[0].Value.Number == 11) && (SortedCards[0].Suit.ID > 2)) return true;
+            if ((IsFourOfAKind()) && (WhichFourOfAKind() != 11) && (SortedCards[4].Value.Number == 11) && (SortedCards[4].Suit.ID > 2)) return true;
+            return false;
+        }
+
+        private bool BLACKJACKBONUSPOKER_IsFourTwosThreesOrFoursWithBlackJack()
+        {
+            if ((WhichFourOfAKind() == 2) && (SortedCards[0].Value.Number == 11) && (SortedCards[0].Suit.ID > 2)) return true;
+            if ((WhichFourOfAKind() == 3) && (SortedCards[0].Value.Number == 11) && (SortedCards[0].Suit.ID > 2)) return true;
+            if ((WhichFourOfAKind() == 4) && (SortedCards[0].Value.Number == 11) && (SortedCards[0].Suit.ID > 2)) return true;
+            return false;
+        }
+
+        private bool IsFourAcesWithAnyTwoThreeOrFour()
+        {
+            if ((WhichFourOfAKind() == 14) && (SortedCards[4].Value.Number == 2)) return true;
+            if ((WhichFourOfAKind() == 14) && (SortedCards[4].Value.Number == 3)) return true;
+            if ((WhichFourOfAKind() == 14) && (SortedCards[4].Value.Number == 4)) return true;
+            return false;
+        }
+
+        private bool IsFourTwosThreesOrFoursWithAceTwoThreeOrFour()
+        {
+            if ((WhichFourOfAKind() == 2) && (SortedCards[0].Value.Number == 14)) return true;
+            if ((WhichFourOfAKind() == 2) && (SortedCards[0].Value.Number == 3)) return true;
+            if ((WhichFourOfAKind() == 2) && (SortedCards[0].Value.Number == 4)) return true;
+            if ((WhichFourOfAKind() == 3) && (SortedCards[0].Value.Number == 14)) return true;
+            if ((WhichFourOfAKind() == 3) && (SortedCards[4].Value.Number == 2)) return true;
+            if ((WhichFourOfAKind() == 3) && (SortedCards[0].Value.Number == 4)) return true;
+            if ((WhichFourOfAKind() == 4) && (SortedCards[0].Value.Number == 14)) return true;
+            if ((WhichFourOfAKind() == 4) && (SortedCards[4].Value.Number == 2)) return true;
+            if ((WhichFourOfAKind() == 4) && (SortedCards[4].Value.Number == 3)) return true;
+            return false;
+        }
+
+        private int WhichFourOfAKind()
+        {
+            if (SortedCards[0].Value.Number == SortedCards[3].Value.Number) return SortedCards[0].Value.Number;
+            if (SortedCards[1].Value.Number == SortedCards[4].Value.Number) return SortedCards[4].Value.Number;
+            return 0;
         }
     }
 }

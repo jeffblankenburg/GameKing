@@ -179,5 +179,9 @@
         <MediaElement x:Name="WinLoop" Source="Assets/audio/jackpot.wav" AutoPlay="False" Volume=".66" />
         <MediaElement x:Name="OneBet" Source="Assets/audio/onebet.wav" AutoPlay="False" Volume=".66" />
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/225-LineChart.png" Text="stats" Click="Stats_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

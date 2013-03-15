@@ -174,7 +174,7 @@ namespace GameKingWP8
         private void SaveHands()
         {
             List<BothHands> handhistory = (List<BothHands>)App.settings["handhistory"];
-            string ANID = UserExtendedProperties.GetValue("ANID2").ToString().Substring(2, 32);
+            string ANID = "";// UserExtendedProperties.GetValue("ANID2").ToString().Substring(2, 32);
             BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"], ANID = ANID };
             handhistory.Add(bothhands);
             App.settings["handhistory"] = handhistory;
@@ -477,6 +477,11 @@ namespace GameKingWP8
         private void Help_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Help.xaml", UriKind.Relative));
+        }
+
+        private void Stats_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
         }
     }
 }
