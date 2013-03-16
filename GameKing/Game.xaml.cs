@@ -21,19 +21,15 @@ using Windows.UI.Xaml.Shapes;
 using PokerLogic;
 using Newtonsoft.Json;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace GameKing
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Game : Page
     {
         VideoPokerGame PokerGame;
         Player GamePlayer = new Player();
         string GameType;
         bool HoldRound = false;
+        bool ShouldResize = false;
         int handCounter = 0;
         Hand HandStart;
         Hand HandEnd;
@@ -57,18 +53,12 @@ namespace GameKing
             SizeChanged += Game_SizeChanged;
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
-            Loaded += Game_Loaded;
             GameSetup();
-        }
-
-        void Game_Loaded(object sender, RoutedEventArgs e)
-        {
-            //AdRotatorControl.Invalidate();
         }
 
         void Game_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //ResizeCards();
+            ResizeCards();
             CheckSnappedView();
         }
 
@@ -95,13 +85,11 @@ namespace GameKing
         {
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
-            Loaded -= Game_Loaded;
         }
 
         private void GameSetup()
         {
             PokerGame = new VideoPokerGame(GameType);
-            //ResizeCards();
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
@@ -110,51 +98,15 @@ namespace GameKing
 
         private void ResizeCards()
         {
-            int CardHeight = 0;
-            int CardWidth = 0;
-
-            if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 768)
+            for (int i = 0;i<5;i++)
             {
-                CardHeight = 273;
-                CardWidth = 190;
-
-                if (Windows.UI.Xaml.Window.Current.Bounds.Width <= 1024)
-                {
-                    CardHeight = 230;
-                    CardWidth = 160;
-                }
+                Image image = FindName("Card" + i) as Image;
+                image.MinHeight = 0;
+                image.MinWidth = 0;
+                image.MaxWidth = 1000;
+                image.MaxHeight = 1000;
             }
-            else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 1050)
-            {
-                CardHeight = 300;
-                CardWidth = 208;
-            }
-            else if (Windows.UI.Xaml.Window.Current.Bounds.Height <= 1200)
-            {
-                CardHeight = 350;
-                CardWidth = 243;
-            }
-            else
-            {
-                CardHeight = 273;
-                CardWidth = 190;
-            }
-
-            if ((GameType == "DOUBLEBONUSDEUCESWILD") || (GameType == "DEUCESWILDBONUSPOKER") || (GameType == "DOUBLEDOUBLEBONUSPOKER") || (GameType == "BLACKJACKBONUSPOKER"))
-            {
-                CardHeight = (int)(CardHeight * .8);
-                CardWidth = (int)(CardWidth * .8);
-            }
-
-            if ((CardWidth != 0) && (CardHeight != 0))
-            {
-                for (int i = 0; i <= 4; i++)
-                {
-                    Image card = (Image)FindName("Card" + i);
-                    card.Width = CardWidth;
-                    card.Height = CardHeight;
-                }
-            }
+            ShouldResize = true;
         }
 
         private void LoadAudioFiles()
@@ -188,7 +140,12 @@ namespace GameKing
 
         private void LoadPayTable()
         {
-            PayTable.ItemsSource = PokerGame.PayTable;
+            PayTableNames.ItemsSource = PokerGame.PayTable;
+            PayTableCoin1.ItemsSource = PokerGame.PayTable;
+            PayTableCoin2.ItemsSource = PokerGame.PayTable;
+            PayTableCoin3.ItemsSource = PokerGame.PayTable;
+            PayTableCoin4.ItemsSource = PokerGame.PayTable;
+            PayTableCoin5.ItemsSource = PokerGame.PayTable;
         }
 
         private void Card_MouseLeftButtonDown(object sender, TappedRoutedEventArgs e)
@@ -242,6 +199,15 @@ namespace GameKing
 
         private void Deal_Click(object sender, TappedRoutedEventArgs e)
         {
+            if (ShouldResize)
+            {
+                ResizeSingleCard(Card0);
+                ResizeSingleCard(Card1);
+                ResizeSingleCard(Card2);
+                ResizeSingleCard(Card3);
+                ResizeSingleCard(Card4);
+                ShouldResize = false;
+            }
             Deal();
         }
 
@@ -375,7 +341,7 @@ namespace GameKing
                     App.settings.Values["credits"] = 10000;
                     DrawCredits(10000);
                 }
-                HighlightWinningBetValue(PayTable, ShouldPayUser);
+                HighlightPayTable(PayTableNames, (ItemsControl)FindName("PayTableCoin" + GamePlayer.CurrentBet), ShouldPayUser);
                 if (ShouldPayUser) SaveHands();
                 IsShowingCards = false;
             }
@@ -448,7 +414,7 @@ namespace GameKing
             BetText.Text = "BET   " + GamePlayer.CurrentBet;
         }
 
-        private void HighlightWinningBetValue(DependencyObject targetElement, bool ShouldAwardWinnings)
+        private void HighlightWinningBetName(DependencyObject targetElement, bool ShouldAwardWinnings)
         {
             var count = VisualTreeHelper.GetChildrenCount(targetElement);
             if (count == 0)
@@ -463,15 +429,37 @@ namespace GameKing
 
                     if (targetItem.Text.Replace(".", "") == PokerGame.CheckHand(GameType))
                     {
-                        TextBlock coinslot = (TextBlock)VisualTreeHelper.GetChild(targetElement, i + GamePlayer.CurrentBet);
-                        Storyboard.SetTarget(PayTableTitleBlink, targetItem);
-                        Storyboard.SetTarget(PayTableNumberBlink, coinslot);
-                        PayTableTitleBlink.Begin();
-                        PayTableNumberBlink.Begin();
+                        //TextBlock coinslot = (TextBlock)VisualTreeHelper.GetChild(targetElement, i + GamePlayer.CurrentBet);
+                        
+                        //PayTableNumberBlink.Begin();
                         if (ShouldAwardWinnings)
                         {
-                            AwardWinnings(Int32.Parse(coinslot.Text));
-                            RecordHand(targetItem.Text.Replace(".", ""));
+                            IEnumerable<int> pay;
+                            switch (GamePlayer.CurrentBet)
+                            {
+                                case 1:
+                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin1).Take(1);
+                                    AwardWinnings(pay.First());
+                                    break;
+                                case 2:
+                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin2).Take(1);
+                                    AwardWinnings(pay.First());
+                                    break;
+                                case 3:
+                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin3).Take(1);
+                                    AwardWinnings(pay.First());
+                                    break;
+                                case 4:
+                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin4).Take(1);
+                                    AwardWinnings(pay.First());
+                                    break;
+                                case 5:
+                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin5).Take(1);
+                                    AwardWinnings(pay.First());
+                                    break;
+                            }
+                            
+                            
                         }
                         else HoldAlert.Play();
                         return;
@@ -479,10 +467,44 @@ namespace GameKing
                 }
                 else
                 {
-                    HighlightWinningBetValue(child, ShouldAwardWinnings);
+                    HighlightWinningBetName(child, ShouldAwardWinnings);
                 }
             }
 
+        }
+
+        private void HighlightPayTable(DependencyObject target, DependencyObject target2, bool ShouldAwardWinnings)
+        {
+            var count = VisualTreeHelper.GetChildrenCount(target);
+            if (count == 0) return;
+
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(target, i);
+                var child2 = VisualTreeHelper.GetChild(target2, i);
+
+                if (child is TextBlock)
+                {
+                    TextBlock targetItem = (TextBlock)child;
+                    TextBlock targetItem2 = (TextBlock)child2;
+                    if (targetItem.Text.Replace(".", "") == PokerGame.CheckHand(GameType))
+                    {
+                        if (ShouldAwardWinnings)
+                        {
+                            Storyboard.SetTarget(PayTableTitleBlink, targetItem);
+                            Storyboard.SetTarget(PayTableNumberBlink, targetItem2);
+                            PayTableTitleBlink.Begin();
+                            PayTableNumberBlink.Begin();
+                            AwardWinnings(Int32.Parse(targetItem2.Text));
+                            RecordHand(targetItem.Text.Replace(".", ""));
+                        }
+                        else HoldAlert.Play();
+                        return;
+                    }
+                }
+                else HighlightPayTable(child, child2, ShouldPayUser);
+                
+            }
         }
 
         private void RecordHand(string HandRank)
@@ -556,6 +578,19 @@ namespace GameKing
         private void ResetBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ResetBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void Card_ImageOpened(object sender, RoutedEventArgs e)
+        {
+            ResizeSingleCard(sender as Image);
+        }
+
+        private void ResizeSingleCard(Image i)
+        {
+            i.MinWidth = i.ActualWidth;
+            i.MaxWidth = i.ActualWidth;
+            i.MinHeight = i.ActualHeight;
+            i.MaxHeight = i.ActualHeight;
         }
     }
 }
