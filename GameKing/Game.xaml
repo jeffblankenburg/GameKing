@@ -212,7 +212,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Image Source="Assets/buttons/HELP.png" Tapped="MoreGames_Tapped" Margin="0,0,10,0" />
                 <Image Source="Assets/buttons/MOREGAMES.png" Tapped="MoreGames_Tapped" Margin="0,0,10,0" />
-                <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" />
+                <Image x:Name="ShareButton" Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" Tapped="ShareButton_Tapped" />
             </StackPanel>
             
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">

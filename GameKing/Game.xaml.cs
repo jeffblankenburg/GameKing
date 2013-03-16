@@ -20,16 +20,19 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using PokerLogic;
 using Newtonsoft.Json;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace GameKing
 {
     public sealed partial class Game : Page
     {
+        DataTransferManager dtm;
         VideoPokerGame PokerGame;
         Player GamePlayer = new Player();
         string GameType;
         bool HoldRound = false;
         bool ShouldResize = false;
+        bool CanShare = false;
         int handCounter = 0;
         Hand HandStart;
         Hand HandEnd;
@@ -50,10 +53,45 @@ namespace GameKing
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             GameType = e.Parameter.ToString();
+            dtm = DataTransferManager.GetForCurrentView();
+            dtm.DataRequested += dtm_DataRequested;
             SizeChanged += Game_SizeChanged;
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
             GameSetup();
+        }
+
+        void dtm_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            string textSource = "I just caught a " + PokerGame.Hand.Check(GameType) + " in King Poker for Windows 8!";
+            string textTitle = PokerGame.Hand.Check(GameType) + " in King Poker!";
+            string textDescription = "Share your " + PokerGame.Hand.Check(GameType) + " with your friends!";
+
+            Uri linkSource = new Uri("http://apps.microsoft.com/windows/app/king-poker/bc8d046c-e35d-49fa-824e-eccf675c7a12");
+
+            string HTMLSource = "<table style='background-color:#00019F;'><tr><td colspan='5'><img src='http://jeffblankenburg.com/KingPoker/gamelogos/" + GameType + ".png' /></td></tr><tr>";
+
+            for (int i = 0; i < 5; i++)
+            {
+                string x = String.Empty;
+                switch (GameType)
+                {
+                    case "DEUCESWILD": case "DOUBLEBONUSDEUCESWILD": case "DEUCESWILDBONUSPOKER":
+                        if (PokerGame.Hand.Cards[i].Value.Number == 2) x = "w";
+                        break;
+                }
+                HTMLSource += "<td><img src='http://jeffblankenburg.com/KingPoker/cards/" + PokerGame.Hand.Cards[i].Suit.ID.ToString() + PokerGame.Hand.Cards[i].Value.Number + x + ".png' /></td><td>";
+
+            }
+
+            HTMLSource += "</tr></table><br/><a href='http://apps.microsoft.com/windows/app/king-poker/bc8d046c-e35d-49fa-824e-eccf675c7a12'><img src='http://jeffblankenburg.com/KingPoker/SplashScreen.png' /></a>";
+
+            DataPackage data = args.Request.Data;
+            data.Properties.Title = textTitle;
+            data.Properties.Description = textDescription;
+            //data.SetText(HTMLSource);
+            //data.SetUri(linkSource);
+            data.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(HTMLSource));
         }
 
         void Game_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -85,6 +123,7 @@ namespace GameKing
         {
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
+            dtm.DataRequested -= dtm_DataRequested;
         }
 
         private void GameSetup()
@@ -225,6 +264,7 @@ namespace GameKing
                         ClearHolds();
                         ResetCardBacks();
                         ChargeCredits();
+                        DisableShareButton();
                         PokerGame = new VideoPokerGame(GameType);
                         IncrementHandCount();
                         handCounter++;
@@ -235,6 +275,7 @@ namespace GameKing
                     {
                         PokerGame.Draw();
                         ResetCardBacks();
+                        ActivateShareButton();
                         //WriteDataToMobileService();
                         HoldRound = false;
                         HandEnd = new Hand(PokerGame.Hand.Cards, PokerGame.Hand.Held);
@@ -242,6 +283,22 @@ namespace GameKing
                     ShowCards(!HoldRound);
                 }
             }
+        }
+
+        private void ActivateShareButton()
+        {
+            CanShare = true;
+            string imagepath = "ms-appx:/Assets/buttons/SHARE.png";
+            BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+            ShareButton.Source = imagesource;
+        }
+
+        private void DisableShareButton()
+        {
+            CanShare = false;
+            string imagepath = "ms-appx:/Assets/buttons/BLANK.png";
+            BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+            ShareButton.Source = imagesource;
         }
 
         private void IncrementHandCount()
@@ -592,6 +649,11 @@ namespace GameKing
             i.MaxWidth = i.ActualWidth;
             i.MinHeight = i.ActualHeight;
             i.MaxHeight = i.ActualHeight;
+        }
+
+        private void ShareButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (CanShare) DataTransferManager.ShowShareUI();
         }
     }
 }

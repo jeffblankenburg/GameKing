@@ -122,8 +122,15 @@ namespace GameKing
                 popup.IsOpen = true;
             });
 
+            SettingsCommand command3 = new SettingsCommand("stats", "Your Poker Stats", (handler) =>
+            {
+                Popup popup = BuildSettingsItem(new Stats(), 646);
+                popup.IsOpen = true;
+            });
+
             args.Request.ApplicationCommands.Add(command);
             args.Request.ApplicationCommands.Add(command2);
+            args.Request.ApplicationCommands.Add(command3);
 
         }
 
