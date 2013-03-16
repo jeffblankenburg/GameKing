@@ -489,12 +489,13 @@ namespace GameKing
                     TextBlock targetItem2 = (TextBlock)child2;
                     if (targetItem.Text.Replace(".", "") == PokerGame.CheckHand(GameType))
                     {
+                        Storyboard.SetTarget(PayTableTitleBlink, targetItem);
+                        Storyboard.SetTarget(PayTableNumberBlink, targetItem2);
+                        PayTableTitleBlink.Begin();
+                        PayTableNumberBlink.Begin();
+
                         if (ShouldAwardWinnings)
                         {
-                            Storyboard.SetTarget(PayTableTitleBlink, targetItem);
-                            Storyboard.SetTarget(PayTableNumberBlink, targetItem2);
-                            PayTableTitleBlink.Begin();
-                            PayTableNumberBlink.Begin();
                             AwardWinnings(Int32.Parse(targetItem2.Text));
                             RecordHand(targetItem.Text.Replace(".", ""));
                         }

@@ -217,8 +217,8 @@
             
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0"/>
-                <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" Tapped="BetOne_Tapped"/>
-                <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" Tapped="BetMax_Tapped"/>
+                <Image Source="Assets/buttons/BETONE.png" Margin="0,0,10,0" Tapped="BetOne_Tapped"/>
+                <Image Source="Assets/buttons/BETMAX.png" Margin="0,0,10,0" Tapped="BetMax_Tapped"/>
                 <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Tapped="Deal_Click"/>
             </StackPanel>
             
@@ -270,7 +270,7 @@
             
         </Grid>
         -->
-        <UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" Grid.Row="4" VerticalAlignment="Bottom"/>
+        <Viewbox Grid.Row="4"><UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728"  VerticalAlignment="Bottom"/></Viewbox>
         <local:HandStats x:Name="SnappedStats" Visibility="Collapsed" />
     </Grid>
 </Page>
