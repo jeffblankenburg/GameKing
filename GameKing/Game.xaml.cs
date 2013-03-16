@@ -64,29 +64,31 @@ namespace GameKing
 
         void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
-            string key = args.VirtualKey.ToString();
-            switch (args.VirtualKey.ToString())
+            if ((bool)App.settings.Values["iskeyboardactive"])
             {
-                case "Number1":
-                    if (HoldRound) HoldCard(Card0);
-                    else SetBet(1);
-                    break;
-                case "Number2":
-                    HoldCard(Card1);
-                    break;
-                case "Number3":
-                    HoldCard(Card2);
-                    break;
-                case "Number4":
-                    HoldCard(Card3);
-                    break;
-                case "Number5":
-                    if (HoldRound) HoldCard(Card4);
-                    else SetBet(5);
-                    break;
-                case "Space":
-                    Deal();
-                    break;
+                switch (args.VirtualKey.ToString())
+                {
+                    case "Number1":
+                        if (HoldRound) HoldCard(Card0);
+                        else SetBet(1);
+                        break;
+                    case "Number2":
+                        HoldCard(Card1);
+                        break;
+                    case "Number3":
+                        HoldCard(Card2);
+                        break;
+                    case "Number4":
+                        HoldCard(Card3);
+                        break;
+                    case "Number5":
+                        if (HoldRound) HoldCard(Card4);
+                        else SetBet(5);
+                        break;
+                    case "Space":
+                        Deal();
+                        break;
+                }
             }
         }
 
@@ -153,6 +155,7 @@ namespace GameKing
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
             dtm.DataRequested -= dtm_DataRequested;
+            Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
         }
 
         private void GameSetup()
@@ -492,7 +495,7 @@ namespace GameKing
         {
             if (!HoldRound && !IsShowingCards && !IsDrawingCredits)
             {
-                OneBet.Play();
+                if (bet == 1) OneBet.Play();
                 if (GamePlayer.IncreaseBet(bet)) Deal();
                 ChangeBetHighlight();
             }
