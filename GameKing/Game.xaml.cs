@@ -58,7 +58,36 @@ namespace GameKing
             SizeChanged += Game_SizeChanged;
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
+            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
             GameSetup();
+        }
+
+        void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        {
+            string key = args.VirtualKey.ToString();
+            switch (args.VirtualKey.ToString())
+            {
+                case "Number1":
+                    if (HoldRound) HoldCard(Card0);
+                    else SetBet(1);
+                    break;
+                case "Number2":
+                    HoldCard(Card1);
+                    break;
+                case "Number3":
+                    HoldCard(Card2);
+                    break;
+                case "Number4":
+                    HoldCard(Card3);
+                    break;
+                case "Number5":
+                    if (HoldRound) HoldCard(Card4);
+                    else SetBet(5);
+                    break;
+                case "Space":
+                    Deal();
+                    break;
+            }
         }
 
         void dtm_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
@@ -129,6 +158,7 @@ namespace GameKing
         private void GameSetup()
         {
             PokerGame = new VideoPokerGame(GameType);
+            GameName.Text = GameType;
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
@@ -189,11 +219,15 @@ namespace GameKing
 
         private void Card_MouseLeftButtonDown(object sender, TappedRoutedEventArgs e)
         {
+            HoldCard(sender as Image);
+        }
+
+        private void HoldCard(Image image)
+        {
             if (!IsShowingCards)
             {
                 if (HoldRound)
                 {
-                    Image image = sender as Image;
                     int place = Int32.Parse(image.Name.Substring(4, 1));
                     if (PokerGame.Hand.Held[place]) PokerGame.Hand.Hold(place, false);
                     else PokerGame.Hand.Hold(place, true);
@@ -445,20 +479,21 @@ namespace GameKing
 
         private void BetMax_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (!HoldRound && !IsShowingCards && !IsDrawingCredits)
-            {
-                if (GamePlayer.IncreaseBet(5)) Deal();
-                //TODO: Build an animation that shows the red box travel to the 5 coin slot.
-                ChangeBetHighlight();
-            }
+            SetBet(5);
+            //TODO: Build an animation that shows the red box travel to the 5 coin slot.
         }
 
         private void BetOne_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            SetBet(1);
+        }
+
+        private void SetBet(int bet)
+        {
             if (!HoldRound && !IsShowingCards && !IsDrawingCredits)
             {
                 OneBet.Play();
-                if (GamePlayer.IncreaseBet(1)) Deal();
+                if (GamePlayer.IncreaseBet(bet)) Deal();
                 ChangeBetHighlight();
             }
         }
@@ -469,65 +504,6 @@ namespace GameKing
             Rectangle r = (Rectangle)FindName("CoinBox" + GamePlayer.CurrentBet);
             r.Fill = Red;
             BetText.Text = "BET   " + GamePlayer.CurrentBet;
-        }
-
-        private void HighlightWinningBetName(DependencyObject targetElement, bool ShouldAwardWinnings)
-        {
-            var count = VisualTreeHelper.GetChildrenCount(targetElement);
-            if (count == 0)
-                return;
-
-            for (int i = 0; i < count; i++)
-            {
-                var child = VisualTreeHelper.GetChild(targetElement, i);
-                if (child is TextBlock)
-                {
-                    TextBlock targetItem = (TextBlock)child;
-
-                    if (targetItem.Text.Replace(".", "") == PokerGame.CheckHand(GameType))
-                    {
-                        //TextBlock coinslot = (TextBlock)VisualTreeHelper.GetChild(targetElement, i + GamePlayer.CurrentBet);
-                        
-                        //PayTableNumberBlink.Begin();
-                        if (ShouldAwardWinnings)
-                        {
-                            IEnumerable<int> pay;
-                            switch (GamePlayer.CurrentBet)
-                            {
-                                case 1:
-                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin1).Take(1);
-                                    AwardWinnings(pay.First());
-                                    break;
-                                case 2:
-                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin2).Take(1);
-                                    AwardWinnings(pay.First());
-                                    break;
-                                case 3:
-                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin3).Take(1);
-                                    AwardWinnings(pay.First());
-                                    break;
-                                case 4:
-                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin4).Take(1);
-                                    AwardWinnings(pay.First());
-                                    break;
-                                case 5:
-                                    pay = (from p in PokerGame.PayTable where p.Title == targetItem.Text select p.Coin5).Take(1);
-                                    AwardWinnings(pay.First());
-                                    break;
-                            }
-                            
-                            
-                        }
-                        else HoldAlert.Play();
-                        return;
-                    }
-                }
-                else
-                {
-                    HighlightWinningBetName(child, ShouldAwardWinnings);
-                }
-            }
-
         }
 
         private void HighlightPayTable(DependencyObject target, DependencyObject target2, bool ShouldAwardWinnings)
