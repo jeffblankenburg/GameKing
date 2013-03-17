@@ -634,5 +634,10 @@ namespace GameKing
         {
             if (CanShare) DataTransferManager.ShowShareUI();
         }
+
+        private void Help_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Help), GameType);
+        }
     }
 }

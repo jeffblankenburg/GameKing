@@ -7,7 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid Background="#00019F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="82*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*" />
+            <ColumnDefinition Width="91*" />
+        </Grid.ColumnDefinitions>
+        <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+        <TextBlock x:Name="pageTitle" Grid.Column="1" Text="King Poker Help" Style="{StaticResource PageHeaderTextStyle}"/>
+        <Grid x:Name="DEUCESWILD" Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="The object of Deuces Wild video poker is to attain the highest ranked" FontSize="24" />
+        </Grid>
     </Grid>
 </Page>

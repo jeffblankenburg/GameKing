@@ -21,6 +21,8 @@ namespace GameKing
     /// </summary>
     public sealed partial class Help : Page
     {
+        string GameType;
+        
         public Help()
         {
             this.InitializeComponent();
@@ -33,6 +35,29 @@ namespace GameKing
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            GameType = e.Parameter.ToString();
+            SetupTitle();
+            LoadContent();
+        }
+
+        private void LoadContent()
+        {
+            
+        }
+
+        private void SetupTitle()
+        {
+            switch (GameType)
+            {
+                case "DEUCESWILD":
+                    pageTitle.Text = "Deuces Wild Help";
+                    break;
+            }
+        }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
         }
     }
 }
