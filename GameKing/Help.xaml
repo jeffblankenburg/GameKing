@@ -9,17 +9,65 @@
 
     <Grid Background="#00019F">
         <Grid.RowDefinitions>
-            <RowDefinition Height="18*"/>
-            <RowDefinition Height="82*"/>
+            <RowDefinition Height="16*" />
+            <RowDefinition Height="84*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*" />
-            <ColumnDefinition Width="91*" />
-        </Grid.ColumnDefinitions>
-        <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-        <TextBlock x:Name="pageTitle" Grid.Column="1" Text="King Poker Help" Style="{StaticResource PageHeaderTextStyle}"/>
-        <Grid x:Name="DEUCESWILD" Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="The object of Deuces Wild video poker is to attain the highest ranked" FontSize="24" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="73*" />
+                <ColumnDefinition Width="17*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox><Button x:Name="backButton" Click="GoBack" Style="{StaticResource BackButtonStyle}" Margin="0,20,0,20"/></Viewbox>
+            <Viewbox Grid.Column="1" HorizontalAlignment="Left"><TextBlock x:Name="pageTitle" Text="King Poker Help" FontWeight="Light" FontSize="60" VerticalAlignment="Center" Margin="0,22,0,22"/></Viewbox>
+            <Viewbox Grid.Column="2"><Image Source="Assets/gamelogo/DEUCESWILD.png" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10"/></Viewbox>
+        </Grid>
+        <Grid x:Name="DEUCESWILD" Grid.Row="1" Margin="0,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="85*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="90*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1" VerticalAlignment="Top" >
+                <TextBlock Text="The most important thing to remember when playing Deuces Wild is that the four twos (deuces) in the deck can be substituted for any other card, for any rank, in any suit. It's what makes playing deuces wild video poker so exciting. For example, a 2 of spades could be used as the fifth card to complete a straight flush in diamonds. You never discard a deuce." FontFamily="Arial" FontSize="20" TextWrapping="Wrap" Margin="0,0,10,0" />
+            </Viewbox>
+            <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="91*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Fill="#B00000" Grid.Row="0" />
+                    <Viewbox HorizontalAlignment="Left"><TextBlock Text="IF YOU ARE DEALT..." Foreground="#FCD800" FontFamily="Arial" FontWeight="Bold" Margin="5,1,0,1"/></Viewbox>
+                    <Viewbox Grid.Row="2" VerticalAlignment="Top">
+                    <StackPanel>
+                        <TextBlock Text="Four Deuces" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock Text="Hold all five cards.  You can't improve this hand." FontSize="18" Margin="0,0,0,10"/>
+                        <TextBlock Text="Three Deuces" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock Text="Keep a wild royal flush and 5 of a kind.  Otherwise, hold the deuces only." FontSize="18" Margin="0,0,0,10"/>
+                        <TextBlock Text="Two Deuces" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock Text="Keep any hand that is 4 of a kind.  Keep any 4 cards to a royal flush.  Otherwise, hold the 2 deuces." FontSize="18" Margin="0,0,0,10"/>
+                        <TextBlock Text="One Deuce" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock Text="Keep all paying hands, unless you get 4 cards to a royal flush.  Keep four cards to the straight flush, three cards to a royal flush.  Otherwise just keep the 2." FontSize="18" Margin="0,0,0,10"/>
+                        <TextBlock Text="No Deuces" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock FontSize="18">
+                            <Run>Keep all paying hands.</Run><LineBreak />
+                            <Run>Keep three or four cards to a royal flush.</Run><LineBreak />
+                            <Run>Keep a three or four card straight flush.</Run><LineBreak />
+                            <Run>Keep a four card flush.</Run><LineBreak />
+                            <Run>Keep a consecutive four card straight. (Don't keep inside straights, like 4-5-7-8).</Run><LineBreak />
+                            <Run>Keep any one pair. (Don't keep two pair.  Pick one.)</Run><LineBreak />                            
+                            <Run>Keep any two of 10, J, Q, or K, if they have the same suit.</Run><LineBreak />
+                            <Run>If you're not dealt any of the above, discard all five cards and draw new ones.</Run><LineBreak />
+                        </TextBlock>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>

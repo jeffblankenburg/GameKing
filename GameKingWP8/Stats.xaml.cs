@@ -29,7 +29,7 @@ namespace GameKingWP8
             List<BothHands> history = App.settings["handhistory"] as List<BothHands>;
             StatsList.ItemsSource = (from p in history
                                     orderby p.TimeStamp descending
-                                    select p).Take(50);
+                                    select p).Take(40);
         }
     }
 }

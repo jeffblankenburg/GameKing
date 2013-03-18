@@ -57,21 +57,27 @@
     <Grid x:Name="LayoutRoot" Background="#00019F">
         <Grid.RowDefinitions>
             <RowDefinition Height="180" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Grid.Row="0">
             <Image Source="Assets/pattern480_800.png" Stretch="UniformToFill" />
-            <Image x:Name="Logo" Height="160" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="399"/>
+            <Image x:Name="Logo" Source="Assets/gamekinglogo.png" Margin="10"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle Fill="#000000" Grid.ColumnSpan="6"  />
             <Rectangle Fill="#FCD800" Grid.ColumnSpan="6" Margin="2" />
@@ -81,60 +87,158 @@
             <Rectangle x:Name="CoinBox3" Fill="#000064" Grid.Column="3" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
             <Rectangle x:Name="CoinBox4" Fill="#000064" Grid.Column="4" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
             <Rectangle x:Name="CoinBox5" Fill="#000064" Grid.Column="5" Stroke="#000000" StrokeThickness="2" Margin="2,4,4,4" />
-            <ItemsControl x:Name="PayTable" Grid.ColumnSpan="6" Margin="15,15,5,15">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="14" Grid.Column="0" FontWeight="Bold" Margin="-5,0,0,0"/>
-                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="14" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" Margin="0,0,10,0" />
-                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="14" Grid.Column="2" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="14" Grid.Column="3" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="14" Grid.Column="4" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="14" Grid.Column="5" FontWeight="Bold" TextAlignment="Right" Margin="0,0,4,0"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Viewbox>
+                <ItemsControl x:Name="PayTableNames" Margin="10,5,0,5">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="12" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
+            <Viewbox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,5">
+                <ItemsControl x:Name="PayTableCoin1">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="12" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
+            <Viewbox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,3,5">
+                <ItemsControl x:Name="PayTableCoin2">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="12" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
+            <Viewbox Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,5">
+                <ItemsControl x:Name="PayTableCoin3">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="12" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
+            <Viewbox Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,5">
+                <ItemsControl x:Name="PayTableCoin4">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="12" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
+            <Viewbox Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,8,5">
+                <ItemsControl x:Name="PayTableCoin5">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="12" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
         </Grid>
-        <Grid Grid.Row="2" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="80" />
-            </Grid.RowDefinitions>
+        <Grid x:Name="CardGrid" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,1,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="95" />
-                <ColumnDefinition Width="95" />
-                <ColumnDefinition Width="95" />
-                <ColumnDefinition Width="95" />
-                <ColumnDefinition Width="95" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image x:Name="Hold0" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="0" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold1" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold2" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="2" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold3" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Hold4" Source="Assets/cards/HOLD.png" Height="25" Grid.Column="4" Visibility="Collapsed" VerticalAlignment="Center" />
-            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
-            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" Width="90" Height="131" MouseLeftButtonDown="Card_MouseLeftButtonDown" />
-            <Border x:Name="ResetBox" Visibility="Collapsed" Grid.Row="1" Grid.ColumnSpan="5" BorderBrush="#FCD800" BorderThickness="6" MouseLeftButtonDown="ResetBox_MouseLeftButtonDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="33*" />
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Column="0">
+                <TextBlock x:Name="Hold0" Text="HELD" Opacity="0.024" Margin="3" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" />
+            </Viewbox>
+            <Viewbox Grid.Column="1">
+                <TextBlock x:Name="Hold1" Text="HELD" Opacity="0.024" Margin="3" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" />
+            </Viewbox>
+            <Viewbox Grid.Column="2">
+                <TextBlock x:Name="Hold2" Text="HELD" Opacity="0.024" Margin="3" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" />
+            </Viewbox>
+            <Viewbox Grid.Column="3">
+                <TextBlock x:Name="Hold3" Text="HELD" Opacity="0.024" Margin="3" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" />
+            </Viewbox>
+            <Viewbox Grid.Column="4">
+                <TextBlock x:Name="Hold4" Text="HELD" Opacity="0.024" Margin="3" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" />
+            </Viewbox>
+            <Image x:Name="Card0" Grid.Column="0" Grid.Row="1" Source="Assets/cards/BACK.png" MouseLeftButtonDown="Card_MouseLeftButtonDown" Margin="5,0" VerticalAlignment="Top" ImageOpened="Card_ImageOpened"/>
+            <Image x:Name="Card1" Grid.Column="1" Grid.Row="1" Source="Assets/cards/BACK.png" MouseLeftButtonDown="Card_MouseLeftButtonDown" Margin="5,0" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" />
+            <Image x:Name="Card2" Grid.Column="2" Grid.Row="1" Source="Assets/cards/BACK.png" MouseLeftButtonDown="Card_MouseLeftButtonDown" Margin="5,0" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" />
+            <Image x:Name="Card3" Grid.Column="3" Grid.Row="1" Source="Assets/cards/BACK.png" MouseLeftButtonDown="Card_MouseLeftButtonDown" Margin="5,0" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" />
+            <Image x:Name="Card4" Grid.Column="4" Grid.Row="1" Source="Assets/cards/BACK.png" MouseLeftButtonDown="Card_MouseLeftButtonDown" Margin="5,0" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" />
+            <Border x:Name="ResetBox" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="5" BorderBrush="#FCD800" BorderThickness="6" MouseLeftButtonDown="ResetBox_Tapped">
                 <Grid>
                     <Rectangle Fill="#000064" />
-                    <TextBlock Foreground="White" Text="You have lost everything, and you should feel bad.  Even still, we have reset your credits to 10,000.  Enjoy!" TextWrapping="Wrap" TextAlignment="Center" Height="100" VerticalAlignment="Center" />
-                    
+                    <TextBlock Foreground="White" Text="You have lost everything, and you should feel bad.  Even still, we have reset your credits to 10,000.  Enjoy!" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="56" />
                 </Grid>
             </Border>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Viewbox Margin="7">
+                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="30" TextAlignment="Center" Foreground="White"/>
+            </Viewbox>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                </StackPanel>
+                <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Margin="10,0,0,0" />
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+        <Grid x:Name="ButtonsGrid" Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Image Source="Assets/buttons/HELP.png" MouseLeftButtonDown="Help_Tapped" Margin="0,0,5,0" />
+                <Image Source="Assets/buttons/MOREGAMES.png" MouseLeftButtonDown="MoreGames_Tapped" Margin="0,0,5,0" />
+                <!--<Image x:Name="ShareButton" Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" MouseLeftButtonDown="ShareButton_Tapped" />-->
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <!--<Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0"/>-->
+                <Image Source="Assets/buttons/BETONE.png" Margin="0,0,5,0" MouseLeftButtonDown="BetOne_Tapped"/>
+                <Image Source="Assets/buttons/BETMAX.png" Margin="0,0,5,0" MouseLeftButtonDown="BetMax_Tapped"/>
+                <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" MouseLeftButtonDown="Deal_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="7">
+            <Viewbox>
+                <UI:AdControl Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
+            </Viewbox>
+        </Grid>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="180" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        
+        
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
@@ -166,22 +270,23 @@
                     <Image Source="Assets/buttons/HELP.png" Grid.Column="1" Height="31" MouseLeftButtonDown="Help_Tapped" />
                     <Image x:Name="BetOneButton" Grid.Column="2" HorizontalAlignment="Right" Source="Assets/buttons/BETONE.png" Width="43" MouseLeftButtonDown="BetOne_Tapped" />
                     <Image x:Name="BetMaxButton" Grid.Column="3" Source="Assets/buttons/BETMAX.png" Width="43" MouseLeftButtonDown="BetMax_Tapped" />
-                    <!--<Image x:Name="VolumeButton" Source="Assets/buttons/Volume2.png" Width="35" MouseLeftButtonDown="Volume_Tapped" />-->
                     <Image x:Name="DealButton" Grid.Column="4" Source="Assets/buttons/DEAL.png" Width="88" MouseLeftButtonDown="Deal_Click" />
                 </Grid>
             </Grid>
-            <Grid Grid.Row="3" Grid.ColumnSpan="5">
-                <UI:AdControl Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
-            </Grid>
+            
         </Grid>
         <MediaElement x:Name="CardFlip" Source="Assets/audio/carddeal.wav" AutoPlay="False" Volume=".66" />
         <MediaElement x:Name="HoldAlert" Source="Assets/audio/holdalert.wav" AutoPlay="False" Volume=".66" />
         <MediaElement x:Name="WinLoop" Source="Assets/audio/jackpot.wav" AutoPlay="False" Volume=".66" />
         <MediaElement x:Name="OneBet" Source="Assets/audio/onebet.wav" AutoPlay="False" Volume=".66" />
+        -->
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <!--<shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="share hand" Click="Share_Click" IsEnabled="False"/>-->
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/225-LineChart.png" Text="stats" Click="Stats_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/questionmark.png" Text="about" Click="About_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.png" Text="review" Click="Review_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

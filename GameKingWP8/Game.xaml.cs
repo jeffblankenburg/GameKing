@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Phone.Info;
+using Microsoft.Phone.Tasks;
 
 namespace GameKingWP8
 {
@@ -106,16 +107,25 @@ namespace GameKingWP8
 
         private void LoadPayTable()
         {
-            PayTable.ItemsSource = PokerGame.PayTable;
+            PayTableNames.ItemsSource = PokerGame.PayTable;
+            PayTableCoin1.ItemsSource = PokerGame.PayTable;
+            PayTableCoin2.ItemsSource = PokerGame.PayTable;
+            PayTableCoin3.ItemsSource = PokerGame.PayTable;
+            PayTableCoin4.ItemsSource = PokerGame.PayTable;
+            PayTableCoin5.ItemsSource = PokerGame.PayTable;
         }
 
         private void Card_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            HoldCard(sender as Image);
+        }
+
+        private void HoldCard(Image image)
         {
             if (!IsShowingCards)
             {
                 if (HoldRound)
                 {
-                    Image image = sender as Image;
                     int place = Int32.Parse(image.Name.Substring(4, 1));
                     if (PokerGame.Hand.Held[place]) PokerGame.Hand.Hold(place, false);
                     else PokerGame.Hand.Hold(place, true);
@@ -128,9 +138,9 @@ namespace GameKingWP8
         {
             for (int i = 0; i <= 4; i++)
             {
-                Image hold = (Image)FindName("Hold" + i);
-                if (PokerGame.Hand.Held[i]) hold.Visibility = Visibility.Visible;
-                else hold.Visibility = Visibility.Collapsed;
+                TextBlock hold = (TextBlock)FindName("Hold" + i);
+                if (PokerGame.Hand.Held[i]) hold.Opacity = 1;
+                else hold.Opacity = .024;
             }
         }
 
@@ -154,6 +164,7 @@ namespace GameKingWP8
                         ClearHolds();
                         ResetCardBacks();
                         ChargeCredits();
+                        DisableShareButton();
                         PokerGame = new VideoPokerGame(GameType);
                         handCounter++;
                         HoldRound = true;
@@ -163,12 +174,25 @@ namespace GameKingWP8
                     {
                         PokerGame.Draw();
                         ResetCardBacks();
+                        ActivateShareButton();
                         HoldRound = false;
                         HandEnd = new Hand(PokerGame.Hand.Cards, PokerGame.Hand.Held);
                     }
                     ShowCards(!HoldRound);
                 }
             }
+        }
+
+        private void ActivateShareButton()
+        {
+            //ApplicationBarIconButton abib = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            //abib.IsEnabled = true;
+        }
+
+        private void DisableShareButton()
+        {
+            //ApplicationBarIconButton abib = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            //abib.IsEnabled = false;
         }
 
         private void SaveHands()
@@ -251,7 +275,7 @@ namespace GameKingWP8
                     App.settings["credits"] = 10000;
                     DrawCredits(10000);
                 }
-                HighlightWinningBetValue(PayTable, ShouldPayUser);
+                HighlightPayTable(PayTableNames, (ItemsControl)FindName("PayTableCoin" + GamePlayer.CurrentBet), ShouldPayUser);
                 if (ShouldPayUser) SaveHands();
                 IsShowingCards = false;
             }
@@ -319,41 +343,39 @@ namespace GameKingWP8
             BetText.Text = "BET   " + GamePlayer.CurrentBet;
         }
 
-        private void HighlightWinningBetValue(DependencyObject targetElement, bool ShouldAwardWinnings)
+        private void HighlightPayTable(DependencyObject target, DependencyObject target2, bool ShouldAwardWinnings)
         {
-            var count = VisualTreeHelper.GetChildrenCount(targetElement);
-            if (count == 0)
-                return;
+            var count = VisualTreeHelper.GetChildrenCount(target);
+            if (count == 0) return;
 
             for (int i = 0; i < count; i++)
             {
-                var child = VisualTreeHelper.GetChild(targetElement, i);
+                var child = VisualTreeHelper.GetChild(target, i);
+                var child2 = VisualTreeHelper.GetChild(target2, i);
+
                 if (child is TextBlock)
                 {
                     TextBlock targetItem = (TextBlock)child;
-
+                    TextBlock targetItem2 = (TextBlock)child2;
                     if (targetItem.Text.Replace(".", "") == PokerGame.CheckHand(GameType))
                     {
-                        TextBlock coinslot = (TextBlock)VisualTreeHelper.GetChild(targetElement, i + GamePlayer.CurrentBet);
                         Storyboard.SetTarget(PayTableTitleBlink, targetItem);
-                        Storyboard.SetTarget(PayTableNumberBlink, coinslot);
+                        Storyboard.SetTarget(PayTableNumberBlink, targetItem2);
                         PayTableTitleBlink.Begin();
                         PayTableNumberBlink.Begin();
+
                         if (ShouldAwardWinnings)
                         {
-                            AwardWinnings(Int32.Parse(coinslot.Text));
-                            RecordHand(targetItem.Text.Replace(".", "").Replace(" ", "").Replace(",", ""));
+                            AwardWinnings(Int32.Parse(targetItem2.Text));
+                            RecordHand(targetItem.Text.Replace(".", ""));
                         }
                         else PlayHoldAlert();
                         return;
                     }
                 }
-                else
-                {
-                    HighlightWinningBetValue(child, ShouldAwardWinnings);
-                }
+                else HighlightPayTable(child, child2, ShouldPayUser);
+                
             }
-
         }
 
         private void RecordHand(string HandRank)
@@ -433,11 +455,11 @@ namespace GameKingWP8
 
         private void ClearHolds()
         {
-            Hold0.Visibility = Visibility.Collapsed;
-            Hold1.Visibility = Visibility.Collapsed;
-            Hold2.Visibility = Visibility.Collapsed;
-            Hold3.Visibility = Visibility.Collapsed;
-            Hold4.Visibility = Visibility.Collapsed;
+            Hold0.Opacity = 0.024;
+            Hold1.Opacity = 0.024;
+            Hold2.Opacity = 0.024;
+            Hold3.Opacity = 0.024;
+            Hold4.Opacity = 0.024;
             PokerGame.Hand.Held[0] = false;
             PokerGame.Hand.Held[1] = false;
             PokerGame.Hand.Held[2] = false;
@@ -482,6 +504,61 @@ namespace GameKingWP8
         private void Stats_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
+        }
+
+        private void Card_ImageOpened(object sender, RoutedEventArgs e)
+        {
+            ResizeSingleCard(sender as Image);
+        }
+
+        private void ResizeSingleCard(Image i)
+        {
+            i.MinWidth = i.ActualWidth;
+            i.MaxWidth = i.ActualWidth;
+            i.MinHeight = i.ActualHeight;
+            i.MaxHeight = i.ActualHeight;
+        }
+
+        private void ResetBox_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ResetBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void Share_Click(object sender, EventArgs e)
+        {
+            string HTMLSource = "<table style='background-color:#00019F;'><tr><td colspan='5'><img src='http://jeffblankenburg.com/KingPoker/gamelogos/" + GameType + ".png' /></td></tr><tr>";
+
+            for (int i = 0; i < 5; i++)
+            {
+                string x = String.Empty;
+                switch (GameType)
+                {
+                    case "DEUCESWILD":
+                    case "DOUBLEBONUSDEUCESWILD":
+                    case "DEUCESWILDBONUSPOKER":
+                        if (PokerGame.Hand.Cards[i].Value.Number == 2) x = "w";
+                        break;
+                }
+                HTMLSource += "<td><img src='http://jeffblankenburg.com/KingPoker/cards/" + PokerGame.Hand.Cards[i].Suit.ID.ToString() + PokerGame.Hand.Cards[i].Value.Number + x + ".png' /></td><td>";
+
+            }
+
+            HTMLSource += "</tr></table><br/><a href='http://apps.microsoft.com/windows/app/king-poker/bc8d046c-e35d-49fa-824e-eccf675c7a12'><img src='http://jeffblankenburg.com/KingPoker/SplashScreen.png' /></a>";
+
+            EmailComposeTask ect = new EmailComposeTask();
+            ect.Body = HTMLSource;
+            ect.Show();
+        }
+
+        private void Review_Click(object sender, EventArgs e)
+        {
+            MarketplaceReviewTask mrt = new MarketplaceReviewTask();
+            mrt.Show();
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
         }
     }
 }

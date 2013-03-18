@@ -13,24 +13,9 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="#00019f">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="180" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid>
-            <Image Source="Assets/pattern480_800.png" Stretch="UniformToFill" />
-            <Image x:Name="Logo" Height="160" Canvas.Left="101" Source="Assets/gamekinglogo.png" Stretch="Fill" Canvas.Top="20" Width="399"/>
-        </Grid>
-        <StackPanel Grid.Row="1" Margin="15">
-            <TextBlock Text="King Poker strives to be the most authentic video poker experience you can have outside a casino.  If you have ideas, comments, suggestions, requests, or find a bug in our software, please email us:" TextWrapping="Wrap" Foreground="White" />
-            <TextBlock Text="kingpoker@jexed.com" FontWeight="Bold" TextWrapping="Wrap" Foreground="White" Margin="0,20,0,30" FontSize="30" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" />
-            <TextBlock Text="We will be adding many more variations of video poker, blackjack, pai gow, and other great electronic casino games in the future.  Please review our app to let us know what your favorite game is!" TextWrapping="Wrap" Foreground="White" />
-            <Image Source="Assets/WindowsPhoneStoreIcon.png" Height="50" Margin="0,20,0,0" HorizontalAlignment="Left" MouseLeftButtonDown="Phone_MouseLeftButtonDown" />
-            <TextBlock Text="If you have a Windows 8 or Windows RT machine, this app is also available there!" TextWrapping="Wrap" Foreground="White" Margin="0,20,0,0" />
-            <Image Source="Assets/WindowsStoreIcon.png" Height="50" Margin="0,20,0,0" HorizontalAlignment="Left" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
-        </StackPanel>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#00019F">
+        
     </Grid>
 
 </phone:PhoneApplicationPage>
