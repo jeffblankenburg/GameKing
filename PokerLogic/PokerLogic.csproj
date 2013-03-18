@@ -40,6 +40,8 @@
     <Compile Include="Card.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="Hand.cs" />
+    <Compile Include="HelpContent.cs" />
+    <Compile Include="HelpItem.cs" />
     <Compile Include="PayTableItem.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

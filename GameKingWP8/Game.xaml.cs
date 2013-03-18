@@ -498,7 +498,7 @@ namespace GameKingWP8
 
         private void Help_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Help.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Help.xaml?game=" + GameType, UriKind.Relative));
         }
 
         private void Stats_Click(object sender, EventArgs e)
