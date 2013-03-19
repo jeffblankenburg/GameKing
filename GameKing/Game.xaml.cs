@@ -694,5 +694,13 @@ namespace GameKing
         {
             AdBox.Resume();
         }
+
+        private void LayoutRoot_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (AdBox.IsSuspended)
+            {
+                AdBox.Resume();
+            }
+        }
     }
 }

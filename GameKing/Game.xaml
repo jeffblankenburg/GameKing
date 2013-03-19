@@ -48,7 +48,7 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="#00019F">
+    <Grid x:Name="LayoutRoot" Background="#00019F" Tapped="LayoutRoot_Tapped">
         <Grid.RowDefinitions>
             <RowDefinition Height="38*" />
             <RowDefinition Height="36*" />

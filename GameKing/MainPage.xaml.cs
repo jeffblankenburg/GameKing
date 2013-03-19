@@ -180,5 +180,13 @@ namespace GameKing
         {
             Frame.Navigate(typeof(Game), "DOUBLEDOUBLEBONUSPOKER");
         }
+
+        private void LayoutRoot_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (AdBox.IsSuspended)
+            {
+                AdBox.Resume();
+            }
+        }
     }
 }
