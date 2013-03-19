@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Shapes;
 using PokerLogic;
 using Newtonsoft.Json;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Core;
 
 namespace GameKing
 {
@@ -66,26 +67,26 @@ namespace GameKing
         {
             if ((bool)App.settings.Values["iskeyboardactive"])
             {
-                switch (args.VirtualKey.ToString())
+                switch (args.VirtualKey)
                 {
-                    case "Number1":
+                    case Windows.System.VirtualKey.Number1:
                         if (HoldRound) HoldCard(Card0);
                         else SetBet(1);
                         break;
-                    case "Number2":
+                    case Windows.System.VirtualKey.Number2:
                         HoldCard(Card1);
                         break;
-                    case "Number3":
+                    case Windows.System.VirtualKey.Number3:
                         HoldCard(Card2);
                         break;
-                    case "Number4":
+                    case Windows.System.VirtualKey.Number4:
                         HoldCard(Card3);
                         break;
-                    case "Number5":
+                    case Windows.System.VirtualKey.Number5:
                         if (HoldRound) HoldCard(Card4);
                         else SetBet(5);
                         break;
-                    case "Space":
+                    case Windows.System.VirtualKey.Space:
                         Deal();
                         break;
                 }

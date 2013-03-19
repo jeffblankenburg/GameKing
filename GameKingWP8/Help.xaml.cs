@@ -25,7 +25,7 @@ namespace GameKingWP8
         {
             GameType = NavigationContext.QueryString["game"].ToString();
             HelpContent h = new HelpContent(GameType);
-            HelpTitle.Text = "STRATEGY FOR " + h.Title;
+            HelpTitle.Text = h.Title;
             SetGameLogo();
             HelpList.ItemsSource = h.HelpItems;
         }

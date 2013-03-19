@@ -189,20 +189,17 @@
             </Viewbox>
         </Grid>
         <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" FlowDirection="RightToLeft">
-                    <Image Source="Assets/numbers/0.png" />
-                    <Image Source="Assets/numbers/0.png" />
-                    <Image Source="Assets/numbers/0.png" />
-                    <Image Source="Assets/numbers/0.png" />
-                    <Image Source="Assets/numbers/0.png" />
-                </StackPanel>
-                <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Margin="10,0,0,0" />
+            <TextBlock x:Name="GameName" Text="DEUCESWILDDOUBLEBONUS" FontFamily="Arial" FontWeight="ExtraBold" VerticalAlignment="Bottom" FontSize="10" Margin="12,0,0,5"  HorizontalAlignment="Left" />
+            <Viewbox VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" FlowDirection="RightToLeft">
+                        <Image Source="Assets/numbers/0.png" />
+                        <Image Source="Assets/numbers/0.png" />
+                        <Image Source="Assets/numbers/0.png" />
+                        <Image Source="Assets/numbers/0.png" />
+                        <Image Source="Assets/numbers/0.png" />
+                    </StackPanel>
+                    <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Margin="10,0,0,0" />
                 </StackPanel>
             </Viewbox>
         </Grid>

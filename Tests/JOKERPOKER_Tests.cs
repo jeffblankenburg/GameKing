@@ -15,7 +15,7 @@ namespace Tests
         public void JOKERPOKER_DeckCount()
         {
             VideoPokerGame vpg = new VideoPokerGame("JOKERPOKER");
-            Assert.AreEqual(49, vpg.Deck.Cards.Count);
+            Assert.AreEqual(48, vpg.Deck.Cards.Count);
         }
 
         [TestMethod]

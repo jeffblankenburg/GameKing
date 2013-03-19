@@ -64,7 +64,7 @@ namespace PokerLogic
                 if (DEUCES_IsStraight()) return "STRAIGHT";
                 if (DEUCES_IsThreeOfAKind()) return "3 OF A KIND";
             }
-            else if ((GameType == "DOUBLEBONUSPOKER") || (GameType == "TRIPLEBONUSPOKERPLUS") || (GameType == "ROYALACESBONUSPOKER") || (GameType == "WHITEHOTACES") || (GameType == "BONUSPOKER") || (GameType == "SUPERACESBONUSPOKER"))
+            else if ((GameType == "DOUBLEBONUSPOKER") || (GameType == "TRIPLEBONUSPOKERPLUS") || (GameType == "WHITEHOTACES") || (GameType == "BONUSPOKER") || (GameType == "SUPERACESBONUSPOKER"))
             {
                 if (IsRoyalFlush()) return "ROYAL FLUSH";
                 if (IsStraightFlush()) return "STRAIGHT FLUSH";
@@ -153,6 +153,20 @@ namespace PokerLogic
                 if (IsThreeOfAKind()) return "3 OF A KIND";
                 if (IsTwoPair()) return "TWO PAIR";
                 if (IsJacksOrBetter()) return "JACKS OR BETTER";
+            }
+            else if ((GameType == "ROYALACESBONUSPOKER"))
+            {
+                if (IsRoyalFlush()) return "ROYAL FLUSH";
+                if (IsStraightFlush()) return "STRAIGHT FLUSH";
+                if (IsFourAces()) return "4 ACES";
+                if (IsFourTwosThreesOrFours()) return "4 2s,3s,4s";
+                if (IsFourFivesThruKings()) return "4 5s THRU KINGS";
+                if (IsFullHouse()) return "FULL HOUSE";
+                if (IsFlush()) return "FLUSH";
+                if (IsStraight()) return "STRAIGHT";
+                if (IsThreeOfAKind()) return "3 OF A KIND";
+                if (IsTwoPair()) return "TWO PAIR";
+                if (IsPairOfAces()) return "PAIR OF ACES";
             }
             else
             {
@@ -296,6 +310,15 @@ namespace PokerLogic
             if ((SortedCards[1].Value.Number == SortedCards[2].Value.Number) && (SortedCards[1].Value.Number >= 11)) return true;
             if ((SortedCards[2].Value.Number == SortedCards[3].Value.Number) && (SortedCards[2].Value.Number >= 11)) return true;
             if ((SortedCards[3].Value.Number == SortedCards[4].Value.Number) && (SortedCards[3].Value.Number >= 11)) return true;
+            return false;
+        }
+
+        private bool IsPairOfAces()
+        {
+            if ((SortedCards[0].Value.Number == SortedCards[1].Value.Number) && (SortedCards[0].Value.Number == 14)) return true;
+            if ((SortedCards[1].Value.Number == SortedCards[2].Value.Number) && (SortedCards[1].Value.Number == 14)) return true;
+            if ((SortedCards[2].Value.Number == SortedCards[3].Value.Number) && (SortedCards[2].Value.Number == 14)) return true;
+            if ((SortedCards[3].Value.Number == SortedCards[4].Value.Number) && (SortedCards[3].Value.Number == 14)) return true;
             return false;
         }
 

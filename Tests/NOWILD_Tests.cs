@@ -273,6 +273,21 @@ namespace Tests
             Assert.AreEqual("4 2s THRU 10s", vpg.Hand.Check("ACESANDFACESPOKER"));
         }
 
-        
+        [TestMethod]
+        public void NOWILD_PairOfAces()
+        {
+            VideoPokerGame vpg = new VideoPokerGame("ROYALACESBONUSPOKER");
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 14, Name = "Three" };
+            vpg.Hand.Cards[1].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 14, Name = "Three" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 3, Name = "Clubs" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 3, Name = "Three" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 4, Name = "Spades" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 8, Name = "Three" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 7, Name = "Seven" };
+            Assert.AreEqual("PAIR OF ACES", vpg.Hand.Check("ROYALACESBONUSPOKER"));
+        }
     }
 }
