@@ -7,15 +7,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:UI="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI" 
+    xmlns:local="clr-namespace:GameKingWP8"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <local:HelpItemToFontWeightConverter x:Key="HelpItemToFontWeightConverter" />
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="#00019F">
+    <Grid Background="#00019F">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
@@ -27,12 +32,12 @@
             <ItemsControl x:Name="HelpList" Margin="10">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" FontSize="20" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Text}" FontSize="20" FontWeight="{Binding Converter={StaticResource HelpItemToFontWeightConverter}}" TextWrapping="Wrap" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <UI:AdControl Grid.Row="2" Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
+        <Image x:Name="GameLogo" Grid.Row="0" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Assets/gamelogo/DEUCESWILD.png" />
     </Grid>
 
 </phone:PhoneApplicationPage>

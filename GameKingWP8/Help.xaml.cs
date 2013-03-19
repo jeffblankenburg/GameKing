@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PokerLogic;
+using System.Windows.Media.Imaging;
 
 namespace GameKingWP8
 {
@@ -25,7 +26,15 @@ namespace GameKingWP8
             GameType = NavigationContext.QueryString["game"].ToString();
             HelpContent h = new HelpContent(GameType);
             HelpTitle.Text = "STRATEGY FOR " + h.Title;
+            SetGameLogo();
             HelpList.ItemsSource = h.HelpItems;
+        }
+
+        private void SetGameLogo()
+        {
+            string imagepath = "Assets/gamelogo/" + GameType + ".png";
+            BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Relative));
+            GameLogo.Source = imagesource;
         }
     }
 }

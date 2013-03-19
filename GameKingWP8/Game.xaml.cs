@@ -69,6 +69,10 @@ namespace GameKingWP8
             LoadCurrentBet();
             LoadPayTable();
             DrawCredits((int)App.settings["credits"]);
+            HelpContent h = new HelpContent(GameType);
+            HelpTitle.Text = "STRATEGY FOR " + h.Title;
+            SetGameLogo();
+            HelpList.ItemsSource = h.HelpItems;
         }
 
         private void LoadAudioFiles()
@@ -498,7 +502,22 @@ namespace GameKingWP8
 
         private void Help_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Help.xaml?game=" + GameType, UriKind.Relative));
+            ShowHelp();
+        }
+
+        private void ShowHelp()
+        {
+            HelpBox.Visibility = Visibility.Visible;
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            if (HelpBox.Visibility == Visibility.Visible)
+            {
+                HelpBox.Visibility = Visibility.Collapsed;
+            }
+            else NavigationService.GoBack();
         }
 
         private void Stats_Click(object sender, EventArgs e)
@@ -559,6 +578,13 @@ namespace GameKingWP8
         private void About_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
+        }
+
+        private void SetGameLogo()
+        {
+            string imagepath = "Assets/gamelogo/" + GameType + ".png";
+            BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Relative));
+            GameLogo.Source = imagesource;
         }
     }
 }

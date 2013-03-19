@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:GameKingWP8"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -52,6 +53,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <local:HelpItemToFontWeightConverter x:Key="HelpItemToFontWeightConverter" />
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="#00019F">
@@ -231,55 +233,25 @@
                 <UI:AdControl Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
             </Viewbox>
         </Grid>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="180" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        
-        
-            <Grid Grid.Row="2" Grid.ColumnSpan="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20" />
-                    <RowDefinition Height="35" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock x:Name="BetText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Text="BET   1" FontFamily="Arial Black" FontSize="16" TextAlignment="Center" Foreground="White"/>
-                <Grid HorizontalAlignment="Right" Grid.Row="1" >
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel x:Name="CreditsPanel" Orientation="Horizontal" FlowDirection="RightToLeft" >
-                            <Image Source="Assets/numbers/0.png" Width="19" />
-                            <Image Source="Assets/numbers/0.png" Width="19" />
-                            <Image Source="Assets/numbers/0.png" Width="19" />
-                            <Image Source="Assets/numbers/0.png" Width="19" />
-                            <Image Source="Assets/numbers/0.png" Width="19" />
-                        </StackPanel>
-                        <Image x:Name="CreditImage" Source="Assets/numbers/CREDITS.png" Height="26" Margin="15,0,0,0" />
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="87" />
-                        <ColumnDefinition Width="87" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="87" />
-                    </Grid.ColumnDefinitions>
-                    <Image Source="Assets/buttons/MOREGAMES.png" Height="31" MouseLeftButtonDown="MoreGames_Tapped" />
-                    <Image Source="Assets/buttons/HELP.png" Grid.Column="1" Height="31" MouseLeftButtonDown="Help_Tapped" />
-                    <Image x:Name="BetOneButton" Grid.Column="2" HorizontalAlignment="Right" Source="Assets/buttons/BETONE.png" Width="43" MouseLeftButtonDown="BetOne_Tapped" />
-                    <Image x:Name="BetMaxButton" Grid.Column="3" Source="Assets/buttons/BETMAX.png" Width="43" MouseLeftButtonDown="BetMax_Tapped" />
-                    <Image x:Name="DealButton" Grid.Column="4" Source="Assets/buttons/DEAL.png" Width="88" MouseLeftButtonDown="Deal_Click" />
-                </Grid>
-            </Grid>
-            
+        <Grid x:Name="HelpBox" Background="#00019F" Grid.RowSpan="7" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Rectangle Grid.Row="1" Fill="#B00000" />
+            <TextBlock Grid.Row="1" x:Name="HelpTitle" Text="STRATEGY FOR DEUCES WILD" VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold" Foreground="#FCD800"/>
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="HelpList" Margin="10">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text}" FontSize="20" FontWeight="{Binding Converter={StaticResource HelpItemToFontWeightConverter}}" TextWrapping="Wrap" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <Image x:Name="GameLogo" Grid.Row="1" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Assets/gamelogo/DEUCESWILD.png" />
         </Grid>
-        <MediaElement x:Name="CardFlip" Source="Assets/audio/carddeal.wav" AutoPlay="False" Volume=".66" />
-        <MediaElement x:Name="HoldAlert" Source="Assets/audio/holdalert.wav" AutoPlay="False" Volume=".66" />
-        <MediaElement x:Name="WinLoop" Source="Assets/audio/jackpot.wav" AutoPlay="False" Volume=".66" />
-        <MediaElement x:Name="OneBet" Source="Assets/audio/onebet.wav" AutoPlay="False" Volume=".66" />
-        -->
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
