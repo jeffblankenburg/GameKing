@@ -147,7 +147,7 @@ namespace GameKing
 
         }
 
-        private Popup BuildSettingsItem(UserControl page, int width)
+        public static Popup BuildSettingsItem(UserControl page, int width)
         {
             Popup p = new Popup();
             p.IsLightDismissEnabled = true;

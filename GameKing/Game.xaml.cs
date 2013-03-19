@@ -638,7 +638,8 @@ namespace GameKing
 
         private void Help_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Help), GameType);
+            Popup popup = App.BuildSettingsItem(new HelpPage(GameType), 480);
+            popup.IsOpen = true;
         }
     }
 }
