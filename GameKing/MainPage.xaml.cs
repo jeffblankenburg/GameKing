@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,11 +37,58 @@ namespace GameKing
         {
             SizeChanged += Game_SizeChanged;
             Loaded += MainPage_Loaded;
+            SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
+        }
+
+        void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            SettingsCommand command = new SettingsCommand("about", "About This App", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new AboutPage(), 346);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command2 = new SettingsCommand("privacy", "Privacy Policy", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new PrivacyPolicyPage(), 346);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command3 = new SettingsCommand("stats", "Your Poker Stats", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new Stats(), 646);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command4 = new SettingsCommand("preferences", "Preferences", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new Preferences(), 346);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            args.Request.ApplicationCommands.Add(command);
+            args.Request.ApplicationCommands.Add(command4);
+            args.Request.ApplicationCommands.Add(command2);
+            args.Request.ApplicationCommands.Add(command3);
+        }
+
+        void popup_Closed(object sender, object e)
+        {
+            AdBox.Resume();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             Loaded -= MainPage_Loaded;
+            SettingsPane.GetForCurrentView().CommandsRequested -= MainPage_CommandsRequested;
         }
 
         private void Game_SizeChanged(object sender, SizeChangedEventArgs e)

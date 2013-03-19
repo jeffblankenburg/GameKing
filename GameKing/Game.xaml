@@ -223,7 +223,7 @@
             </StackPanel>
         </Grid>
         
-        <Viewbox Grid.Row="4"><UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728"  VerticalAlignment="Bottom"/></Viewbox>
+        <Viewbox Grid.Row="4"><UI:AdControl x:Name="AdBox" ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728"  VerticalAlignment="Bottom"/></Viewbox>
         <Viewbox Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top">
             <TextBlock x:Name="GameName" Text="" Margin="5,3,10,40" VerticalAlignment="Top" FontWeight="Bold"/>
         </Viewbox>

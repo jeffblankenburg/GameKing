@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="768"
     d:DesignWidth="346">
 
     <Border BorderBrush="#FCD800" BorderThickness="3,0,0,0">
@@ -38,8 +38,27 @@
                         <ColumnDefinition Width="50" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
                     <CheckBox x:Name="KeyboardCheckbox" Checked="KeyboardCheckbox_Checked" Unchecked="KeyboardCheckbox_Unchecked" />
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="16" Text="Use Keyboard Shortcut Keys" />
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="16" Text="Use Keyboard Shortcut Keys" FontWeight="Bold" />
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="2" FontSize="16">
+                        <Run>When you are betting...</Run><LineBreak/>
+                        <Run>1 = Bet One</Run><LineBreak/>
+                        <Run>5 = Bet Max</Run><LineBreak/>
+                        <LineBreak/>
+                        <Run>When you are holding cards...</Run><LineBreak/>
+                        <Run>1 = Hold card #1</Run><LineBreak/>
+                        <Run>2 = Hold card #2</Run><LineBreak/>
+                        <Run>3 = Hold card #3</Run><LineBreak/>
+                        <Run>4 = Hold card #4</Run><LineBreak/>
+                        <Run>5 = Hold card #5</Run><LineBreak/>
+                        <LineBreak/>
+                        <Run>Spacebar = DEAL Button</Run><LineBreak/>
+                    </TextBlock>
                 </Grid>
             </ScrollViewer>
         </Grid>

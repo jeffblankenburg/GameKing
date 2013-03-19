@@ -53,7 +53,7 @@
             <Image Grid.Row="4" Grid.Column="9" Source="Assets/gamelogo/JokerPoker.png" Tapped="JokerPoker_Tapped"  />
             <Image Grid.Row="6" Grid.Column="9" Source="Assets/gamelogo/DoubleDoubleBonusPoker.png" Tapped="DoubleDoubleBonusPoker_Tapped"  />
 
-            <Viewbox Grid.Row="8" Grid.ColumnSpan="11"><UI:AdControl ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" VerticalAlignment="Bottom" Margin="0,0,0,5"/></Viewbox>
+            <Viewbox Grid.Row="8" Grid.ColumnSpan="11"><UI:AdControl x:Name="AdBox" ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" VerticalAlignment="Bottom" Margin="0,0,0,5"/></Viewbox>
         </Grid>
         <local:HandStats x:Name="SnappedState" Visibility="Collapsed" />
     </Grid>

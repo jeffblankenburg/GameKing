@@ -22,6 +22,7 @@ using PokerLogic;
 using Newtonsoft.Json;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Core;
+using Windows.UI.ApplicationSettings;
 
 namespace GameKing
 {
@@ -37,6 +38,7 @@ namespace GameKing
         int handCounter = 0;
         Hand HandStart;
         Hand HandEnd;
+        Popup HelpPopup;
 
         SolidColorBrush Blue = new SolidColorBrush { Color = new Utility().HexToColor("#FF000064") };
         SolidColorBrush Red = new SolidColorBrush { Color = new Utility().HexToColor("#FFB00000") };
@@ -60,7 +62,51 @@ namespace GameKing
             CreditPause.Completed += CreditPause_Completed;
             CardPause.Completed += CardPause_Completed;
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+            SettingsPane.GetForCurrentView().CommandsRequested += Game_CommandsRequested;
+            HelpPopup = App.BuildSettingsItem(new HelpPage(GameType), 480);
+            HelpPopup.Closed += popup_Closed;
+
             GameSetup();
+        }
+
+        void Game_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            SettingsCommand command = new SettingsCommand("about", "About This App", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new AboutPage(), 346);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command2 = new SettingsCommand("privacy", "Privacy Policy", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new PrivacyPolicyPage(), 346);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command3 = new SettingsCommand("stats", "Your Poker Stats", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new Stats(), 646);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command4 = new SettingsCommand("preferences", "Preferences", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new Preferences(), 346);
+                popup.Closed += popup_Closed;
+                AdBox.Suspend();
+                popup.IsOpen = true;
+            });
+
+            args.Request.ApplicationCommands.Add(command);
+            args.Request.ApplicationCommands.Add(command4);
+            args.Request.ApplicationCommands.Add(command2);
+            args.Request.ApplicationCommands.Add(command3);
         }
 
         void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
@@ -157,6 +203,8 @@ namespace GameKing
             CardPause.Completed -= CardPause_Completed;
             dtm.DataRequested -= dtm_DataRequested;
             Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
+            HelpPopup.Closed -= popup_Closed;
+            SettingsPane.GetForCurrentView().CommandsRequested -= Game_CommandsRequested;
         }
 
         private void GameSetup()
@@ -638,8 +686,13 @@ namespace GameKing
 
         private void Help_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Popup popup = App.BuildSettingsItem(new HelpPage(GameType), 480);
-            popup.IsOpen = true;
+            AdBox.Suspend();
+            HelpPopup.IsOpen = true;
+        }
+
+        void popup_Closed(object sender, object e)
+        {
+            AdBox.Resume();
         }
     }
 }
