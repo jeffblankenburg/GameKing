@@ -209,7 +209,7 @@ namespace GameKing
 
         private void GameSetup()
         {
-            PokerGame = new VideoPokerGame(GameType);
+            if (PokerGame == null) PokerGame = new VideoPokerGame(GameType);
             GameName.Text = GameType;
             LoadAudioFiles();
             LoadCurrentBet();

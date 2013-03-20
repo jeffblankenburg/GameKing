@@ -599,7 +599,7 @@ namespace PokerLogic
             if ((CountJokers() == 1) && (SortedCards[0].Value.Number == 13)) return true;
             if ((SortedCards[0].Value.Number == 14) && (SortedCards[1].Value.Number == 14)) return true;
             if ((SortedCards[0].Value.Number == 13) && (SortedCards[1].Value.Number == 13)) return true;
-            if ((SortedCards[0].Value.Number == 13) && (SortedCards[1].Value.Number == 13)) return true;
+            if ((SortedCards[1].Value.Number == 13) && (SortedCards[2].Value.Number == 13)) return true;
             return false;
         }
 

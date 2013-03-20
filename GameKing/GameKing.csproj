@@ -261,6 +261,8 @@
     <Content Include="Assets\gamelogo\SuperDoubleDoubleBonusPoker.png" />
     <Content Include="Assets\gamelogo\TripleBonusPokerPlus.png" />
     <Content Include="Assets\gamelogo\WhiteHotAces.png" />
+    <Content Include="Assets\LOGGEDIN_Microsoft.png" />
+    <Content Include="Assets\LOGIN_Microsoft.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\numbers\0.png" />
     <Content Include="Assets\numbers\1.png" />

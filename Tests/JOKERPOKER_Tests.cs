@@ -447,16 +447,16 @@ namespace Tests
         public void JOKERPOKER_KingsOrBetter_NoJokers()
         {
             VideoPokerGame vpg = new VideoPokerGame("JOKERPOKER");
-            vpg.Hand.Cards[0].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[0].Value = new Value { Number = 14, Name = "Ace" };
+            vpg.Hand.Cards[0].Suit = new Suit { ID = 2, Name = "Diamonds" };
+            vpg.Hand.Cards[0].Value = new Value { Number = 13, Name = "King" };
             vpg.Hand.Cards[1].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[1].Value = new Value { Number = 10, Name = "Ten" };
-            vpg.Hand.Cards[2].Suit = new Suit { ID = 4, Name = "Spades" };
-            vpg.Hand.Cards[2].Value = new Value { Number = 4, Name = "Four" };
-            vpg.Hand.Cards[3].Suit = new Suit { ID = 1, Name = "Hearts" };
-            vpg.Hand.Cards[3].Value = new Value { Number = 11, Name = "King" };
-            vpg.Hand.Cards[4].Suit = new Suit { ID = 2, Name = "Diamonds" };
-            vpg.Hand.Cards[4].Value = new Value { Number = 14, Name = "Ace" };
+            vpg.Hand.Cards[1].Value = new Value { Number = 14, Name = "Ace" };
+            vpg.Hand.Cards[2].Suit = new Suit { ID = 1, Name = "Hearts" };
+            vpg.Hand.Cards[2].Value = new Value { Number = 10, Name = "Ten" };
+            vpg.Hand.Cards[3].Suit = new Suit { ID = 3, Name = "Clubs" };
+            vpg.Hand.Cards[3].Value = new Value { Number = 13, Name = "King" };
+            vpg.Hand.Cards[4].Suit = new Suit { ID = 3, Name = "Clubs" };
+            vpg.Hand.Cards[4].Value = new Value { Number = 7, Name = "Seven" };
             Assert.AreEqual("KINGS OR BETTER", vpg.Hand.Check("JOKERPOKER"));
         }
 

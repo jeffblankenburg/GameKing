@@ -36,6 +36,7 @@
             <Grid Grid.ColumnSpan="11">
                 <Image Source="Assets/pattern.png" Stretch="UniformToFill" />
                 <Image x:Name="Logo" Source="Assets/gamekinglogo.png" Stretch="Uniform" Margin="10" />
+                
             </Grid>
             <Image Grid.Row="2" Grid.Column="1" Source="Assets/gamelogo/DeucesWild.png" Tapped="DeucesWild_Tapped"  />
             <Image Grid.Row="2" Grid.Column="3" Source="Assets/gamelogo/JacksOrBetter.png" Tapped="JacksOrBetter_Tapped"  />
@@ -52,7 +53,7 @@
             <Image Grid.Row="2" Grid.Column="9" Source="Assets/gamelogo/BlackJackBonusPoker.png" Tapped="BlackJackBonusPoker_Tapped"  />
             <Image Grid.Row="4" Grid.Column="9" Source="Assets/gamelogo/JokerPoker.png" Tapped="JokerPoker_Tapped"  />
             <Image Grid.Row="6" Grid.Column="9" Source="Assets/gamelogo/DoubleDoubleBonusPoker.png" Tapped="DoubleDoubleBonusPoker_Tapped"  />
-
+            <Image x:Name="MicrosoftLoginButton" Grid.Row="8" Grid.ColumnSpan="11" Source="Assets/LOGIN_Microsoft.png" Width="200" Height="37" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Tapped="Microsoft_Tapped"/>
             <Viewbox Grid.Row="8" Grid.ColumnSpan="11"><UI:AdControl x:Name="AdBox" ApplicationId="0cd20fbe-8688-49de-b14d-305e604ad2bd" AdUnitId="10063496" Height="90" Width="728" VerticalAlignment="Bottom" Margin="0,0,0,5"/></Viewbox>
         </Grid>
         <local:HandStats x:Name="SnappedState" Visibility="Collapsed" />
