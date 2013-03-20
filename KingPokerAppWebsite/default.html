@@ -1,7 +1,14 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>King Poker Leaderboard</title>
+    <script src="//kingpoker.azure-mobile.net/client/MobileServices.Web-1.0.0.min.js"></script>
+    <script>
+        var client = new WindowsAzure.MobileServiceClient("https://kingpoker.azure-mobile.net/", "TKrwESHysONzEMdZtNMlQrPbNzdjPB94");
+        var table = client.GetTable("HandHistory");
+        var query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+        credits = query.ToListAsync();
+    </script>
 </head>
 <body>
 
