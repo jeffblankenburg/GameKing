@@ -252,7 +252,7 @@
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <!--<shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="share hand" Click="Share_Click" IsEnabled="False"/>-->
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/LogIn.png" Text="login" Click="Login_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/225-LineChart.png" Text="stats" Click="Stats_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/questionmark.png" Text="about" Click="About_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.png" Text="review" Click="Review_Click"/>

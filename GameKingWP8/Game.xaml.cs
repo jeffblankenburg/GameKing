@@ -64,6 +64,7 @@ namespace GameKingWP8
         private void GameSetup()
         {
             if (PokerGame == null) PokerGame = new VideoPokerGame(GameType);
+            SetLoginButtonState();
             LoadAudioFiles();
             LoadCurrentBet();
             LoadPayTable();
@@ -593,6 +594,30 @@ namespace GameKingWP8
             string imagepath = "Assets/gamelogo/" + GameType + ".png";
             BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Relative));
             GameLogo.Source = imagesource;
+        }
+
+        private void Login_Click(object sender, EventArgs e)
+        {
+            App.Registration();
+            SetLoginButtonState();
+        }
+
+        private void SetLoginButtonState()
+        {
+            ApplicationBarIconButton abib = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+
+            if (App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                abib.Text = "log out";
+                abib.IconUri = new Uri("Assets/AppBar/LogOut.png", UriKind.Relative);
+                App.SaveOldHandData();
+            }
+            else
+            {
+                abib.Text = "log in";
+                abib.IconUri = new Uri("Assets/AppBar/LogIn.png", UriKind.Relative);
+            }
+
         }
     }
 }

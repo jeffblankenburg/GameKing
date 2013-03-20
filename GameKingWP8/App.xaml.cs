@@ -254,6 +254,27 @@ namespace GameKingWP8
             }
         }
 
+        public static async void Registration()
+        {
+            if (!settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                try
+                {
+                    MobileServiceUser user = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+                    settings["microsoftuserid"] = user.UserId;
+                    settings.Save();
+                }
+                catch (InvalidOperationException)
+                {
+
+                }
+            }
+            else
+            {
+                App.settings["microsoftuserid"] = String.Empty;
+            }
+        }
+
         public static async void SaveOldHandData()
         {
             IMobileServiceTable<HandHistory> table;

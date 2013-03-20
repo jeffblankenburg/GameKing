@@ -11,6 +11,7 @@ using GameKingWP8.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.WindowsAzure.MobileServices;
+using System.Windows.Media.Imaging;
 
 namespace GameKingWP8
 {
@@ -106,30 +107,11 @@ namespace GameKingWP8
             NavigationService.Navigate(new Uri("/Game.xaml?game=DEUCESWILDBONUSPOKER", UriKind.Relative));
         }
 
-        private async void Stats_Click(object sender, EventArgs e)
+        private void Stats_Click(object sender, EventArgs e)
         {
             //NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
-            if (!App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
-            {
-                try
-                {
-                    MobileServiceUser user = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
-                    App.settings["microsoftuserid"] = user.UserId;
-                    App.settings.Save();
-
-                }
-                catch (InvalidOperationException)
-                {
-
-                }
-
-                SetLoginButtonState();
-            }
-            else
-            {
-                App.settings["microsoftuserid"] = String.Empty;
-                SetLoginButtonState();
-            }
+            App.Registration();
+            SetLoginButtonState();
         }
 
         
@@ -140,16 +122,14 @@ namespace GameKingWP8
             
             if (App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
             {
-                
                 abib.Text = "log out";
-            //    string imagepath = "ms-appx:/Assets/LOGGEDIN_Microsoft.png";
-            //    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
-            //    MicrosoftLoginButton.Source = imagesource;
+                abib.IconUri = new Uri("Assets/AppBar/LogOut.png", UriKind.Relative);
                 App.SaveOldHandData();
             }
             else
             {
                 abib.Text = "log in";
+                abib.IconUri = new Uri("Assets/AppBar/LogIn.png", UriKind.Relative);
             }
             
         }

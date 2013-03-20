@@ -120,7 +120,34 @@ namespace GameKing
 
         void App_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
         {
-            
+            SettingsCommand command = new SettingsCommand("about", "About This App", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new AboutPage(), 346);
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command2 = new SettingsCommand("privacy", "Privacy Policy", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new PrivacyPolicyPage(), 346);
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command3 = new SettingsCommand("stats", "Your Poker Stats", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new Stats(), 646);
+                popup.IsOpen = true;
+            });
+
+            SettingsCommand command4 = new SettingsCommand("preferences", "Preferences", (handler) =>
+            {
+                Popup popup = App.BuildSettingsItem(new Preferences(), 346);
+                popup.IsOpen = true;
+            });
+
+            args.Request.ApplicationCommands.Add(command);
+            args.Request.ApplicationCommands.Add(command4);
+            args.Request.ApplicationCommands.Add(command2);
+            args.Request.ApplicationCommands.Add(command3);
         }
 
         public static Popup BuildSettingsItem(UserControl page, int width)
