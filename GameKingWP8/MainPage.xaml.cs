@@ -107,10 +107,10 @@ namespace GameKingWP8
             NavigationService.Navigate(new Uri("/Game.xaml?game=DEUCESWILDBONUSPOKER", UriKind.Relative));
         }
 
-        private void Stats_Click(object sender, EventArgs e)
+        private async void Stats_Click(object sender, EventArgs e)
         {
             //NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
-            App.Registration();
+            await App.Registration();
             SetLoginButtonState();
         }
 

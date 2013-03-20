@@ -277,6 +277,7 @@
     <Content Include="Assets\numbers\CREDITS.png" />
     <Content Include="Assets\numbers\WIN.png" />
     <Content Include="Assets\pattern.png" />
+    <Content Include="Assets\pattern480_800.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />

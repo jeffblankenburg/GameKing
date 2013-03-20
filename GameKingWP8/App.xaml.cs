@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using PokerLogic;
 using System.Linq;
 using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
 
 namespace GameKingWP8
 {
@@ -254,7 +255,7 @@ namespace GameKingWP8
             }
         }
 
-        public static async void Registration()
+        public static async Task Registration()
         {
             if (!settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
             {

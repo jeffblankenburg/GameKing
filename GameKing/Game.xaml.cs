@@ -149,19 +149,21 @@ namespace GameKing
             if (Windows.UI.Xaml.Window.Current.Bounds.Width <= 320)
             {
                 IsSnapped = true;
-                PayTableGrid.Visibility = Visibility.Collapsed;
-                CardGrid.Visibility = Visibility.Collapsed;
-                ButtonsGrid.Visibility = Visibility.Collapsed;
-                SnappedStats.GrabStats();
-                SnappedStats.Visibility = Visibility.Visible;
+                SnappedStateGrid.Visibility = Visibility.Visible;
+                //PayTableGrid.Visibility = Visibility.Collapsed;
+                //CardGrid.Visibility = Visibility.Collapsed;
+                //ButtonsGrid.Visibility = Visibility.Collapsed;
+                //SnappedStats.GrabStats();
+                //SnappedStats.Visibility = Visibility.Visible;
             }
             else
             {
                 IsSnapped = false;
-                PayTableGrid.Visibility = Visibility.Visible;
-                CardGrid.Visibility = Visibility.Visible;
-                ButtonsGrid.Visibility = Visibility.Visible;
-                SnappedStats.Visibility = Visibility.Collapsed;
+                SnappedStateGrid.Visibility = Visibility.Collapsed;
+                //PayTableGrid.Visibility = Visibility.Visible;
+                //CardGrid.Visibility = Visibility.Visible;
+                //ButtonsGrid.Visibility = Visibility.Visible;
+                //SnappedStats.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -236,6 +238,13 @@ namespace GameKing
             PayTableCoin3.ItemsSource = PokerGame.PayTable;
             PayTableCoin4.ItemsSource = PokerGame.PayTable;
             PayTableCoin5.ItemsSource = PokerGame.PayTable;
+
+            PayTableNamesSNAP.ItemsSource = PokerGame.PayTable;
+            PayTableCoin1SNAP.ItemsSource = PokerGame.PayTable;
+            PayTableCoin2SNAP.ItemsSource = PokerGame.PayTable;
+            PayTableCoin3SNAP.ItemsSource = PokerGame.PayTable;
+            PayTableCoin4SNAP.ItemsSource = PokerGame.PayTable;
+            PayTableCoin5SNAP.ItemsSource = PokerGame.PayTable;
         }
 
         private void Card_MouseLeftButtonDown(object sender, TappedRoutedEventArgs e)
@@ -262,8 +271,17 @@ namespace GameKing
             for (int i = 0; i <= 4; i++)
             {
                 TextBlock hold = (TextBlock)FindName("Hold" + i);
-                if (PokerGame.Hand.Held[i]) hold.Opacity = 1;
-                else hold.Opacity = 0.024;
+                TextBlock held = (TextBlock)FindName("Held" + i);
+                if (PokerGame.Hand.Held[i])
+                {
+                    hold.Opacity = 1;
+                    held.Opacity = 1;
+                }
+                else
+                {
+                    hold.Opacity = 0.024;
+                    held.Opacity = 0.024;
+                }
             }
         }
 
@@ -274,6 +292,11 @@ namespace GameKing
             Hold2.Opacity = 0.024;
             Hold3.Opacity = 0.024;
             Hold4.Opacity = 0.024;
+            Held0.Opacity = 0.024;
+            Held1.Opacity = 0.024;
+            Held2.Opacity = 0.024;
+            Held3.Opacity = 0.024;
+            Held4.Opacity = 0.024;
             PokerGame.Hand.Held[0] = false;
             PokerGame.Hand.Held[1] = false;
             PokerGame.Hand.Held[2] = false;
@@ -389,9 +412,11 @@ namespace GameKing
                 if (!PokerGame.Hand.Held[i])
                 {
                     Image image = (Image)FindName("Card" + i);
+                    Image imageSNAP = (Image)FindName("Snap" + i);
                     string imagepath = "ms-appx:/Assets/cards/BACK.png";
                     BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                     image.Source = imagesource;
+                    imageSNAP.Source = imagesource;
                 }
             }
         }
@@ -429,9 +454,11 @@ namespace GameKing
                     }
 
                     Image image = (Image)FindName("Card" + cardCounter);
+                    Image imageSNAP = (Image)FindName("Snap" + cardCounter);
                     string imagepath = "ms-appx:/Assets/cards/" + PokerGame.Hand.Cards[cardCounter].Suit.ID.ToString() + PokerGame.Hand.Cards[cardCounter].Value.Number.ToString() + x.ToString() + ".png";
                     BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                     image.Source = imagesource;
+                    imageSNAP.Source = imagesource;
                     cardCounter++;
                     CardFlip.Play();
                     CardPause.Begin();
@@ -451,6 +478,7 @@ namespace GameKing
                     App.settings.Values["credits"] = 10000;
                     DrawCredits(10000);
                 }
+                HighlightPayTableSNAP(PayTableNamesSNAP, (ItemsControl)FindName("PayTableCoin" + GamePlayer.CurrentBet + "SNAP"), false);
                 HighlightPayTable(PayTableNames, (ItemsControl)FindName("PayTableCoin" + GamePlayer.CurrentBet), ShouldPayUser);
                 if (ShouldPayUser) SaveHands();
                 IsShowingCards = false;
@@ -560,6 +588,47 @@ namespace GameKing
             }
         }
 
+        private void HighlightPayTableSNAP(DependencyObject target, DependencyObject target2, bool ShouldAwardWinnings)
+        {
+            var count = VisualTreeHelper.GetChildrenCount(target);
+            if (count == 0) return;
+
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(target, i);
+                var child2 = VisualTreeHelper.GetChild(target2, i);
+
+                if (child is TextBlock)
+                {
+                    TextBlock targetItem = (TextBlock)child;
+                    TextBlock targetItem2 = (TextBlock)child2;
+                    if (targetItem.Text.Replace(".", "") == PokerGame.CheckHand(GameType))
+                    {
+                        if (targetItem != null)
+                        {
+                            Storyboard.SetTarget(PayTableTitleBlinkSNAP, targetItem);
+                            PayTableTitleBlinkSNAP.Begin();
+                        }
+                        if (targetItem2 != null)
+                        {
+                            Storyboard.SetTarget(PayTableNumberBlinkSNAP, targetItem2);
+                            PayTableNumberBlinkSNAP.Begin();
+                        }
+
+                        if (ShouldAwardWinnings)
+                        {
+                            AwardWinnings(Int32.Parse(targetItem2.Text));
+                            RecordHand(targetItem.Text.Replace(".", ""));
+                        }
+                        else HoldAlert.Play();
+                        return;
+                    }
+                }
+                else HighlightPayTableSNAP(child, child2, ShouldPayUser);
+
+            }
+        }
+
         private void RecordHand(string HandRank)
         {
             HandRank = HandRank.Replace(",", "");
@@ -574,6 +643,8 @@ namespace GameKing
         {
             PayTableTitleBlink.Stop();
             PayTableNumberBlink.Stop();
+            PayTableTitleBlinkSNAP.Stop();
+            PayTableNumberBlinkSNAP.Stop();
         }
 
         int OldCredits;
@@ -613,6 +684,7 @@ namespace GameKing
         private void DrawCredits(int credits)
         {
             CreditsPanel.Children.Clear();
+            CreditsPanelSNAP.Children.Clear();
             for (int i = credits.ToString().Length-1; i >=0 ; i--)
             {
                 Image j = new Image();
@@ -620,6 +692,10 @@ namespace GameKing
                 BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                 j.Source = imagesource;
                 CreditsPanel.Children.Add(j);
+
+                Image jSNAP = new Image();
+                jSNAP.Source = imagesource;
+                CreditsPanelSNAP.Children.Add(jSNAP);
             }
         }
 

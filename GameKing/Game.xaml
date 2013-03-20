@@ -9,7 +9,20 @@
     mc:Ignorable="d">
     <Page.Resources>
         <Storyboard x:Name="PayTableTitleBlink" RepeatBehavior="Forever">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="PayTableNames">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="PayTableTitleBlinkSNAP" RepeatBehavior="Forever">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="PayTableNamesSNAP">
                 <EasingColorKeyFrame KeyTime="0" Value="White"/>
                 <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
                 <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
@@ -22,7 +35,20 @@
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="PayTableNumberBlink" RepeatBehavior="Forever">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BetText">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="PayTableCoin5">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.799999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.199999" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.599999" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="PayTableNumberBlinkSNAP" RepeatBehavior="Forever">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="PayTableCoin5SNAP">
                 <EasingColorKeyFrame KeyTime="0" Value="White"/>
                 <EasingColorKeyFrame KeyTime="0:0:0.399999" Value="White"/>
                 <EasingColorKeyFrame KeyTime="0:0:0.4" Value="Yellow"/>
@@ -227,6 +253,143 @@
         <Viewbox Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top">
             <TextBlock x:Name="GameName" Text="" Margin="5,3,10,40" VerticalAlignment="Top" FontWeight="Bold"/>
         </Viewbox>
-        <local:HandStats x:Name="SnappedStats" Visibility="Collapsed" />
+        <Grid x:Name="SnappedStateGrid" Grid.RowSpan="5" Background="#00019F" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="64" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="110" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="110" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Image Grid.ColumnSpan="5" Source="Assets/SplashScreen.png" Stretch="UniformToFill" />
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="5" x:Name="PayTableGridSNAP" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="#000000" Grid.ColumnSpan="6"  />
+                <Rectangle Fill="#FCD800" Grid.ColumnSpan="6" Margin="2" />
+                <Rectangle x:Name="CoinBox0SNAP" Fill="#000064" Grid.Column="0" Stroke="#000000" StrokeThickness="2" Margin="4,4,0,4" />
+                <Rectangle x:Name="CoinBox1SNAP" Fill="#000064" Grid.Column="1" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+                <Rectangle x:Name="CoinBox2SNAP" Fill="#000064" Grid.Column="2" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+                <Rectangle x:Name="CoinBox3SNAP" Fill="#000064" Grid.Column="3" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+                <Rectangle x:Name="CoinBox4SNAP" Fill="#000064" Grid.Column="4" Stroke="#000000" StrokeThickness="2" Margin="2,4,0,4" />
+                <Rectangle x:Name="CoinBox5SNAP" Fill="#000064" Grid.Column="5" Stroke="#000000" StrokeThickness="2" Margin="2,4,4,4" />
+                <Viewbox>
+                    <ItemsControl x:Name="PayTableNamesSNAP" Margin="15,15,0,15">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}" Foreground="#FCD800" FontSize="20" Grid.Column="0" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Viewbox>
+                <Viewbox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ItemsControl x:Name="PayTableCoin1SNAP" Margin="15">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Coin1}" Foreground="#FCD800" FontSize="20" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Viewbox>
+                <Viewbox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ItemsControl x:Name="PayTableCoin2SNAP" Margin="15">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Coin2}" Foreground="#FCD800" FontSize="20" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Viewbox>
+                <Viewbox Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ItemsControl x:Name="PayTableCoin3SNAP" Margin="15">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Coin3}" Foreground="#FCD800" FontSize="20" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Viewbox>
+                <Viewbox Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ItemsControl x:Name="PayTableCoin4SNAP" Margin="15">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Coin4}" Foreground="#FCD800" FontSize="20" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Viewbox>
+                <Viewbox Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ItemsControl x:Name="PayTableCoin5SNAP" Margin="15">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Coin5}" Foreground="#FCD800" FontSize="20" Grid.Column="0" FontWeight="Bold" TextAlignment="Right"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Viewbox>
+                
+            </Grid>
+
+            <Viewbox Grid.Column="0" Grid.Row="2">
+                <TextBlock x:Name="Held0" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+            </Viewbox>
+            <Viewbox Grid.Column="1" Grid.Row="2">
+                <TextBlock x:Name="Held1" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+            </Viewbox>
+            <Viewbox Grid.Column="2" Grid.Row="2">
+                <TextBlock x:Name="Held2" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+            </Viewbox>
+            <Viewbox Grid.Column="3" Grid.Row="2">
+                <TextBlock x:Name="Held3" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+            </Viewbox>
+            <Viewbox Grid.Column="4" Grid.Row="2">
+                <TextBlock x:Name="Held4" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+            </Viewbox>
+            <Image x:Name="Snap0" Grid.Column="0" Grid.Row="3" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" Width="58"/>
+            <Image x:Name="Snap1" Grid.Column="1" Grid.Row="3" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" Width="58" />
+            <Image x:Name="Snap2" Grid.Column="2" Grid.Row="3" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" Width="58" />
+            <Image x:Name="Snap3" Grid.Column="3" Grid.Row="3" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" Width="58" />
+            <Image x:Name="Snap4" Grid.Column="4" Grid.Row="3" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" Width="58" />
+            <Grid Grid.Row="4" Grid.ColumnSpan="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="CreditsPanelSNAP" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                    <Image Source="Assets/numbers/0.png" />
+                </StackPanel>
+                <Image Grid.Column="1" Source="Assets/numbers/CREDITS.png" Margin="10,0,0,0" />
+            </Grid>
+            <Grid Grid.Row="5" Grid.ColumnSpan="5" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="Assets/buttons/BETONE.png" Width="90" Tapped="BetOne_Tapped" Margin="5"/>
+                <Image Grid.Column="1" Source="Assets/buttons/BETMAX.png" Width="90" Tapped="BetMax_Tapped" Margin="5"/>
+                <Image Grid.Column="2" Source="Assets/buttons/DEAL.png" Width="90" Tapped="Deal_Click" Margin="5"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
