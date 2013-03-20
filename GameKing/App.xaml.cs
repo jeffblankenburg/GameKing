@@ -193,35 +193,51 @@ namespace GameKing
             StorageFile file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.OpenIfExists);
             string handtext = await FileIO.ReadTextAsync(file);
             List<BothHands> history = JsonConvert.DeserializeObject<List<BothHands>>(handtext);
-            if (history.Count != 0)
+            if (history != null)
             {
-                List<BothHands> historySorted = (from h in history orderby h.TimeStamp descending select h).Take(50).ToList<BothHands>();
-
-                for (int i = 0; i < history.Count; i++)
+                if (history.Count != 0)
                 {
-                    try
-                    {
-                        HandHistory h = new HandHistory((string)App.settings.Values["microsoftuserid"], history[i].CreditCount, history[i].OpeningHand, history[i].ClosingHand, history[i].GameType, history[i].TimeStamp, history[i].IsSnapped, "WINDOWS 8");
-                        await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
-                        history[i].IsOnline = true;
-                    }
-                    catch (Exception ex)
-                    {
+                    List<BothHands> historySorted = (from h in history orderby h.TimeStamp descending select h).Take(50).ToList<BothHands>();
 
+                    for (int i = 0; i < history.Count; i++)
+                    {
+                        if (!history[i].IsOnline)
+                        {
+                            try
+                            {
+                                HandHistory h = new HandHistory((string)App.settings.Values["microsoftuserid"], history[i].CreditCount, history[i].OpeningHand, history[i].ClosingHand, history[i].GameType, history[i].TimeStamp, history[i].IsSnapped, "WINDOWS 8");
+                                await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
+                                history[i].IsOnline = true;
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                        }
+                    }
+
+                    handtext = JsonConvert.SerializeObject(historySorted);
+                    file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.ReplaceExisting);
+                    await FileIO.WriteTextAsync(file, handtext);
+
+                    IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                    MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                    List<HandHistory> credits = await query.ToListAsync();
+
+                    if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                    {
+                        settings.Values["credits"] = credits[0].Credits;
                     }
                 }
-
-                handtext = JsonConvert.SerializeObject(historySorted);
-                file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(file, handtext);
-
-                IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
-                MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                List<HandHistory> credits = await query.ToListAsync();
-
-                if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                else
                 {
-                    settings.Values["credits"] = credits[0].Credits;
+                    IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                    MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                    List<HandHistory> credits = await query.ToListAsync();
+                    if (credits.Count != 0)
+                    {
+                        settings.Values["credits"] = credits[0].Credits;
+                    }
                 }
             }
             else
@@ -229,8 +245,11 @@ namespace GameKing
                 IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
                 MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
                 List<HandHistory> credits = await query.ToListAsync();
-                
-                settings.Values["credits"] = credits[0].Credits;
+
+                if (credits.Count != 0)
+                {
+                    settings.Values["credits"] = credits[0].Credits;
+                }
             }
         }
     }

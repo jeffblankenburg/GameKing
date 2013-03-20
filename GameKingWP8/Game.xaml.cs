@@ -200,28 +200,13 @@ namespace GameKingWP8
             //abib.IsEnabled = false;
         }
 
-        private async void SaveHands()
+        private void SaveHands()
         {
-            bool IsSaved = false;
-
-            if (App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
-            {
-                try
-                {
-                    HandHistory h = new HandHistory((string)App.settings["microsoftuserid"], (int)App.settings["credits"], HandStart, HandEnd, GameType, DateTime.Now, false, "WINDOWS PHONE 8");
-                    await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
-                    IsSaved = true;
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-            
             List<BothHands> handhistory = (List<BothHands>)App.settings["handhistory"];
-            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"], IsSnapped=false, IsOnline=IsSaved};
+            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"], IsSnapped=false, IsOnline=false};
             handhistory.Add(bothhands);
             App.settings["handhistory"] = handhistory;
+            App.SaveOldHandData();
         }
 
         private void ChargeCredits()
@@ -610,7 +595,6 @@ namespace GameKingWP8
             {
                 abib.Text = "log out";
                 abib.IconUri = new Uri("Assets/AppBar/LogOut.png", UriKind.Relative);
-                App.SaveOldHandData();
             }
             else
             {

@@ -288,19 +288,22 @@ namespace GameKingWP8
             {
                 for (int i = 0; i < history.Count; i++)
                 {
-                    try
+                    if (!history[i].IsOnline)
                     {
-                        HandHistory h = new HandHistory((string)App.settings["microsoftuserid"], history[i].CreditCount, history[i].OpeningHand, history[i].ClosingHand, history[i].GameType, history[i].TimeStamp, history[i].IsSnapped, "WINDOWS PHONE 8");
-                        await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
-                        history[i].IsOnline = true;
-                    }
-                    catch (Exception ex)
-                    {
+                        try
+                        {
+                            HandHistory h = new HandHistory((string)App.settings["microsoftuserid"], history[i].CreditCount, history[i].OpeningHand, history[i].ClosingHand, history[i].GameType, history[i].TimeStamp, history[i].IsSnapped, "WINDOWS PHONE 8");
+                            await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
+                            history[i].IsOnline = true;
+                        }
+                        catch (Exception ex)
+                        {
 
+                        }
                     }
                 }
 
-                settings["handhistory"] = (from h in history orderby h.TimeStamp descending select h).Take(50);
+                settings["handhistory"] = (from h in history orderby h.TimeStamp descending select h).Take(50).ToList<BothHands>();
 
                 table = App.MobileService.GetTable<HandHistory>();
                 query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
@@ -316,8 +319,10 @@ namespace GameKingWP8
                 table = App.MobileService.GetTable<HandHistory>();
                 query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
                 credits = await query.ToListAsync();
-                
-                settings["credits"] = credits[0].Credits;
+                if (credits.Count != 0)
+                {
+                    settings["credits"] = credits[0].Credits;
+                }
             }
 
             
