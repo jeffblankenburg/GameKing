@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using GameKingWP8.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace GameKingWP8
 {
@@ -18,6 +19,11 @@ namespace GameKingWP8
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SetLoginButtonState();
         }
 
         private void DeucesWild_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -100,9 +106,52 @@ namespace GameKingWP8
             NavigationService.Navigate(new Uri("/Game.xaml?game=DEUCESWILDBONUSPOKER", UriKind.Relative));
         }
 
-        private void Stats_Click(object sender, EventArgs e)
+        private async void Stats_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
+            //NavigationService.Navigate(new Uri("/Stats.xaml", UriKind.Relative));
+            if (!App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                try
+                {
+                    MobileServiceUser user = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+                    App.settings["microsoftuserid"] = user.UserId;
+                    App.settings.Save();
+
+                }
+                catch (InvalidOperationException)
+                {
+
+                }
+
+                SetLoginButtonState();
+            }
+            else
+            {
+                App.settings["microsoftuserid"] = String.Empty;
+                SetLoginButtonState();
+            }
+        }
+
+        
+
+        private void SetLoginButtonState()
+        {
+            ApplicationBarIconButton abib = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            
+            if (App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                
+                abib.Text = "log out";
+            //    string imagepath = "ms-appx:/Assets/LOGGEDIN_Microsoft.png";
+            //    BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+            //    MicrosoftLoginButton.Source = imagesource;
+                App.SaveOldHandData();
+            }
+            else
+            {
+                abib.Text = "log in";
+            }
+            
         }
 
         private void JokerPoker_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)

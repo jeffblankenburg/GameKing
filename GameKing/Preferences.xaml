@@ -39,13 +39,18 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="30" />
                         <RowDefinition Height="10" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <CheckBox x:Name="KeyboardCheckbox" Checked="KeyboardCheckbox_Checked" Unchecked="KeyboardCheckbox_Unchecked" />
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="16" Text="Use Keyboard Shortcut Keys" FontWeight="Bold" />
-                    <TextBlock Grid.Row="2" Grid.ColumnSpan="2" FontSize="16">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="16" Text="Leaderboard Display Name" FontWeight="Bold" />
+                    <TextBox x:Name="DisplayName" Grid.Row="1" Grid.ColumnSpan="2" TextChanged="DisplayName_TextChanged" />
+                    <CheckBox Grid.Row="3" x:Name="KeyboardCheckbox" Checked="KeyboardCheckbox_Checked" Unchecked="KeyboardCheckbox_Unchecked" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" FontSize="16" Text="Use Keyboard Shortcut Keys" FontWeight="Bold" />
+                    <TextBlock Grid.Row="5" Grid.ColumnSpan="2" FontSize="16">
                         <Run>When you are betting...</Run><LineBreak/>
                         <Run>1 = Bet One</Run><LineBreak/>
                         <Run>5 = Bet Max</Run><LineBreak/>

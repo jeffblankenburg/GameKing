@@ -30,7 +30,7 @@ namespace GameKing
 
         private async void LoadData()
         {
-            StorageFile file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.OpenIfExists);
+            StorageFile file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.OpenIfExists);
             string handtext = await FileIO.ReadTextAsync(file);
 
 

@@ -10,6 +10,7 @@ using GameKingWP8.Resources;
 using System.IO.IsolatedStorage;
 using System.Collections.Generic;
 using PokerLogic;
+using System.Linq;
 using Microsoft.WindowsAzure.MobileServices;
 
 namespace GameKingWP8
@@ -42,6 +43,16 @@ namespace GameKingWP8
             if (!settings.Contains("handhistory"))
             {
                 settings["handhistory"] = new List<BothHands>();
+            }
+
+            if (!settings.Contains("playername"))
+            {
+                settings["playername"] = String.Empty;
+            }
+
+            if (!settings.Contains("microsoftuserid"))
+            {
+                settings["microsoftuserid"] = String.Empty;
             }
             
             // Global handler for uncaught exceptions.
@@ -241,6 +252,56 @@ namespace GameKingWP8
 
                 throw;
             }
+        }
+
+        public static async void SaveOldHandData()
+        {
+            IMobileServiceTable<HandHistory> table;
+            MobileServiceTableQuery<HandHistory> query;
+            List<HandHistory> credits;
+            
+            List<BothHands> history = (List<BothHands>)settings["handhistory"];
+            List<BothHands> historySorted = (from h in history orderby h.TimeStamp descending select h).ToList<BothHands>();
+
+            if (history.Count != 0)
+            {
+                for (int i = 0; i < history.Count; i++)
+                {
+                    try
+                    {
+                        HandHistory h = new HandHistory((string)App.settings["microsoftuserid"], history[i].CreditCount, history[i].OpeningHand, history[i].ClosingHand, history[i].GameType, history[i].TimeStamp, history[i].IsSnapped, "WINDOWS PHONE 8");
+                        await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
+                        history[i].IsOnline = true;
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+
+                settings["handhistory"] = (from h in history orderby h.TimeStamp descending select h).Take(50);
+
+                table = App.MobileService.GetTable<HandHistory>();
+                query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                credits = await query.ToListAsync();
+
+                if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                {
+                    settings["credits"] = credits[0].Credits;
+                }
+            }
+            else
+            {
+                table = App.MobileService.GetTable<HandHistory>();
+                query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                credits = await query.ToListAsync();
+                
+                settings["credits"] = credits[0].Credits;
+            }
+
+            
+
+            
         }
     }
 }

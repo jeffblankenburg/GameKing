@@ -71,14 +71,19 @@ namespace GameKing
                 settings.Values["totalhandsplayed"] = 0;
             }
 
-            if (!settings.Values.ContainsKey("userid"))
+            if (!settings.Values.ContainsKey("microsoftuserid"))
             {
-                settings.Values["userid"] = Guid.NewGuid().ToString();
+                settings.Values["microsoftuserid"] = String.Empty;
             }
 
             if (!settings.Values.ContainsKey("iskeyboardactive"))
             {
                 settings.Values["iskeyboardactive"] = true;
+            }
+
+            if (!settings.Values.ContainsKey("playername"))
+            {
+                settings.Values["playername"] = String.Empty;
             }
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -156,9 +161,50 @@ namespace GameKing
             deferral.Complete();
         }
 
-        public static void SaveHandData(string HandType)
+        public static async void SaveOldHandData()
         {
-            //TODO: Save Every Result 
+            StorageFile file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.OpenIfExists);
+            string handtext = await FileIO.ReadTextAsync(file);
+            List<BothHands> history = JsonConvert.DeserializeObject<List<BothHands>>(handtext);
+            if (history.Count != 0)
+            {
+                List<BothHands> historySorted = (from h in history orderby h.TimeStamp descending select h).Take(50).ToList<BothHands>();
+
+                for (int i = 0; i < history.Count; i++)
+                {
+                    try
+                    {
+                        HandHistory h = new HandHistory((string)App.settings.Values["microsoftuserid"], history[i].CreditCount, history[i].OpeningHand, history[i].ClosingHand, history[i].GameType, history[i].TimeStamp, history[i].IsSnapped, "WINDOWS 8");
+                        await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
+                        history[i].IsOnline = true;
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+
+                handtext = JsonConvert.SerializeObject(historySorted);
+                file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(file, handtext);
+
+                IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                List<HandHistory> credits = await query.ToListAsync();
+
+                if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                {
+                    settings.Values["credits"] = credits[0].Credits;
+                }
+            }
+            else
+            {
+                IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                List<HandHistory> credits = await query.ToListAsync();
+                
+                settings.Values["credits"] = credits[0].Credits;
+            }
         }
     }
 }

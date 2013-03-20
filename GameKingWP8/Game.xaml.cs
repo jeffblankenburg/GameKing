@@ -49,7 +49,6 @@ namespace GameKingWP8
         {
             CreditPause.Completed -= CreditPause_Completed;
             CardPause.Completed -= CardPause_Completed;
-            App.settings.Save();
         }
 
         void CardPause_Completed(object sender, object e)
@@ -200,20 +199,28 @@ namespace GameKingWP8
             //abib.IsEnabled = false;
         }
 
-        private void SaveHands()
+        private async void SaveHands()
         {
+            bool IsSaved = false;
+
+            if (App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                try
+                {
+                    HandHistory h = new HandHistory((string)App.settings["microsoftuserid"], (int)App.settings["credits"], HandStart, HandEnd, GameType, DateTime.Now, false, "WINDOWS PHONE 8");
+                    await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
+                    IsSaved = true;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            
             List<BothHands> handhistory = (List<BothHands>)App.settings["handhistory"];
-            string ANID = "";// UserExtendedProperties.GetValue("ANID2").ToString().Substring(2, 32);
-            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"], ANID = ANID };
+            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings["credits"], IsSnapped=false, IsOnline=IsSaved};
             handhistory.Add(bothhands);
             App.settings["handhistory"] = handhistory;
-            //WriteDataToMobileService(bothhands);
-            //App.settings.Save();
-        }
-
-        private async void WriteDataToMobileService(BothHands bh)
-        {
-            await App.MobileService.GetTable<BothHands>().InsertAsync(bh);
         }
 
         private void ChargeCredits()

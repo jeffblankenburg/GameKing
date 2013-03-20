@@ -38,8 +38,10 @@
   <ItemGroup>
     <Compile Include="BothHands.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="CreditLeaderboardItem.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="Hand.cs" />
+    <Compile Include="HandHistory.cs" />
     <Compile Include="HelpContent.cs" />
     <Compile Include="HelpItem.cs" />
     <Compile Include="PayTableItem.cs" />

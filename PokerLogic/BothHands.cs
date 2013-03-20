@@ -14,6 +14,8 @@ namespace PokerLogic
         public DateTime TimeStamp { get; set; }
         public string GameType { get; set; }
         public int CreditCount { get; set; }
+        public bool IsOnline { get; set; }
+        public bool IsSnapped { get; set; }
 
         public BothHands()
         {

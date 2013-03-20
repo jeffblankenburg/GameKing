@@ -35,6 +35,7 @@ namespace GameKing
         bool HoldRound = false;
         bool ShouldResize = false;
         bool CanShare = false;
+        bool IsSnapped = false;
         int handCounter = 0;
         Hand HandStart;
         Hand HandEnd;
@@ -182,6 +183,7 @@ namespace GameKing
         {
             if (Windows.UI.Xaml.Window.Current.Bounds.Width <= 320)
             {
+                IsSnapped = true;
                 PayTableGrid.Visibility = Visibility.Collapsed;
                 CardGrid.Visibility = Visibility.Collapsed;
                 ButtonsGrid.Visibility = Visibility.Collapsed;
@@ -190,6 +192,7 @@ namespace GameKing
             }
             else
             {
+                IsSnapped = false;
                 PayTableGrid.Visibility = Visibility.Visible;
                 CardGrid.Visibility = Visibility.Visible;
                 ButtonsGrid.Visibility = Visibility.Visible;
@@ -395,18 +398,31 @@ namespace GameKing
 
         private async void SaveHands()
         {
-            StorageFile file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.OpenIfExists);
+            bool IsSaved = false;
+
+            if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                try
+                {
+                    HandHistory h = new HandHistory((string)App.settings.Values["microsoftuserid"], (int)App.settings.Values["credits"], HandStart, HandEnd, GameType, DateTime.Now, IsSnapped, "WINDOWS 8");
+                    await App.MobileService.GetTable<HandHistory>().InsertAsync(h);
+                    IsSaved = true;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            StorageFile file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.OpenIfExists);
             string handtext = await FileIO.ReadTextAsync(file);
-
-
             List<BothHands> handhistory = JsonConvert.DeserializeObject<List<BothHands>>(handtext);
             if (handhistory == null) handhistory = new List<BothHands>();
-            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings.Values["credits"], ANID = App.settings.Values["userid"].ToString() };
+            BothHands bothhands = new BothHands { OpeningHand = HandStart, ClosingHand = HandEnd, GameType = GameType, CreditCount = (int)App.settings.Values["credits"], IsOnline = IsSaved, IsSnapped = IsSnapped };
             handhistory.Add(bothhands);
             handtext = JsonConvert.SerializeObject(handhistory);
-            //WriteDataToMobileService(handtext);
 
-            file = await App.files.CreateFileAsync("handhistory.txt", CreationCollisionOption.ReplaceExisting);
+            file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, handtext);
         }
 

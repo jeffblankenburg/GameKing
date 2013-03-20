@@ -40,6 +40,7 @@ namespace GameKing
             SizeChanged += Game_SizeChanged;
             Loaded += MainPage_Loaded;
             SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
+            SetLoginButtonState();
         }
 
         void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
@@ -193,21 +194,44 @@ namespace GameKing
 
         private async void Microsoft_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            try
+            if (!App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
             {
-                MobileServiceUser user = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+                try
+                {
+                    MobileServiceUser user = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+                    App.settings.Values["microsoftuserid"] = user.UserId;
 
+                }
+                catch (InvalidOperationException)
+                {
+
+                }
+
+                SetLoginButtonState();
             }
-            catch (InvalidOperationException)
+            else
             {
-
+                App.settings.Values["microsoftuserid"] = String.Empty;
+                SetLoginButtonState();
             }
-            finally
+        }
+
+        private void SetLoginButtonState()
+        {
+            if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
             {
                 string imagepath = "ms-appx:/Assets/LOGGEDIN_Microsoft.png";
                 BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                 MicrosoftLoginButton.Source = imagesource;
+                App.SaveOldHandData();
             }
+            else
+            {
+                string imagepath = "ms-appx:/Assets/LOGIN_Microsoft.png";
+                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                MicrosoftLoginButton.Source = imagesource;
+            }
+            
         }
     }
 }

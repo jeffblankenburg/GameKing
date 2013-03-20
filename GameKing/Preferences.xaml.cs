@@ -29,6 +29,7 @@ namespace GameKing
         {
             bool keyboard = (bool)App.settings.Values["iskeyboardactive"];
             KeyboardCheckbox.IsChecked = keyboard;
+            DisplayName.Text = App.settings.Values["playername"].ToString();
         }
 
 
@@ -57,6 +58,11 @@ namespace GameKing
         private void KeyboardCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             App.settings.Values["iskeyboardactive"] = false;
+        }
+
+        private void DisplayName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            App.settings.Values["playername"] = DisplayName.Text;
         }
     }
 }
