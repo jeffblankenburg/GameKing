@@ -176,6 +176,7 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\ArrowS.png" />
     <Content Include="Assets\audio\carddeal.wav" />
     <Content Include="Assets\audio\click.wav" />
     <Content Include="Assets\audio\onebet.wav" />

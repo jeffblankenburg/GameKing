@@ -25,6 +25,16 @@ namespace GameKingWP8
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SetLoginButtonState();
+            ShowAlertBox();
+        }
+
+        private void ShowAlertBox()
+        {
+            if (((bool)App.settings["showalertbox"]))
+            {
+                AlertBox.Visibility = Visibility.Visible;
+            }
+            else AlertBox.Visibility = Visibility.Collapsed;
         }
 
         private void DeucesWild_Tapped(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -150,6 +160,13 @@ namespace GameKingWP8
         {
             PlayClick();
             NavigationService.Navigate(new Uri("/Game.xaml?game=BLACKJACKBONUSPOKER", UriKind.Relative));
+        }
+
+        private void AlertBoxClose_Click(object sender, RoutedEventArgs e)
+        {
+            AlertBox.Visibility = Visibility.Collapsed;
+            App.settings["showalertbox"] = false;
+            App.settings["alertdate"] = DateTime.Now.ToString();
         }
     }
 }

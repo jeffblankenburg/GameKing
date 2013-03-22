@@ -312,6 +312,12 @@ namespace GameKing
             CoinBox3.Fill = Blue;
             CoinBox4.Fill = Blue;
             CoinBox5.Fill = Blue;
+
+            CoinBox1SNAP.Fill = Blue;
+            CoinBox2SNAP.Fill = Blue;
+            CoinBox3SNAP.Fill = Blue;
+            CoinBox4SNAP.Fill = Blue;
+            CoinBox5SNAP.Fill = Blue;
         }
 
         private void Deal_Click(object sender, TappedRoutedEventArgs e)
@@ -549,7 +555,9 @@ namespace GameKing
         {
             ResetReds();
             Rectangle r = (Rectangle)FindName("CoinBox" + GamePlayer.CurrentBet);
+            Rectangle rSNAP = (Rectangle)FindName("CoinBox" + GamePlayer.CurrentBet + "SNAP");
             r.Fill = Red;
+            rSNAP.Fill = Red;
             BetText.Text = "BET   " + GamePlayer.CurrentBet;
         }
 

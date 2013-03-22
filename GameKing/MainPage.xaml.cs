@@ -41,6 +41,16 @@ namespace GameKing
             Loaded += MainPage_Loaded;
             SettingsPane.GetForCurrentView().CommandsRequested += MainPage_CommandsRequested;
             SetLoginButtonState();
+            ShowAlertBox();
+        }
+
+        private void ShowAlertBox()
+        {
+            if (((bool)App.settings.Values["showalertbox"]))
+            {
+                AlertBox.Visibility = Visibility.Visible;
+            }
+            else AlertBox.Visibility = Visibility.Collapsed;
         }
 
         void MainPage_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
@@ -192,6 +202,13 @@ namespace GameKing
                 MicrosoftLoginButton.Source = imagesource;
             }
             
+        }
+
+        private void AlertBoxClose_Click(object sender, RoutedEventArgs e)
+        {
+            AlertBox.Visibility = Visibility.Collapsed;
+            App.settings.Values["showalertbox"] = false;
+            App.settings.Values["alertdate"] = DateTime.Now.ToString();
         }
     }
 }

@@ -167,6 +167,7 @@
     <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Arrow.png" />
     <Content Include="Assets\audio\carddeal.wav" />
     <Content Include="Assets\audio\click.wav" />
     <Content Include="Assets\audio\jackpot.wav" />

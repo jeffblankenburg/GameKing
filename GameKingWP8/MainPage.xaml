@@ -61,10 +61,29 @@
         <Grid Grid.Row="12" Grid.ColumnSpan="7" VerticalAlignment="Bottom">
             <UI:AdControl Height="80" Width="480" AdUnitId="10064434" ApplicationId="a9715b4b-5605-4435-8277-a77762734368" />
         </Grid>
+        <Grid x:Name="AlertBox" Grid.Row="2" Grid.RowSpan="9" Grid.Column="1" Grid.ColumnSpan="5" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="#000064" Stroke="#FCD800" StrokeThickness="5" />
+            <TextBlock Grid.Row="0" Text="New Features!" FontSize="44" Foreground="White" FontWeight="Light" Margin="20,20,0,0" />
+            <TextBlock Grid.Row="1" FontSize="12" Foreground="White" Margin="20" TextWrapping="Wrap">
+                <Run FontWeight="Bold">In this release of King Poker, we've added a bunch of new features:</Run><LineBreak/><LineBreak/>
+                <Run>* 3 new games: Joker Poker, Black Jack Bonus Poker, and Double Double Bonus Poker.</Run><LineBreak/><LineBreak/>
+                <Run>* Added a "Hand History" to show you your last 50 hands played.</Run><LineBreak/><LineBreak/>
+                <Run>* Added "help" for each game to explain the strategy you should use.</Run><LineBreak/><LineBreak/>
+                <Run>* Added credit synchronization between your Windows 8 and Windows Phone devices, and a history of EVERY HAND.</Run><LineBreak/><LineBreak/><LineBreak/>
+                <Run FontWeight="Bold">Log in with your Microsoft Account below, and your credits will sync automatically!</Run>
+            </TextBlock>
+            <Image Source="Assets/ArrowS.png" Grid.Row="1" Height="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" />
+            
+                            <Button Content="Close" Click="AlertBoxClose_Click" Grid.Row="1" FontSize="14" Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                    </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/225-LineChart.png" Text="stats" Click="Stats_Click"/>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/Login.png" Text="log in" Click="Stats_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

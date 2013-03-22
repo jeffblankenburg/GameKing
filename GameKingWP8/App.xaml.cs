@@ -13,6 +13,7 @@ using PokerLogic;
 using System.Linq;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
+using Microsoft.Phone.Notification;
 
 namespace GameKingWP8
 {
@@ -25,12 +26,17 @@ namespace GameKingWP8
         public static PhoneApplicationFrame RootFrame { get; private set; }
         public static MobileServiceClient MobileService = new MobileServiceClient("https://kingpoker.azure-mobile.net/", "TKrwESHysONzEMdZtNMlQrPbNzdjPB94");
         public static IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+        public DateTime AlertDate;
+        public static HttpNotificationChannel CurrentChannel { get; private set; }
+
 
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
         {
+            AlertDate = new DateTime(2013, 3, 22);
+            
             if (!settings.Contains("credits"))
             {
                 settings["credits"] = 10000;
@@ -54,6 +60,17 @@ namespace GameKingWP8
             if (!settings.Contains("microsoftuserid"))
             {
                 settings["microsoftuserid"] = String.Empty;
+            }
+
+            if (!settings.Contains("alertdate"))
+            {
+                settings["showalertbox"] = true;
+                settings["alertdate"] = DateTime.Now.ToString();
+            }
+
+            if (DateTime.Parse(settings["alertdate"].ToString()) < AlertDate)
+            {
+                settings["showalertbox"] = true;
             }
             
             // Global handler for uncaught exceptions.
@@ -94,6 +111,7 @@ namespace GameKingWP8
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            //AcquirePushChannel();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -134,6 +152,24 @@ namespace GameKingWP8
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+        }
+
+        private void AcquirePushChannel()
+        {
+            CurrentChannel = HttpNotificationChannel.Find("MyPushChannel");
+
+
+            if (CurrentChannel == null)
+            {
+                CurrentChannel = new HttpNotificationChannel("MyPushChannel");
+                CurrentChannel.Open();
+                CurrentChannel.BindToShellTile();
+            }
+
+
+            IMobileServiceTable<Channel> channelTable = App.MobileService.GetTable<Channel>();
+            var channel = new Channel { Uri = CurrentChannel.ChannelUri.ToString() };
+            channelTable.InsertAsync(channel);
         }
 
         #region Phone application initialization

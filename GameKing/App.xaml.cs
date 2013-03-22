@@ -32,6 +32,7 @@ namespace GameKing
         public static MobileServiceClient MobileService = new MobileServiceClient("https://kingpoker.azure-mobile.net/","TKrwESHysONzEMdZtNMlQrPbNzdjPB94");
         public static ApplicationDataContainer settings;
         public static StorageFolder files;
+        public DateTime AlertDate;
         
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -52,6 +53,7 @@ namespace GameKing
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             SettingsPane.GetForCurrentView().CommandsRequested += App_CommandsRequested;
+            AlertDate = new DateTime(2013,3,22);
             
             settings = ApplicationData.Current.LocalSettings;
             files = ApplicationData.Current.LocalFolder;
@@ -84,6 +86,17 @@ namespace GameKing
             if (!settings.Values.ContainsKey("playername"))
             {
                 settings.Values["playername"] = String.Empty;
+            }
+
+            if (!settings.Values.ContainsKey("alertdate"))
+            {
+                settings.Values["showalertbox"] = true;
+                settings.Values["alertdate"] = DateTime.Now.ToString();
+            }
+
+            if (DateTime.Parse(settings.Values["alertdate"].ToString()) < AlertDate)
+            {
+                settings.Values["showalertbox"] = true;
             }
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -220,35 +233,56 @@ namespace GameKing
                     file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.ReplaceExisting);
                     await FileIO.WriteTextAsync(file, handtext);
 
-                    IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
-                    MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                    List<HandHistory> credits = await query.ToListAsync();
-
-                    if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                    try
                     {
-                        settings.Values["credits"] = credits[0].Credits;
+                        IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                        MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                        List<HandHistory> credits = await query.ToListAsync();
+
+                        if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                        {
+                            settings.Values["credits"] = credits[0].Credits;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
                     }
                 }
                 else
                 {
+                    try
+                    {
+                        IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                        MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                        List<HandHistory> credits = await query.ToListAsync();
+                        if (credits.Count != 0)
+                        {
+                            settings.Values["credits"] = credits[0].Credits;
+                        }
+                    }
+                catch (Exception ex)
+                {
+
+                }
+                }
+            }
+            else
+            {
+                try
+                {
                     IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
                     MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
                     List<HandHistory> credits = await query.ToListAsync();
+
                     if (credits.Count != 0)
                     {
                         settings.Values["credits"] = credits[0].Credits;
                     }
                 }
-            }
-            else
-            {
-                IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
-                MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                List<HandHistory> credits = await query.ToListAsync();
-
-                if (credits.Count != 0)
+                catch (Exception ex)
                 {
-                    settings.Values["credits"] = credits[0].Credits;
+
                 }
             }
         }
