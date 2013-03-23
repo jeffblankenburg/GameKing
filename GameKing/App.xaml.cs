@@ -235,13 +235,15 @@ namespace GameKing
 
                     try
                     {
-                        IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
-                        MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                        List<HandHistory> credits = await query.ToListAsync();
-
-                        if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                        if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
                         {
-                            settings.Values["credits"] = credits[0].Credits;
+                            IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                            MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                            List<HandHistory> credits = await query.ToListAsync();
+                            if (credits.Count != 0)
+                            {
+                                settings.Values["credits"] = credits[0].Credits;
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -253,12 +255,15 @@ namespace GameKing
                 {
                     try
                     {
-                        IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
-                        MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                        List<HandHistory> credits = await query.ToListAsync();
-                        if (credits.Count != 0)
+                        if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
                         {
-                            settings.Values["credits"] = credits[0].Credits;
+                            IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                            MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                            List<HandHistory> credits = await query.ToListAsync();
+                            if (credits.Count != 0)
+                            {
+                                settings.Values["credits"] = credits[0].Credits;
+                            }
                         }
                     }
                 catch (Exception ex)
@@ -271,13 +276,15 @@ namespace GameKing
             {
                 try
                 {
-                    IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
-                    MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                    List<HandHistory> credits = await query.ToListAsync();
-
-                    if (credits.Count != 0)
+                    if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
                     {
-                        settings.Values["credits"] = credits[0].Credits;
+                        IMobileServiceTable<HandHistory> table = App.MobileService.GetTable<HandHistory>();
+                        MobileServiceTableQuery<HandHistory> query = table.Where(i => i.MicrosoftAccountID == settings.Values["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                        List<HandHistory> credits = await query.ToListAsync();
+                        if (credits.Count != 0)
+                        {
+                            settings.Values["credits"] = credits[0].Credits;
+                        }
                     }
                 }
                 catch (Exception ex)

@@ -342,23 +342,30 @@ namespace GameKingWP8
 
                 settings["handhistory"] = (from h in history orderby h.TimeStamp descending select h).Take(50).ToList<BothHands>();
 
-                table = App.MobileService.GetTable<HandHistory>();
-                query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                credits = await query.ToListAsync();
-
-                if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                if (App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
                 {
-                    settings["credits"] = credits[0].Credits;
+                    table = App.MobileService.GetTable<HandHistory>();
+                    query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                    credits = await query.ToListAsync();
+
+                    if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                    {
+                        settings["credits"] = credits[0].Credits;
+                    }
                 }
             }
             else
             {
-                table = App.MobileService.GetTable<HandHistory>();
-                query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
-                credits = await query.ToListAsync();
-                if (credits.Count != 0)
+                if (App.settings["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
                 {
-                    settings["credits"] = credits[0].Credits;
+                    table = App.MobileService.GetTable<HandHistory>();
+                    query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
+                    credits = await query.ToListAsync();
+
+                    if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                    {
+                        settings["credits"] = credits[0].Credits;
+                    }
                 }
             }
 

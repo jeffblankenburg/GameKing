@@ -344,14 +344,15 @@
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>21982JeffBlankenburg.BowlingStatsPro</MainPackageIdentityName>
+    <MainPackageIdentityName>21982JeffBlankenburg.CrazyMonkeyShooter</MainPackageIdentityName>
     <MainPackageIdentityName>21982JeffBlankenburg.GameKing</MainPackageIdentityName>
     <MainPackageIdentityName>21982JeffBlankenburg.Tapscotch</MainPackageIdentityName>
     <MainPackageIdentityName>21982JeffBlankenburg.VideoPokerKing</MainPackageIdentityName>
   </AccountPackageIdentityNames>
   <PackageInfoList LandingUrl="https://appdev.microsoft.com:443/StorePortals/Developer/Catalog/ReleaseAnchor/bc8d046c-e35d-49fa-824e-eccf675c7a12">
     <PackageInfo>
-      <PackageArchitecture>neutral</PackageArchitecture>
-      <PackageMaxArchitectureVersion>1.2.0.7</PackageMaxArchitectureVersion>
+      <PackageArchitecture />
+      <PackageMaxArchitectureVersion>0.0.0.0</PackageMaxArchitectureVersion>
     </PackageInfo>
   </PackageInfoList>
 </StoreAssociation>
