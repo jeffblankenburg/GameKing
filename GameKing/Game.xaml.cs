@@ -23,6 +23,7 @@ using Newtonsoft.Json;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Core;
 using Windows.UI.ApplicationSettings;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace GameKing
 {
@@ -403,7 +404,11 @@ namespace GameKing
 
             file = await App.files.CreateFileAsync("handhistory2.txt", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, handtext);
-            App.SaveOldHandData();
+            App.UpdateLiveTiles(HandEnd.Check(GameType), GameType);
+            if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                App.SaveOldHandData();
+            }
         }
 
         private async void WriteDataToMobileService(string bh)
@@ -753,5 +758,61 @@ namespace GameKing
                 AdBox.Resume();
             }
         }
+
+        private void MouseOver(object sender, PointerRoutedEventArgs e)
+        {
+            Image i = sender as Image;
+            i.Opacity = .75;
+        }
+
+        private void MouseOut(object sender, PointerRoutedEventArgs e)
+        {
+            Image i = sender as Image;
+            i.Opacity = 1;
+        }
+
+        private async void LogIn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                try
+                {
+                    MobileServiceUser user = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+                    App.settings.Values["microsoftuserid"] = user.UserId;
+
+                }
+                catch (InvalidOperationException)
+                {
+
+                }
+
+                SetLoginButtonState();
+            }
+            else
+            {
+                App.settings.Values["microsoftuserid"] = String.Empty;
+                SetLoginButtonState();
+            }
+        }
+
+        private void SetLoginButtonState()
+        {
+            if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
+            {
+                string imagepath = "ms-appx:/Assets/buttons/LOGOUT.png";
+                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                MicrosoftLoginButton.Source = imagesource;
+                App.SaveOldHandData();
+            }
+            else
+            {
+                string imagepath = "ms-appx:/Assets/buttons/LOGIN.png";
+                BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
+                MicrosoftLoginButton.Source = imagesource;
+            }
+
+        }
+
+        
     }
 }

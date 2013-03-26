@@ -19,6 +19,8 @@ using PokerLogic;
 using Newtonsoft.Json;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -292,6 +294,39 @@ namespace GameKing
 
                 }
             }
+        }
+
+        public static void UpdateLiveTiles(string outcome, string gametype)
+        {
+            //Create the Large Tile exactly the same way.
+            XmlDocument largeTileData = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWidePeekImage02);
+            XmlNodeList largeTextData = largeTileData.GetElementsByTagName("text");
+            XmlNodeList imageData = largeTileData.GetElementsByTagName("image");
+            largeTextData[0].InnerText = settings.Values["credits"].ToString() + " credits";
+            largeTextData[2].InnerText = outcome;
+            largeTextData[3].InnerText = DateTime.Now.ToString();
+            ((XmlElement)imageData[0]).SetAttribute("src", "ms-appx:///Assets/gamelogo/" + gametype + ".png");
+            
+
+            //Create a Small Tile notification also (not required, but recommended.)
+            XmlDocument smallTileData = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText03);
+            XmlNodeList smallTileText = smallTileData.GetElementsByTagName("text");
+            smallTileText[0].InnerText = settings.Values["credits"].ToString() + " CREDITS";
+            smallTileText[1].InnerText = outcome;
+            smallTileText[2].InnerText = DateTime.Now.ToString("d");
+            smallTileText[3].InnerText = DateTime.Now.ToString("t");
+
+            //Merge the two updates into one <visual> XML node
+            IXmlNode newNode = largeTileData.ImportNode(smallTileData.GetElementsByTagName("binding").Item(0), true);
+            largeTileData.GetElementsByTagName("visual").Item(0).AppendChild(newNode);
+
+            //Create the notification the same way.
+            TileNotification notification = new TileNotification(largeTileData);
+            notification.ExpirationTime = DateTimeOffset.UtcNow.AddDays(5);
+
+            //Push the update to the tile.
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
+
         }
     }
 }

@@ -236,16 +236,16 @@
                 <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Image Source="Assets/buttons/HELP.png" Tapped="Help_Tapped" Margin="0,0,10,0" />
-                <Image Source="Assets/buttons/MOREGAMES.png" Tapped="MoreGames_Tapped" Margin="0,0,10,0" />
+                <Image x:Name="HELP" Source="Assets/buttons/HELP.png" Tapped="Help_Tapped" Margin="0,0,10,0" PointerEntered="MouseOver" PointerExited="MouseOut" />
+                <Image x:Name="MOREGAMES" Source="Assets/buttons/MOREGAMES.png" Tapped="MoreGames_Tapped" Margin="0,0,10,0" PointerEntered="MouseOver" PointerExited="MouseOut" />
                 <Image x:Name="ShareButton" Source="Assets/buttons/BLANK.png" Margin="0,0,10,0" Tapped="ShareButton_Tapped" />
             </StackPanel>
             
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Image Source="Assets/buttons/BLANK.png" Margin="0,0,10,0"/>
-                <Image Source="Assets/buttons/BETONE.png" Margin="0,0,10,0" Tapped="BetOne_Tapped"/>
-                <Image Source="Assets/buttons/BETMAX.png" Margin="0,0,10,0" Tapped="BetMax_Tapped"/>
-                <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Tapped="Deal_Click"/>
+                <Image x:Name="BETONE" Source="Assets/buttons/BETONE.png" Margin="0,0,10,0" Tapped="BetOne_Tapped" PointerEntered="MouseOver" PointerExited="MouseOut"/>
+                <Image x:Name="BETMAX" Source="Assets/buttons/BETMAX.png" Margin="0,0,10,0" Tapped="BetMax_Tapped" PointerEntered="MouseOver" PointerExited="MouseOut"/>
+                <Image x:Name="DealButton" Source="Assets/buttons/DEAL.png" Tapped="Deal_Click" PointerEntered="MouseOver" PointerExited="MouseOut"/>
             </StackPanel>
         </Grid>
         
@@ -267,7 +267,7 @@
                 <RowDefinition Height="15" />
                 <RowDefinition Height="110" />
                 <RowDefinition Height="35" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="120" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Image Grid.ColumnSpan="5" Source="Assets/SplashScreen.png" Stretch="UniformToFill" />
@@ -347,19 +347,19 @@
             </Grid>
 
             <Viewbox Grid.Column="0" Grid.Row="2">
-                <TextBlock x:Name="Held0" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+                <TextBlock x:Name="Held0" Text="HELD" Opacity=".024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
             </Viewbox>
             <Viewbox Grid.Column="1" Grid.Row="2">
-                <TextBlock x:Name="Held1" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+                <TextBlock x:Name="Held1" Text="HELD" Opacity=".024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
             </Viewbox>
             <Viewbox Grid.Column="2" Grid.Row="2">
-                <TextBlock x:Name="Held2" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+                <TextBlock x:Name="Held2" Text="HELD" Opacity=".024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
             </Viewbox>
             <Viewbox Grid.Column="3" Grid.Row="2">
-                <TextBlock x:Name="Held3" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+                <TextBlock x:Name="Held3" Text="HELD" Opacity=".024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
             </Viewbox>
             <Viewbox Grid.Column="4" Grid.Row="2">
-                <TextBlock x:Name="Held4" Text="HELD" Opacity="1.024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
+                <TextBlock x:Name="Held4" Text="HELD" Opacity=".024" FontSize="24" FontFamily="Arial" FontWeight="ExtraBold" TextAlignment="Center" VerticalAlignment="Top" Margin="10" />
             </Viewbox>
             <Image x:Name="Snap0" Grid.Column="0" Grid.Row="3" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" Width="58"/>
             <Image x:Name="Snap1" Grid.Column="1" Grid.Row="3" Source="Assets/cards/BACK.png" Tapped="Card_MouseLeftButtonDown" VerticalAlignment="Top" ImageOpened="Card_ImageOpened" Width="58" />
@@ -386,9 +386,16 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="Assets/buttons/BETONE.png" Width="90" Tapped="BetOne_Tapped" Margin="5"/>
-                <Image Grid.Column="1" Source="Assets/buttons/BETMAX.png" Width="90" Tapped="BetMax_Tapped" Margin="5"/>
-                <Image Grid.Column="2" Source="Assets/buttons/DEAL.png" Width="90" Tapped="Deal_Click" Margin="5"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Source="Assets/buttons/BETONE.png" Width="90" Tapped="BetOne_Tapped" Margin="5" PointerEntered="MouseOver" PointerExited="MouseOut"/>
+                <Image Grid.Column="1" Source="Assets/buttons/BETMAX.png" Width="90" Tapped="BetMax_Tapped" Margin="5" PointerEntered="MouseOver" PointerExited="MouseOut"/>
+                <Image Grid.Column="2" Source="Assets/buttons/DEAL.png" Width="90" Tapped="Deal_Click" Margin="5" PointerEntered="MouseOver" PointerExited="MouseOut"/>
+                <Image x:Name="MicrosoftLoginButton" Grid.Column="0" Grid.Row="1" Source="Assets/buttons/LOGIN.png" Width="90" Tapped="LogIn_Tapped" Margin="5" PointerEntered="MouseOver" PointerExited="MouseOut"/>
+                <Image Grid.Column="1" Grid.Row="1" Source="Assets/buttons/BLANK.png" Width="90" Margin="5" />
+                <Image Grid.Column="2" Grid.Row="1" Source="Assets/buttons/MOREGAMES.png" Width="90" Tapped="MoreGames_Tapped" Margin="5" PointerEntered="MouseOver" PointerExited="MouseOut"/>
             </Grid>
         </Grid>
     </Grid>

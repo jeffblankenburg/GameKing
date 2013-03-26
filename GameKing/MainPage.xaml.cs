@@ -69,7 +69,6 @@ namespace GameKing
             if (Windows.UI.Xaml.Window.Current.Bounds.Width <= 320)
             {
                 FullScreen.Visibility = Visibility.Collapsed;
-                SnappedState.GrabStats();
                 SnappedState.Visibility = Visibility.Visible;
             }
             else
@@ -190,14 +189,14 @@ namespace GameKing
         {
             if (App.settings.Values["microsoftuserid"].ToString().Contains("MicrosoftAccount"))
             {
-                string imagepath = "ms-appx:/Assets/LOGGEDIN_Microsoft.png";
+                string imagepath = "ms-appx:/Assets/buttons/LOGOUT.png";
                 BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                 MicrosoftLoginButton.Source = imagesource;
                 App.SaveOldHandData();
             }
             else
             {
-                string imagepath = "ms-appx:/Assets/LOGIN_Microsoft.png";
+                string imagepath = "ms-appx:/Assets/buttons/LOGIN.png";
                 BitmapImage imagesource = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                 MicrosoftLoginButton.Source = imagesource;
             }
@@ -209,6 +208,18 @@ namespace GameKing
             AlertBox.Visibility = Visibility.Collapsed;
             App.settings.Values["showalertbox"] = false;
             App.settings.Values["alertdate"] = DateTime.Now.ToString();
+        }
+
+        private void MouseOver(object sender, PointerRoutedEventArgs e)
+        {
+            Image i = sender as Image;
+            i.Opacity = .75;
+        }
+
+        private void MouseOut(object sender, PointerRoutedEventArgs e)
+        {
+            Image i = sender as Image;
+            i.Opacity = 1;
         }
     }
 }

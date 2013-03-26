@@ -179,6 +179,8 @@
     <Content Include="Assets\buttons\BLANK.png" />
     <Content Include="Assets\buttons\DEAL.png" />
     <Content Include="Assets\buttons\HELP.png" />
+    <Content Include="Assets\buttons\LOGIN.png" />
+    <Content Include="Assets\buttons\LOGOUT.png" />
     <Content Include="Assets\buttons\MOREGAMES.png" />
     <Content Include="Assets\buttons\SEEPAYS.png" />
     <Content Include="Assets\buttons\SHARE.png" />
