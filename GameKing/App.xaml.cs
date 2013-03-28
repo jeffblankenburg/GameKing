@@ -135,7 +135,7 @@ namespace GameKing
 
         void App_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
         {
-            SettingsCommand command = new SettingsCommand("about", "About This App", (handler) =>
+            SettingsCommand command = new SettingsCommand("about", "Feedback & Support", (handler) =>
             {
                 Popup popup = App.BuildSettingsItem(new AboutPage(), 346);
                 popup.IsOpen = true;
@@ -159,10 +159,10 @@ namespace GameKing
                 popup.IsOpen = true;
             });
 
-            args.Request.ApplicationCommands.Add(command);
             args.Request.ApplicationCommands.Add(command4);
             args.Request.ApplicationCommands.Add(command2);
             args.Request.ApplicationCommands.Add(command3);
+            args.Request.ApplicationCommands.Add(command);
         }
 
         public static Popup BuildSettingsItem(UserControl page, int width)

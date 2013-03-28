@@ -25,7 +25,7 @@
 
                 <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="40, 32, 17, 13">
                     <Button x:Name="BackButton" Margin="0,3,0,0" Style="{StaticResource BackButtonStyle}" Click="BackButton_Click"/>
-                    <TextBlock Margin="10,10,0,0" FontFamily="Segoe UI" FontWeight="SemiLight" FontSize="24.6667" Text="About King Poker" Foreground="White"/>
+                    <TextBlock Margin="10,10,0,0" FontFamily="Segoe UI" FontWeight="SemiLight" FontSize="24.6667" Text="Feedback &amp; Support" Foreground="White"/>
                 </StackPanel>
                 <Image Source="Assets/SmallLogo.png" Width="29" Height="29" Margin="353,46,17,21" />
             </Grid>
@@ -36,8 +36,9 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
                 <Grid Margin="40,33,40,39" VerticalAlignment="Top" Grid.RowSpan="3">
                     <StackPanel Grid.Row="1" >
-                        <TextBlock Text="King Poker strives to be the most authentic video poker experience you can have outside a casino.  If you have ideas, comments, suggestions, requests, or find a bug in our software, please email us:" TextWrapping="Wrap" Foreground="White" />
-                        <TextBlock Text="kingpoker@jexed.com" FontWeight="Bold" TextWrapping="Wrap" Foreground="White" Margin="0,20,0,30" FontSize="24" Tapped="TextBlock_Tapped" />
+                        <TextBlock Text="King Poker strives to be the most authentic video poker experience you can have outside a casino.  If you have ideas, comments, suggestions, requests, or find a bug in our software, please post it to our support site!" TextWrapping="Wrap" Foreground="White" FontSize="16" />
+                        <Button Content="Submit A Bug" Margin="0,20,0,0" Click="Bug_Click"/>
+                        <Button Content="Suggest A Feature" Margin="0,20,0,0" Click="Feature_Click"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

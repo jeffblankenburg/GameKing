@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -55,6 +56,16 @@ namespace GameKing
                 SettingsPane.Show();
             }
 
+        }
+
+        private async void Bug_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("http://kingpoker.uservoice.com", UriKind.Absolute));
+        }
+
+        private async void Feature_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("http://kingpoker.uservoice.com", UriKind.Absolute));
         }
     }
 }

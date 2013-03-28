@@ -75,6 +75,8 @@
     <Content Include="content\img\5m.png" />
     <Content Include="content\img\6m.png" />
     <Content Include="content\img\7m.png" />
+    <Content Include="content\img\WindowsPhoneStoreIcon.png" />
+    <Content Include="content\img\WindowsStoreIcon.png" />
     <Content Include="index.html" />
     <Content Include="LICENSE.txt" />
     <Content Include="Privacy.html" />
