@@ -7,22 +7,49 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#00019F">
+    <UserControl.Resources>
+        <local:CompletedToOpacityConverter x:Key="CompletedToOpacityConverter" />
+        <local:AchivementToProgressConverter x:Key="AchivementToProgressConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="#000064">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+            <RowDefinition Height="70" />
             <RowDefinition Height="2" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Rectangle Fill="#B00000" />
         <Rectangle Fill="#FCD800" Grid.Row="1" />
-        <TextBlock x:Name="HelpTitle" Text="ACHIEVEMENTS" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="20"  FontWeight="Bold" Foreground="#FCD800"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource BackButtonStyle}" Margin="10" Click="BackButton_Click"/>
+            <TextBlock x:Name="HelpTitle" Text="ACHIEVEMENTS" VerticalAlignment="Center" Margin="10,15,10,10" FontSize="35"  FontWeight="Bold" Foreground="#FCD800"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Image Source="Assets/numbers/1.png" />
+        </StackPanel>
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="HelpList" Margin="10">
+            <ItemsControl x:Name="AchievementList" Margin="10">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Text}" FontSize="20" TextWrapping="Wrap" />
-                    </DataTemplate>
+                            <Grid Opacity="{Binding IsCompleted, Converter={StaticResource CompletedToOpacityConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="95" />
+                                    <ColumnDefinition Width="300" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Icon}" Margin="10" />
+                                <StackPanel Grid.Column="1" Margin="0,10,0,0">
+                                    <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" TextWrapping="Wrap" />
+                                    <TextBlock Text="{Binding Text}" FontSize="16" TextWrapping="Wrap" />
+                                    <TextBlock Text="{Binding Converter={StaticResource AchivementToProgressConverter}}" FontSize="14" FontWeight="Bold" Foreground="#FCD800" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
                 </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
         <!--<Image x:Name="GameLogo" Grid.Row="0" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Assets/gamelogo/DEUCESWILD.png" />-->

@@ -53,6 +53,9 @@
             <Image Grid.Row="2" Grid.Column="9" Source="Assets/gamelogo/BlackJackBonusPoker.png" Tapped="BlackJackBonusPoker_Tapped" PointerEntered="MouseOver" PointerExited="MouseOut" />
             <Image Grid.Row="4" Grid.Column="9" Source="Assets/gamelogo/JokerPoker.png" Tapped="JokerPoker_Tapped" PointerEntered="MouseOver" PointerExited="MouseOut" />
             <Image Grid.Row="6" Grid.Column="9" Source="Assets/gamelogo/DoubleDoubleBonusPoker.png" Tapped="DoubleDoubleBonusPoker_Tapped" PointerEntered="MouseOver" PointerExited="MouseOut" />
+            <Viewbox Grid.Row="8" Grid.ColumnSpan="11" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <Image x:Name="AchievementsButton" Source="Assets/buttons/ACHIEVEMENTS.png" Width="200" Height="37" Margin="20,50,10,10" Tapped="Achievements_Tapped"/>
+            </Viewbox>
             <Viewbox Grid.Row="8" Grid.ColumnSpan="11" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Image x:Name="MicrosoftLoginButton" Source="Assets/buttons/LOGIN.png" Width="200" Height="37" Margin="50,50,10,10" Tapped="Microsoft_Tapped"/>
             </Viewbox>

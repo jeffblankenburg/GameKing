@@ -13,6 +13,7 @@ namespace PokerLogic
         public string Icon { get; set; }
         public int Points { get; set; }
         public string GameType { get; set; }
+        public string Outcome { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime CompletedDate { get; set; }
 

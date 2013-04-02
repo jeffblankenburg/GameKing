@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PokerLogic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,6 +36,20 @@ namespace GameKing
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            LoadAchievements();
+        }
+
+        private async void LoadAchievements()
+        {
+            StorageFile file = await App.files.CreateFileAsync("achievements.txt", CreationCollisionOption.OpenIfExists);
+            string achievementtext = await FileIO.ReadTextAsync(file);
+            List<Achievement> achievements = JsonConvert.DeserializeObject<List<Achievement>>(achievementtext);
+            AchievementList.ItemsSource = from a in achievements orderby a.IsCompleted orderby a.Id ascending select a;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
         }
     }
 }

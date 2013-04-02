@@ -221,5 +221,10 @@ namespace GameKing
             Image i = sender as Image;
             i.Opacity = 1;
         }
+
+        private void Achievements_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Achievements));
+        }
     }
 }

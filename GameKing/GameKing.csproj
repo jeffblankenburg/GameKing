@@ -117,6 +117,7 @@
     <Compile Include="Achievements.xaml.cs">
       <DependentUpon>Achievements.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\AchivementToProgressConverter.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -126,6 +127,7 @@
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Converters\CompletedToOpacityConverter.cs" />
     <Compile Include="Converters\BothHandsToCredits.cs" />
     <Compile Include="Converters\ClosingHandCardToImageConverter.cs" />
     <Compile Include="Converters\GameTypeToImagePathConverter.cs" />
@@ -170,6 +172,7 @@
     <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\achievements\DEUCES_ROYALFLUSHWITHDEUCES.png" />
     <Content Include="Assets\ArrowSE.png" />
     <Content Include="Assets\audio\carddeal.wav" />
     <Content Include="Assets\audio\click.wav" />
@@ -177,6 +180,7 @@
     <Content Include="Assets\audio\slot_machine_bet_04.wav" />
     <Content Include="Assets\audio\slot_machine_win_03.wav" />
     <Content Include="Assets\audio\slot_machine_win_jackpot_04.wav" />
+    <Content Include="Assets\buttons\ACHIEVEMENTS.png" />
     <Content Include="Assets\buttons\BETMAX.png" />
     <Content Include="Assets\buttons\BETONE.png" />
     <Content Include="Assets\buttons\BLANK.png" />
