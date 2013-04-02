@@ -21,6 +21,7 @@ using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using System.Threading.Tasks;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -101,6 +102,14 @@ namespace GameKing
                 settings.Values["showalertbox"] = true;
             }
 
+            if (!settings.Values.ContainsKey("achievements"))
+            {
+                WriteAchievements();
+                settings.Values["achievements"] = true;
+            }
+
+            WriteAchievements();
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -131,6 +140,15 @@ namespace GameKing
             }
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        private async void WriteAchievements()
+        {
+            List<Achievement> achievementlist = BuildAchievements();
+            StorageFile file = await App.files.CreateFileAsync("achievements.txt", CreationCollisionOption.OpenIfExists);
+            string achievementtext = JsonConvert.SerializeObject(achievementlist);
+            file = await App.files.CreateFileAsync("achievements.txt", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(file, achievementtext);
         }
 
         void App_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
@@ -327,6 +345,107 @@ namespace GameKing
             //Push the update to the tile.
             TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
 
+        }
+
+        public List<Achievement> BuildAchievements()
+        {
+            List<Achievement> list = new List<Achievement>();
+
+            list.Add(new Achievement { Id = 101, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Jacks or Better", Text = "Complete 100 hands with Jacks or Better in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 102, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Jacks or Better", Text = "Complete 250 hands with Jacks or Better in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 103, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Jacks or Better", Text = "Complete 100 hands with Jacks or Better in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 104, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Jacks or Better", Text = "Complete 1000 hands with Jacks or Better in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 105, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Straights", Text = "Complete 100 hands with a Straight in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 106, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Straights", Text = "Complete 250 hands with a Straight in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 107, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Straights", Text = "Complete 100 hands with a Straight in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 108, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Straights", Text = "Complete 1000 hands with a Straight in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 109, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Flushes", Text = "Complete 100 hands with a Flush in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 110, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Flushes", Text = "Complete 250 hands with a Flush in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 111, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Flushes", Text = "Complete 100 hands with a Flush in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 112, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Flushes", Text = "Complete 1000 hands with a Flush in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 113, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Full Houses", Text = "Complete 100 hands with a Full House in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 114, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Full Houses", Text = "Complete 250 hands with a Full House in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 115, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Full Houses", Text = "Complete 100 hands with a Full House in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 116, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Full Houses", Text = "Complete 1000 hands with a Full House in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 117, Icon = "ms-appx:///Assets/Logo.png", Title = "100 4s of a Kind", Text = "Complete 100 hands with 4 of a Kind in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 118, Icon = "ms-appx:///Assets/Logo.png", Title = "250 4s of a Kind", Text = "Complete 250 hands with 4 of a Kind in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 119, Icon = "ms-appx:///Assets/Logo.png", Title = "500 4s of a Kind", Text = "Complete 100 hands with 4 of a Kind in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 120, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 4s of a Kind", Text = "Complete 1000 hands with 4 of a Kind in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 121, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Straight Flushes", Text = "Complete 100 hands with a Straight Flush in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 122, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Straight Flushes", Text = "Complete 250 hands with a Straight Flush in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 123, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Straight Flushes", Text = "Complete 100 hands with a Straight Flush in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 124, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Straight Flushes", Text = "Complete 1000 hands with a Straight Flush in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 125, Icon = "ms-appx:///Assets/Logo.png", Title = "100 5s of a Kind", Text = "Complete 100 hands with 5 of a Kind in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 126, Icon = "ms-appx:///Assets/Logo.png", Title = "250 5s of a Kind", Text = "Complete 250 hands with 5 of a Kind in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 127, Icon = "ms-appx:///Assets/Logo.png", Title = "500 5s of a Kind", Text = "Complete 100 hands with 5 of a Kind in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 128, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 5s of a Kind", Text = "Complete 1000 hands with 5 of a Kind in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 129, Icon = "ms-appx:///Assets/Logo.png", Title = "50 Royal Flushes with Deuces", Text = "Complete 50 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 130, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Royal Flushes with Deuces", Text = "Complete 100 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 131, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Royal Flushes with Deuces", Text = "Complete 250 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 132, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Royal Flushes with Deuces", Text = "Complete 500 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 133, Icon = "ms-appx:///Assets/Logo.png", Title = "1 Four Deuces", Text = "Complete 1 hand with 4 Deuces in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 134, Icon = "ms-appx:///Assets/Logo.png", Title = "5 Four Deuces", Text = "Complete 5 hands with 4 Deuces in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 135, Icon = "ms-appx:///Assets/Logo.png", Title = "10 Four Deuces", Text = "Complete 10 hands with 4 Deuces in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 136, Icon = "ms-appx:///Assets/Logo.png", Title = "25 Four Deuces", Text = "Complete 25 hands with 4 Deuces in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 137, Icon = "ms-appx:///Assets/Logo.png", Title = "1 Royal Flush", Text = "Complete 1 hand with a Royal Flush in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 138, Icon = "ms-appx:///Assets/Logo.png", Title = "3 Royal Flushes", Text = "Complete 3 hands with a Royal Flush in a Deuces Wild game.", Points = 250, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 139, Icon = "ms-appx:///Assets/Logo.png", Title = "5 Royal Flushes", Text = "Complete 5 hands with a Royal Flush in a Deuces Wild game.", Points = 500, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 140, Icon = "ms-appx:///Assets/Logo.png", Title = "10 Royal Flushes", Text = "Complete 10 hands with a Royal Flush in a Deuces Wild game.", Points = 1000, GameType = "DEUCESWILD" });
+            return list;
+        }
+
+        public static async Task CheckForAchievement(string gametype, string outcome)
+        {
+            StorageFile file = await App.files.CreateFileAsync("achievements.txt", CreationCollisionOption.OpenIfExists);
+            string achievementtext = await FileIO.ReadTextAsync(file);
+            List<Achievement> achievements = JsonConvert.DeserializeObject<List<Achievement>>(achievementtext);
+
+            int x = 0;
+            Achievement a = null;
+
+            switch (gametype)
+            {
+                case "DEUCESWILD": case "DOUBLEBONUSDEUCESWILD": case "DEUCESWILDBONUSPOKER":
+                    //3 OF A KIND
+                    x = 0;
+                    if (App.settings.Values.ContainsKey("COUNT_DEUCESWILD_3 OF A KIND")) x += (int)App.settings.Values["COUNT_DEUCESWILD_3 OF A KIND"];
+                    if (App.settings.Values.ContainsKey("COUNT_DOUBLEBONUSDEUCESWILD_3 OF A KIND")) x += (int)App.settings.Values["COUNT_DOUBLEBONUSDEUCESWILD_3 OF A KIND"];
+                    if (App.settings.Values.ContainsKey("COUNT_DEUCESWILDBONUSPOKER_3 OF A KIND")) x += (int)App.settings.Values["COUNT_DEUCESWILDBONUSPOKER_3 OF A KIND"];
+                    if ((x >= 1000) && (achievements.Find(n => n.Id == 104).IsCompleted == false)) { a = achievements.Find(n => n.Id == 104); break; }
+                    else if ((x >= 500) && (achievements.Find(n => n.Id == 103).IsCompleted == false)) { a = achievements.Find(n => n.Id == 103); break; }
+                    else if ((x >= 250) && (achievements.Find(n => n.Id == 102).IsCompleted == false)) { a = achievements.Find(n => n.Id == 102); break; }
+                    else if ((x >= 100) && (achievements.Find(n => n.Id == 101).IsCompleted == false)) { a = achievements.Find(n => n.Id == 101); break; }
+                    //STRAIGHT
+                    x = 0;
+                    if (App.settings.Values.ContainsKey("COUNT_DEUCESWILD_STRAIGHT")) x += (int)App.settings.Values["COUNT_DEUCESWILD_STRAIGHT"];
+                    if (App.settings.Values.ContainsKey("COUNT_DOUBLEBONUSDEUCESWILD_STRAIGHT")) x += (int)App.settings.Values["COUNT_DOUBLEBONUSDEUCESWILD_STRAIGHT"];
+                    if (App.settings.Values.ContainsKey("COUNT_DEUCESWILDBONUSPOKER_STRAIGHT")) x += (int)App.settings.Values["COUNT_DEUCESWILDBONUSPOKER_STRAIGHT"];
+                    if ((x >= 1000) && (achievements.Find(n => n.Id == 108).IsCompleted == false)) { a = achievements.Find(n => n.Id == 108); break; }
+                    else if ((x >= 500) && (achievements.Find(n => n.Id == 107).IsCompleted == false)) { a = achievements.Find(n => n.Id == 107); break; }
+                    else if ((x >= 250) && (achievements.Find(n => n.Id == 106).IsCompleted == false)) { a = achievements.Find(n => n.Id == 106); break; }
+                    else if ((x >= 100) && (achievements.Find(n => n.Id == 105).IsCompleted == false)) { a = achievements.Find(n => n.Id == 105); break; }
+                    break;
+            }
+
+            if (a != null)
+            {
+                a.IsCompleted = true;
+                ToastTemplateType toastType = ToastTemplateType.ToastImageAndText02;
+                XmlDocument toastXML = ToastNotificationManager.GetTemplateContent(toastType);
+                XmlNodeList toastText = toastXML.GetElementsByTagName("text");
+                XmlNodeList toastImages = toastXML.GetElementsByTagName("image");
+                toastText[0].InnerText = a.Title;
+                toastText[1].InnerText = a.Text;
+                ((XmlElement)toastImages[0]).SetAttribute("src", a.Icon);
+                ((XmlElement)toastImages[0]).SetAttribute("alt", "King Poker");
+
+                ToastNotification toast = new ToastNotification(toastXML);
+                ToastNotificationManager.CreateToastNotifier().Show(toast);
+
+                achievementtext = JsonConvert.SerializeObject(achievements);
+                file = await App.files.CreateFileAsync("achievements.txt", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(file, achievementtext);
+            }
         }
     }
 }

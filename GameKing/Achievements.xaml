@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="GameKing.Achievements"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GameKing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#00019F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#B00000" />
+        <Rectangle Fill="#FCD800" Grid.Row="1" />
+        <TextBlock x:Name="HelpTitle" Text="ACHIEVEMENTS" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="20"  FontWeight="Bold" Foreground="#FCD800"/>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="HelpList" Margin="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Text}" FontSize="20" TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <!--<Image x:Name="GameLogo" Grid.Row="0" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Assets/gamelogo/DEUCESWILD.png" />-->
+    </Grid>
+</Page>

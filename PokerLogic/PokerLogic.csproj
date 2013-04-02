@@ -36,6 +36,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achievement.cs" />
     <Compile Include="BothHands.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="Channel.cs" />

@@ -24,6 +24,8 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Core;
 using Windows.UI.ApplicationSettings;
 using Microsoft.WindowsAzure.MobileServices;
+using Windows.UI.Notifications;
+using Windows.Data.Xml.Dom;
 
 namespace GameKing
 {
@@ -646,10 +648,11 @@ namespace GameKing
         {
             HandRank = HandRank.Replace(",", "");
 
-            if (App.settings.Values.ContainsKey("COUNT_" + HandRank))
-                App.settings.Values["COUNT_" + HandRank] = (int)App.settings.Values["COUNT_" + HandRank] + 1;
+            if (App.settings.Values.ContainsKey("COUNT_" + GameType + "_" + HandRank))
+                App.settings.Values["COUNT_" + GameType + "_" + HandRank] = (int)App.settings.Values["COUNT_" + GameType + "_" + HandRank] + 1;
             else
-                App.settings.Values["COUNT_" + HandRank] = 1;
+                App.settings.Values["COUNT_" + GameType + "_" + HandRank] = 1;
+            App.CheckForAchievement(GameType, HandRank);
         }
 
         private void StopPayTableAnimations()

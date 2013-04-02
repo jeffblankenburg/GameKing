@@ -348,9 +348,12 @@ namespace GameKingWP8
                     query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
                     credits = await query.ToListAsync();
 
-                    if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                    if (credits.Count != 0)
                     {
-                        settings["credits"] = credits[0].Credits;
+                        if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                        {
+                            settings["credits"] = credits[0].Credits;
+                        }
                     }
                 }
             }
@@ -362,9 +365,12 @@ namespace GameKingWP8
                     query = table.Where(i => i.MicrosoftAccountID == settings["microsoftuserid"].ToString()).OrderByDescending(m => m.DatePlayed).Select(k => k).Take(1);
                     credits = await query.ToListAsync();
 
-                    if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                    if (credits.Count != 0)
                     {
-                        settings["credits"] = credits[0].Credits;
+                        if (credits[0].DatePlayed > historySorted[0].TimeStamp)
+                        {
+                            settings["credits"] = credits[0].Credits;
+                        }
                     }
                 }
             }
