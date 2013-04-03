@@ -172,7 +172,26 @@
     <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\achievements\DEUCES_ROYALFLUSHWITHDEUCES.png" />
+    <Content Include="Assets\achievements\DEUCES_3 OF A KIND_100.png" />
+    <Content Include="Assets\achievements\DEUCES_3 OF A KIND_1000.png" />
+    <Content Include="Assets\achievements\DEUCES_3 OF A KIND_250.png" />
+    <Content Include="Assets\achievements\DEUCES_3 OF A KIND_500.png" />
+    <Content Include="Assets\achievements\DEUCES_4 OF A KIND_100.png" />
+    <Content Include="Assets\achievements\DEUCES_4 OF A KIND_1000.png" />
+    <Content Include="Assets\achievements\DEUCES_4 OF A KIND_250.png" />
+    <Content Include="Assets\achievements\DEUCES_4 OF A KIND_500.png" />
+    <Content Include="Assets\achievements\DEUCES_FLUSH_100.png" />
+    <Content Include="Assets\achievements\DEUCES_FLUSH_1000.png" />
+    <Content Include="Assets\achievements\DEUCES_FLUSH_250.png" />
+    <Content Include="Assets\achievements\DEUCES_FLUSH_500.png" />
+    <Content Include="Assets\achievements\DEUCES_FULL HOUSE_100.png" />
+    <Content Include="Assets\achievements\DEUCES_FULL HOUSE_1000.png" />
+    <Content Include="Assets\achievements\DEUCES_FULL HOUSE_250.png" />
+    <Content Include="Assets\achievements\DEUCES_FULL HOUSE_500.png" />
+    <Content Include="Assets\achievements\DEUCES_STRAIGHT_100.png" />
+    <Content Include="Assets\achievements\DEUCES_STRAIGHT_1000.png" />
+    <Content Include="Assets\achievements\DEUCES_STRAIGHT_250.png" />
+    <Content Include="Assets\achievements\DEUCES_STRAIGHT_500.png" />
     <Content Include="Assets\ArrowSE.png" />
     <Content Include="Assets\audio\carddeal.wav" />
     <Content Include="Assets\audio\click.wav" />
@@ -371,6 +390,7 @@
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

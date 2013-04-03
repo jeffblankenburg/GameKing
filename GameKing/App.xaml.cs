@@ -351,46 +351,26 @@ namespace GameKing
         {
             List<Achievement> list = new List<Achievement>();
 
-            list.Add(new Achievement { IsCompleted = true, Outcome = "3 OF A KIND", Id = 101, Icon = "ms-appx:///Assets/Logo.png", Title = "100 3s of a Kind", Text = "Complete 100 hands with a 3 of a Kind in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "3 OF A KIND", Id = 102, Icon = "ms-appx:///Assets/Logo.png", Title = "250 3s of a Kind", Text = "Complete 250 hands with a 3 of a Kind in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "3 OF A KIND", Id = 103, Icon = "ms-appx:///Assets/Logo.png", Title = "500 3s of a Kind", Text = "Complete 100 hands with a 3 of a Kind in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "3 OF A KIND", Id = 104, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 3s of a Kind", Text = "Complete 1000 hands with a 3 of a Kind in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT", Id = 105, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Straights", Text = "Complete 100 hands with a Straight in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT", Id = 106, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Straights", Text = "Complete 250 hands with a Straight in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT", Id = 107, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Straights", Text = "Complete 100 hands with a Straight in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT", Id = 108, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Straights", Text = "Complete 1000 hands with a Straight in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FLUSH", Id = 109, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Flushes", Text = "Complete 100 hands with a Flush in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FLUSH", Id = 110, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Flushes", Text = "Complete 250 hands with a Flush in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FLUSH", Id = 111, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Flushes", Text = "Complete 100 hands with a Flush in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FLUSH", Id = 112, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Flushes", Text = "Complete 1000 hands with a Flush in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FULL HOUSE", Id = 113, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Full Houses", Text = "Complete 100 hands with a Full House in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FULL HOUSE", Id = 114, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Full Houses", Text = "Complete 250 hands with a Full House in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FULL HOUSE", Id = 115, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Full Houses", Text = "Complete 100 hands with a Full House in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "FULL HOUSE", Id = 116, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Full Houses", Text = "Complete 1000 hands with a Full House in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 OF A KIND", Id = 117, Icon = "ms-appx:///Assets/Logo.png", Title = "100 4s of a Kind", Text = "Complete 100 hands with 4 of a Kind in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 OF A KIND", Id = 118, Icon = "ms-appx:///Assets/Logo.png", Title = "250 4s of a Kind", Text = "Complete 250 hands with 4 of a Kind in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 OF A KIND", Id = 119, Icon = "ms-appx:///Assets/Logo.png", Title = "500 4s of a Kind", Text = "Complete 100 hands with 4 of a Kind in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 OF A KIND", Id = 120, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 4s of a Kind", Text = "Complete 1000 hands with 4 of a Kind in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT FLUSH", Id = 121, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Straight Flushes", Text = "Complete 100 hands with a Straight Flush in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT FLUSH", Id = 122, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Straight Flushes", Text = "Complete 250 hands with a Straight Flush in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT FLUSH", Id = 123, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Straight Flushes", Text = "Complete 100 hands with a Straight Flush in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "STRAIGHT FLUSH", Id = 124, Icon = "ms-appx:///Assets/Logo.png", Title = "1000 Straight Flushes", Text = "Complete 1000 hands with a Straight Flush in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "5 OF A KIND", Id = 125, Icon = "ms-appx:///Assets/Logo.png", Title = "50 5s of a Kind", Text = "Complete 50 hands with 5 of a Kind in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "5 OF A KIND", Id = 126, Icon = "ms-appx:///Assets/Logo.png", Title = "100 5s of a Kind", Text = "Complete 100 hands with 5 of a Kind in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "5 OF A KIND", Id = 127, Icon = "ms-appx:///Assets/Logo.png", Title = "250 5s of a Kind", Text = "Complete 250 hands with 5 of a Kind in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "5 OF A KIND", Id = 128, Icon = "ms-appx:///Assets/Logo.png", Title = "500 5s of a Kind", Text = "Complete 500 hands with 5 of a Kind in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH WITH DEUCES", Id = 129, Icon = "ms-appx:///Assets/achievements/DEUCES_ROYALFLUSHWITHDEUCES.png", Title = "50 Royal Flushes with Deuces", Text = "Complete 50 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH WITH DEUCES", Id = 130, Icon = "ms-appx:///Assets/Logo.png", Title = "100 Royal Flushes with Deuces", Text = "Complete 100 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH WITH DEUCES", Id = 131, Icon = "ms-appx:///Assets/Logo.png", Title = "250 Royal Flushes with Deuces", Text = "Complete 250 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH WITH DEUCES", Id = 132, Icon = "ms-appx:///Assets/Logo.png", Title = "500 Royal Flushes with Deuces", Text = "Complete 500 hands with a Royal Flush with Deuces in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 DEUCES", Id = 133, Icon = "ms-appx:///Assets/Logo.png", Title = "1 Four Deuces", Text = "Complete 1 hand with 4 Deuces in a Deuces Wild game.", Points = 10, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 DEUCES", Id = 134, Icon = "ms-appx:///Assets/Logo.png", Title = "5 Four Deuces", Text = "Complete 5 hands with 4 Deuces in a Deuces Wild game.", Points = 25, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 DEUCES", Id = 135, Icon = "ms-appx:///Assets/Logo.png", Title = "10 Four Deuces", Text = "Complete 10 hands with 4 Deuces in a Deuces Wild game.", Points = 50, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "4 DEUCES", Id = 136, Icon = "ms-appx:///Assets/Logo.png", Title = "25 Four Deuces", Text = "Complete 25 hands with 4 Deuces in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH", Id = 137, Icon = "ms-appx:///Assets/Logo.png", Title = "1 Royal Flush", Text = "Complete 1 hand with a Royal Flush in a Deuces Wild game.", Points = 100, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH", Id = 138, Icon = "ms-appx:///Assets/Logo.png", Title = "3 Royal Flushes", Text = "Complete 3 hands with a Royal Flush in a Deuces Wild game.", Points = 250, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH", Id = 139, Icon = "ms-appx:///Assets/Logo.png", Title = "5 Royal Flushes", Text = "Complete 5 hands with a Royal Flush in a Deuces Wild game.", Points = 500, GameType = "DEUCESWILD" });
-            list.Add(new Achievement { Outcome = "ROYAL FLUSH", Id = 140, Icon = "ms-appx:///Assets/Logo.png", Title = "10 Royal Flushes", Text = "Complete 10 hands with a Royal Flush in a Deuces Wild game.", Points = 1000, GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 101, Icon = "ms-appx:///Assets/achievements/DEUCES_3 OF A KIND_100.png", Title = "100 3s of a Kind", Text = "Complete 100 hands with 3 of a Kind in a Deuces Wild game.", Points = 10, Outcome = "3 OF A KIND", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 102, Icon = "ms-appx:///Assets/achievements/DEUCES_3 OF A KIND_250.png", Title = "250 3s of a Kind", Text = "Complete 250 hands with 3 of a Kind in a Deuces Wild game.", Points = 25, Outcome = "3 OF A KIND", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 103, Icon = "ms-appx:///Assets/achievements/DEUCES_3 OF A KIND_500.png", Title = "500 3s of a Kind", Text = "Complete 500 hands with 3 of a Kind in a Deuces Wild game.", Points = 50, Outcome = "3 OF A KIND", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 104, Icon = "ms-appx:///Assets/achievements/DEUCES_3 OF A KIND_1000.png", Title = "100 3s of a Kind", Text = "Complete 1000 hands with 3 of a Kind in a Deuces Wild game.", Points = 100, Outcome = "3 OF A KIND", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 105, Icon = "ms-appx:///Assets/achievements/DEUCES_STRAIGHT_100.png", Title = "100 Straights", Text = "Complete 100 hands with a Straight in a Deuces Wild game.", Points = 10, Outcome = "STRAIGHT", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 106, Icon = "ms-appx:///Assets/achievements/DEUCES_STRAIGHT_250.png", Title = "250 Straights", Text = "Complete 250 hands with a Straight in a Deuces Wild game.", Points = 25, Outcome = "STRAIGHT", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 107, Icon = "ms-appx:///Assets/achievements/DEUCES_STRAIGHT_500.png", Title = "500 Straights", Text = "Complete 500 hands with a Straight in a Deuces Wild game.", Points = 50, Outcome = "STRAIGHT", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 108, Icon = "ms-appx:///Assets/achievements/DEUCES_STRAIGHT_1000.png", Title = "1000 Straights", Text = "Complete 1000 hands with a Straight in a Deuces Wild game.", Points = 100, Outcome = "STRAIGHT", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 109, Icon = "ms-appx:///Assets/achievements/DEUCES_FLUSH_100.png", Title = "100 Flushes", Text = "Complete 100 hands with a Flush in a Deuces Wild game.", Points = 10, Outcome = "FLUSH", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 110, Icon = "ms-appx:///Assets/achievements/DEUCES_FLUSH_250.png", Title = "250 Flushes", Text = "Complete 250 hands with a Flush in a Deuces Wild game.", Points = 25, Outcome = "FLUSH", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 111, Icon = "ms-appx:///Assets/achievements/DEUCES_FLUSH_500.png", Title = "500 Flushes", Text = "Complete 500 hands with a Flush in a Deuces Wild game.", Points = 50, Outcome = "FLUSH", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 112, Icon = "ms-appx:///Assets/achievements/DEUCES_FLUSH_1000.png", Title = "1000 Flushes", Text = "Complete 1000 hands with a Flush in a Deuces Wild game.", Points = 100, Outcome = "FLUSH", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 113, Icon = "ms-appx:///Assets/achievements/DEUCES_FULL HOUSE_100.png", Title = "100 Full Houses", Text = "Complete 100 hands with a Full House in a Deuces Wild game.", Points = 10, Outcome = "FULL HOUSE", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 114, Icon = "ms-appx:///Assets/achievements/DEUCES_FULL HOUSE_250.png", Title = "250 Full Houses", Text = "Complete 250 hands with a Full House in a Deuces Wild game.", Points = 25, Outcome = "FULL HOUSE", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 115, Icon = "ms-appx:///Assets/achievements/DEUCES_FULL HOUSE_500.png", Title = "500 Full Houses", Text = "Complete 500 hands with a Full House in a Deuces Wild game.", Points = 50, Outcome = "FULL HOUSE", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 116, Icon = "ms-appx:///Assets/achievements/DEUCES_FULL HOUSE_1000.png", Title = "1000 Full Houses", Text = "Complete 1000 hands with a Full House in a Deuces Wild game.", Points = 100, Outcome = "FULL HOUSE", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 117, Icon = "ms-appx:///Assets/achievements/DEUCES_4 OF A KIND_100.png", Title = "100 4s of a Kind", Text = "Complete 100 hands with 4 of a Kind in a Deuces Wild game.", Points = 10, Outcome = "4 OF A KIND", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 118, Icon = "ms-appx:///Assets/achievements/DEUCES_4 OF A KIND_250.png", Title = "250 4s of a Kind", Text = "Complete 250 hands with 4 of a Kind in a Deuces Wild game.", Points = 25, Outcome = "4 OF A KIND", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 119, Icon = "ms-appx:///Assets/achievements/DEUCES_4 OF A KIND_500.png", Title = "500 4s of a Kind", Text = "Complete 500 hands with 4 of a Kind in a Deuces Wild game.", Points = 50, Outcome = "4 OF A KIND", GameType = "DEUCESWILD" });
+            list.Add(new Achievement { Id = 120, Icon = "ms-appx:///Assets/achievements/DEUCES_4 OF A KIND_1000.png", Title = "1000 4s of a Kind", Text = "Complete 1000 hands with 4 of a Kind in a Deuces Wild game.", Points = 100, Outcome = "4 OF A KIND", GameType = "DEUCESWILD" });
 
             return list;
         }
@@ -404,9 +384,21 @@ namespace GameKing
             int x = 0;
             Achievement a = null;
 
-            if (App.settings.Values.ContainsKey("COUNT_" + gametype + "_" + outcome)) x += (int)App.settings.Values["COUNT_" + gametype + "_" + outcome];
-            if (App.settings.Values.ContainsKey("COUNT_" + gametype + "_" + outcome)) x += (int)App.settings.Values["COUNT_" + gametype + "_" + outcome];
-            if (App.settings.Values.ContainsKey("COUNT_" + gametype + "_" + outcome)) x += (int)App.settings.Values["COUNT_" + gametype + "_" + outcome];
+            if (gametype.Contains("DEUCES"))
+            {
+                if (App.settings.Values.ContainsKey("COUNT_DEUCESWILD_" + outcome)) x += (int)App.settings.Values["COUNT_DEUCESWILD_" + outcome];
+                if (App.settings.Values.ContainsKey("COUNT_DEUCESWILDBONUSPOKER_" + outcome)) x += (int)App.settings.Values["COUNT_DEUCESWILDBONUSPOKER_" + outcome];
+                if (App.settings.Values.ContainsKey("COUNT_DOUBLEDONUSDEUCESWILD_" + outcome)) x += (int)App.settings.Values["COUNT_DOUBLEDONUSDEUCESWILD_" + outcome];
+            }
+            else if (gametype.Contains("JOKER"))
+            {
+                if (App.settings.Values.ContainsKey("COUNT_JOKERPOKER_" + outcome)) x += (int)App.settings.Values["COUNT_JOKERPOKER_" + outcome];
+            }
+            else
+            {
+
+            }
+            
 
             switch(outcome)
             {

@@ -13,7 +13,7 @@ namespace GameKing
         {
             bool v = (bool)value;
             if (v) return 1;
-            else return .5;
+            else return .55;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
